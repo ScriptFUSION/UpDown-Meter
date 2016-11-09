@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScriptFUSION.UpDown_Meter.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,8 +19,6 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private Sample LastSample { get; set; }
 
-        private int counter = 0;
-
         /// <summary>
         /// Point at which the user starts dragging the form.
         /// </summary>
@@ -28,7 +27,7 @@ namespace ScriptFUSION.UpDown_Meter {
         public NetGraphForm() {
             InitializeComponent();
 
-            Options = new Options();
+            Options = Options.FromSettings(Settings.Default);
         }
 
         private void settings_Click(object sender, EventArgs e) {
@@ -44,8 +43,6 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void timer_Tick(object sender, EventArgs e) {
-            //netGraph.AddSample(new Sample { Downstream = (int)((Math.Sin(counter++) + 1) * 100) });
-
             netGraph.AddSample(TakeSample());
         }
 
@@ -71,13 +68,13 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) {
+            if ((e.Button & MouseButtons.Left) > 0) {
                 Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
             }
         }
 
         private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) {
+            if ((e.Button & MouseButtons.Left) > 0) {
                 dragPoint = e.Location;
             }
         }

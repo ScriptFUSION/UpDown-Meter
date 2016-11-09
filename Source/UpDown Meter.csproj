@@ -62,6 +62,7 @@
     <Compile Include="NetGraphForm.Designer.cs">
       <DependentUpon>NetGraphForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetworkInterfaces.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>

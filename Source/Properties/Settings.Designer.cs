@@ -22,5 +22,88 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastNic {
+            get {
+                return ((string)(this["LastNic"]));
+            }
+            set {
+                this["LastNic"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BootHide {
+            get {
+                return ((bool)(this["BootHide"]));
+            }
+            set {
+                this["BootHide"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Topmost {
+            get {
+                return ((bool)(this["Topmost"]));
+            }
+            set {
+                this["Topmost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Docking {
+            get {
+                return ((bool)(this["Docking"]));
+            }
+            set {
+                this["Docking"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle Bounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["Bounds"]));
+            }
+            set {
+                this["Bounds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HandsFree {
+            get {
+                return ((bool)(this["HandsFree"]));
+            }
+            set {
+                this["HandsFree"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Hashtable NicSpeeds {
+            get {
+                return ((global::System.Collections.Hashtable)(this["NicSpeeds"]));
+            }
+            set {
+                this["NicSpeeds"] = value;
+            }
+        }
     }
 }

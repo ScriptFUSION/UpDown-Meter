@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ScriptFUSION.UpDown_Meter.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Net.NetworkInformation;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class OptionsForm : Form {
@@ -16,14 +16,11 @@ namespace ScriptFUSION.UpDown_Meter {
 
         internal Options Options { get; private set; }
 
-        public OptionsForm() {
-            InitializeComponent();
-
-            LoadAdapaters();
-        }
-
-        internal OptionsForm(Options options) : this() {
+        internal OptionsForm(Options options) {
             Options = options;
+
+            InitializeComponent();
+            LoadNetworkInterfaces();
         }
 
         private void nics_SelectedIndexChanged(object sender, EventArgs e) {
@@ -32,18 +29,21 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void ok_Click(object sender, EventArgs e) {
             Close();
+
+            SaveSettings();
         }
 
-        private void button2_Click(object sender, EventArgs e) {
+        private void SaveSettings() {
+            Settings.Default.LastNic = Options.NetworkInterface?.Id;
+            Settings.Default.Save();
+        }
+
+        private void cancel_Click(object sender, EventArgs e) {
             Close();
         }
 
-        private void LoadAdapaters() {
-            IEnumerable<NetworkInterface> interfaces = NetworkInterface.GetAllNetworkInterfaces();
-
-            if (!showDisabledAdapters.Checked) {
-                interfaces = interfaces.Where(nic => nic.OperationalStatus == OperationalStatus.Up);
-            }
+        private void LoadNetworkInterfaces() {
+            var interfaces = showDisabledAdapters.Checked ? NetworkInterfaces.FetchAll() : NetworkInterfaces.FetchOperational();
 
             nics.Items.Clear();
             nics.Items.AddRange(
@@ -72,10 +72,21 @@ namespace ScriptFUSION.UpDown_Meter {
 
             // HeaderSize includes column content but ColumnContent excludes header size.
             nics.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            SyncSelectedNetworkInterface();
+        }
+
+        private void SyncSelectedNetworkInterface() {
+            foreach (ListViewItem nic in nics.Items) {
+                if (((NetworkInterface)nic.Tag).Id == Options.NetworkInterface?.Id) {
+                    nic.Selected = true;
+                    break;
+                }
+            }
         }
 
         private void showDisabledAdapters_CheckedChanged(object sender, EventArgs e) {
-            LoadAdapaters();
+            LoadNetworkInterfaces();
         }
 
         private void OptionsForm_Paint(object sender, PaintEventArgs e) {

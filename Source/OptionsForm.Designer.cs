@@ -33,8 +33,8 @@
             this.header = new System.Windows.Forms.PictureBox();
             this.showDisabledAdapters = new System.Windows.Forms.CheckBox();
             this.ok = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
+            this.apply = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.header)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,37 +126,37 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
-            // button2
+            // cancel
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(473, 339);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cancel.Location = new System.Drawing.Point(473, 339);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.TabIndex = 6;
+            this.cancel.Text = "Cancel";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
-            // button3
+            // apply
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(554, 339);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Apply";
-            this.button3.UseVisualStyleBackColor = true;
+            this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.apply.Location = new System.Drawing.Point(554, 339);
+            this.apply.Name = "apply";
+            this.apply.Size = new System.Drawing.Size(75, 23);
+            this.apply.TabIndex = 7;
+            this.apply.Text = "Apply";
+            this.apply.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 374);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.apply);
+            this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.showDisabledAdapters);
             this.Controls.Add(this.header);
@@ -187,8 +187,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.CheckBox showDisabledAdapters;
         private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button cancel;
+        private System.Windows.Forms.Button apply;
     }
 }
 

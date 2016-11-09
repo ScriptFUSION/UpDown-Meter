@@ -81,7 +81,6 @@
             this.Name = "NetGraphForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NetGraphForm";
-            this.TopMost = true;
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NetGraphForm_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
