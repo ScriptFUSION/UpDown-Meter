@@ -28,6 +28,7 @@
             this.close = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.NetGraph();
+            this.minimize = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // settings
@@ -69,11 +70,23 @@
             this.netGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.netGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
             // 
+            // minimize
+            // 
+            this.minimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.minimize.Location = new System.Drawing.Point(495, 41);
+            this.minimize.Name = "minimize";
+            this.minimize.Size = new System.Drawing.Size(75, 23);
+            this.minimize.TabIndex = 3;
+            this.minimize.Text = "_";
+            this.minimize.UseVisualStyleBackColor = true;
+            this.minimize.Click += new System.EventHandler(this.minimize_Click);
+            // 
             // NetGraphForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 152);
+            this.Controls.Add(this.minimize);
             this.Controls.Add(this.close);
             this.Controls.Add(this.netGraph);
             this.Controls.Add(this.settings);
@@ -94,5 +107,6 @@
         private NetGraph netGraph;
         private System.Windows.Forms.Button close;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button minimize;
     }
 }

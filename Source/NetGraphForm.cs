@@ -84,5 +84,9 @@ namespace ScriptFUSION.UpDown_Meter {
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.RaisedInner, Border3DSide.Bottom | Border3DSide.Right);
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.RaisedInner, Border3DSide.Top | Border3DSide.Left);
         }
+
+        private void minimize_Click(object sender, EventArgs e) {
+            WindowState = FormWindowState.Minimized;
+        }
     }
 }

@@ -19,5 +19,10 @@ namespace ScriptFUSION.UpDown_Meter {
                 NetworkInterface = NetworkInterfaces.Fetch(settings.LastNic)
             };
         }
+
+        public void Save(Settings settings) {
+            settings.LastNic = NetworkInterface?.Id;
+            settings.Save();
+        }
     }
 }

@@ -34,8 +34,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SaveSettings() {
-            Settings.Default.LastNic = Options.NetworkInterface?.Id;
-            Settings.Default.Save();
+            Options.Save(Settings.Default);
         }
 
         private void cancel_Click(object sender, EventArgs e) {
