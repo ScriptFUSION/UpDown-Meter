@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraph : Control {
@@ -49,15 +44,17 @@ namespace ScriptFUSION.UpDown_Meter {
         /// <summary>
         /// Gets the rectangle that represents the graph area of the control.
         /// </summary>
-        public Rectangle GraphRectangle {
-            get {
+        public Rectangle GraphRectangle
+        {
+            get
+            {
                 var rectangle = ClientRectangle;
                 rectangle.Inflate(-1, -1);
 
                 return rectangle;
             }
         }
-        
+
         protected override void OnPaint(PaintEventArgs e) {
             // Avoid division by zero.
             if (MaximumSample > 0) {

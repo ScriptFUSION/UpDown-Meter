@@ -1,17 +1,13 @@
 ﻿using ScriptFUSION.UpDown_Meter.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraphForm : Form {
+
         /// <summary>
         /// Application options.
         /// </summary>
@@ -72,7 +68,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void minimize_Click(object sender, EventArgs e) {
             WindowState = FormWindowState.Minimized;
         }
-        
+
         private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
             if ((e.Button & MouseButtons.Left) > 0) {
                 Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
