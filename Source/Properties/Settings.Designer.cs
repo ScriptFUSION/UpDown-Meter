@@ -94,16 +94,5 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
                 this["HandsFree"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Hashtable NicSpeeds {
-            get {
-                return ((global::System.Collections.Hashtable)(this["NicSpeeds"]));
-            }
-            set {
-                this["NicSpeeds"] = value;
-            }
-        }
     }
 }

@@ -10,6 +10,11 @@ namespace ScriptFUSION.UpDown_Meter {
     public partial class OptionsForm : Form {
         internal Options Options { get; private set; }
 
+        private NetworkInterface SelectedNic
+        {
+            get { return (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag; }
+        }
+
         internal OptionsForm(Options options) {
             Options = options;
 
@@ -18,6 +23,10 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SaveSettings() {
+            if (SelectedNic != null) {
+                Options.NicSpeeds[SelectedNic.Id] = long.Parse(customSpeed.Text);
+            }
+
             Options.Save(Settings.Default);
         }
 
@@ -52,14 +61,16 @@ namespace ScriptFUSION.UpDown_Meter {
             // HeaderSize includes column content but ColumnContent excludes header size.
             nics.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            SyncSelectedNetworkInterface();
+            SelectCurrentNetworkInterface();
         }
 
-        private void SyncSelectedNetworkInterface() {
-            foreach (ListViewItem nic in nics.Items) {
-                if (((NetworkInterface)nic.Tag).Id == Options.NetworkInterface?.Id) {
-                    nic.Selected = true;
-                    break;
+        private void SelectCurrentNetworkInterface() {
+            if (Options.NetworkInterface != null) {
+                foreach (ListViewItem nic in nics.Items) {
+                    if (((NetworkInterface)nic.Tag).Id == Options.NetworkInterface.Id) {
+                        nic.Selected = true;
+                        break;
+                    }
                 }
             }
         }
@@ -67,27 +78,48 @@ namespace ScriptFUSION.UpDown_Meter {
         #region Event handlers
 
         private void ok_Click(object sender, EventArgs e) {
-            Close();
-
             SaveSettings();
+
+            Close();
         }
 
         private void cancel_Click(object sender, EventArgs e) {
             Close();
         }
 
+        private void apply_Click(object sender, EventArgs e) {
+            SaveSettings();
+        }
+
         private void nics_SelectedIndexChanged(object sender, EventArgs e) {
-            Options.NetworkInterface = (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag;
+            Options.NetworkInterface = SelectedNic;
+
+            detectedSpeed.Text = SelectedNic?.Speed.ToString();
+            customSpeed.Text = SelectedNic != null && Options.NicSpeeds.ContainsKey(SelectedNic.Id)
+                ? Options.NicSpeeds[SelectedNic.Id].ToString()
+                : detectedSpeed.Text;
         }
 
         private void showDisabledAdapters_CheckedChanged(object sender, EventArgs e) {
             LoadNetworkInterfaces();
         }
 
-        private void OptionsForm_Paint(object sender, PaintEventArgs e) {
-            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bounds.Bottom + 1, Width, 2), Border3DStyle.SunkenOuter);
+        private void copySpeed_Click(object sender, EventArgs e) {
+            customSpeed.Text = detectedSpeed.Text;
         }
 
+        private void OptionsForm_Paint(object sender, PaintEventArgs e) {
+            // Draw header border.
+            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bottom + 1, Width, 2), Border3DStyle.SunkenOuter);
+
+            // Draw footer border.
+            ControlPaint.DrawBorder3D(
+                e.Graphics,
+                new Rectangle(0, ok.Top - (ClientRectangle.Height - ok.Bottom) - 2, Width, 2),
+                Border3DStyle.SunkenOuter
+            );
+        }
         #endregion
+
     }
 }

@@ -20,8 +20,5 @@
     <Setting Name="HandsFree" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NicSpeeds" Type="System.Collections.Hashtable" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
   </Settings>
 </SettingsFile>

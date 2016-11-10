@@ -62,7 +62,7 @@
             // netGraph
             // 
             this.netGraph.Location = new System.Drawing.Point(12, 12);
-            this.netGraph.MaximumSample = ((long)(0));
+            this.netGraph.MaximumSpeed = ((long)(0));
             this.netGraph.Name = "netGraph";
             this.netGraph.Size = new System.Drawing.Size(479, 121);
             this.netGraph.TabIndex = 1;

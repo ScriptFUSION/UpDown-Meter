@@ -9,7 +9,7 @@ namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraph : Control {
         private Stack<Sample> Samples { get; set; }
 
-        public long MaximumSample { get; set; }
+        public long MaximumSpeed { get; set; }
 
         private Pen applePen, pineapplePen, ppapPen;
 
@@ -34,9 +34,10 @@ namespace ScriptFUSION.UpDown_Meter {
         public void AddSample(Sample sample) {
             Samples.Push(sample);
 
-            if (sample.Max > MaximumSample) {
-                MaximumSample = sample.Max;
-            }
+            // Automatic calibration.
+            //if (sample.Max > MaximumSpeed) {
+            //    MaximumSpeed = sample.Max;
+            //}
 
             Invalidate();
         }
@@ -57,14 +58,14 @@ namespace ScriptFUSION.UpDown_Meter {
 
         protected override void OnPaint(PaintEventArgs e) {
             // Avoid division by zero.
-            if (MaximumSample > 0) {
+            if (MaximumSpeed > 0) {
                 // Use entire graph area regardless of clipping region.
                 Rectangle surface = GraphRectangle;
                 var x = surface.Right - 1;
 
                 foreach (var sample in Samples) {
-                    var downstream = sample.Downstream / (float)MaximumSample;
-                    var upstream = sample.Upstream / (float)MaximumSample;
+                    var downstream = sample.Downstream / (float)MaximumSpeed;
+                    var upstream = sample.Upstream / (float)MaximumSpeed;
                     var downDominant = downstream > upstream;
                     var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream)) + surface.Top;
 

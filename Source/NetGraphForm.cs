@@ -7,23 +7,42 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraphForm : Form {
-
-        /// <summary>
-        /// Application options.
-        /// </summary>
-        private Options Options { get; set; }
-
-        private Sample LastSample { get; set; }
+        private Options options;
 
         /// <summary>
         /// Point at which the user starts dragging the form.
         /// </summary>
         private Point dragPoint;
 
+        /// <summary>
+        /// Application options.
+        /// </summary>
+        private Options Options
+        {
+            get
+            {
+                return options;
+            }
+            set
+            {
+                SyncOptionsWithGraph(options = value);
+            }
+        }
+
+        private Sample LastSample { get; set; }
+
         public NetGraphForm() {
             InitializeComponent();
 
             Options = Options.FromSettings(Settings.Default);
+        }
+
+        private void SyncOptionsWithGraph(Options options) {
+            var nic = options.NetworkInterface;
+
+            if (nic != null) {
+                netGraph.MaximumSpeed = options.NicSpeeds[nic.Id];
+            }
         }
 
         private Sample TakeSample() {
@@ -69,15 +88,17 @@ namespace ScriptFUSION.UpDown_Meter {
             WindowState = FormWindowState.Minimized;
         }
 
-        private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
+        private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {
+            // Record drag start location.
             if ((e.Button & MouseButtons.Left) > 0) {
-                Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
+                dragPoint = e.Location;
             }
         }
 
-        private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {
+        private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
+            // Drag form.
             if ((e.Button & MouseButtons.Left) > 0) {
-                dragPoint = e.Location;
+                Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
             }
         }
 
