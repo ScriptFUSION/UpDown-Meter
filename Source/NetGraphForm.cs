@@ -35,6 +35,8 @@ namespace ScriptFUSION.UpDown_Meter {
             InitializeComponent();
 
             Options = Options.FromSettings(Settings.Default);
+
+            netGraphBindingSource.Add(netGraph);
         }
 
         private void SyncOptionsWithGraph(Options options) {

@@ -50,11 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorExtensions.cs" />
-    <Compile Include="NetGraph.cs">
+    <Compile Include="Controls\NetGraph.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NetGraph.Designer.cs">
+    <Compile Include="Controls\NetGraph.Designer.cs">
       <DependentUpon>NetGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VerticalLabel.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="NetGraphForm.cs">
       <SubType>Form</SubType>
@@ -90,6 +93,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\NetGraph.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
