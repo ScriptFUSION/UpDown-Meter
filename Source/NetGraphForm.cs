@@ -30,22 +30,6 @@ namespace ScriptFUSION.UpDown_Meter {
             Options = Options.FromSettings(Settings.Default);
         }
 
-        private void settings_Click(object sender, EventArgs e) {
-            using (var optionsForm = new OptionsForm(Options.Clone())) {
-                if (optionsForm.ShowDialog(this) == DialogResult.OK) {
-                    Options = optionsForm.Options;
-                }
-            }
-        }
-
-        private void close_Click(object sender, EventArgs e) {
-            Close();
-        }
-
-        private void timer_Tick(object sender, EventArgs e) {
-            netGraph.AddSample(TakeSample());
-        }
-
         private Sample TakeSample() {
             var nic = Options.NetworkInterface;
 
@@ -67,6 +51,28 @@ namespace ScriptFUSION.UpDown_Meter {
             return new Sample { Downstream = stats.BytesReceived, Upstream = stats.BytesSent };
         }
 
+        #region Event handlers
+
+        private void timer_Tick(object sender, EventArgs e) {
+            netGraph.AddSample(TakeSample());
+        }
+
+        private void settings_Click(object sender, EventArgs e) {
+            using (var optionsForm = new OptionsForm(Options.Clone())) {
+                if (optionsForm.ShowDialog(this) == DialogResult.OK) {
+                    Options = optionsForm.Options;
+                }
+            }
+        }
+
+        private void close_Click(object sender, EventArgs e) {
+            Close();
+        }
+
+        private void minimize_Click(object sender, EventArgs e) {
+            WindowState = FormWindowState.Minimized;
+        }
+        
         private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
             if ((e.Button & MouseButtons.Left) > 0) {
                 Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
@@ -85,8 +91,6 @@ namespace ScriptFUSION.UpDown_Meter {
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.RaisedInner, Border3DSide.Top | Border3DSide.Left);
         }
 
-        private void minimize_Click(object sender, EventArgs e) {
-            WindowState = FormWindowState.Minimized;
-        }
+        #endregion
     }
 }

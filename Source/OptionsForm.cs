@@ -12,8 +12,6 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class OptionsForm : Form {
-        private Point? headerBorderP1, headerBorderP2, headerBorderP3, headerBorderP4;
-
         internal Options Options { get; private set; }
 
         internal OptionsForm(Options options) {
@@ -23,22 +21,8 @@ namespace ScriptFUSION.UpDown_Meter {
             LoadNetworkInterfaces();
         }
 
-        private void nics_SelectedIndexChanged(object sender, EventArgs e) {
-            Options.NetworkInterface = (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag;
-        }
-
-        private void ok_Click(object sender, EventArgs e) {
-            Close();
-
-            SaveSettings();
-        }
-
         private void SaveSettings() {
             Options.Save(Settings.Default);
-        }
-
-        private void cancel_Click(object sender, EventArgs e) {
-            Close();
         }
 
         private void LoadNetworkInterfaces() {
@@ -84,21 +68,30 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        #region Event handlers
+
+        private void ok_Click(object sender, EventArgs e) {
+            Close();
+
+            SaveSettings();
+        }
+
+        private void cancel_Click(object sender, EventArgs e) {
+            Close();
+        }
+
+        private void nics_SelectedIndexChanged(object sender, EventArgs e) {
+            Options.NetworkInterface = (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag;
+        }
+
         private void showDisabledAdapters_CheckedChanged(object sender, EventArgs e) {
             LoadNetworkInterfaces();
         }
 
         private void OptionsForm_Paint(object sender, PaintEventArgs e) {
-            e.Graphics.DrawLine(
-                SystemPens.ButtonShadow,
-                (headerBorderP1 = headerBorderP1 ?? new Point(0, header.Bounds.Bottom + 1)).Value,
-                (headerBorderP2 = headerBorderP2 ?? new Point(header.Bounds.Right, headerBorderP1.Value.Y)).Value
-            );
-            e.Graphics.DrawLine(
-                SystemPens.ButtonHighlight,
-                (headerBorderP3 = headerBorderP3 ?? new Point(0, headerBorderP1.Value.Y + 1)).Value,
-                (headerBorderP4 = headerBorderP4 ?? new Point(headerBorderP2.Value.X, headerBorderP3.Value.Y)).Value
-            );
+            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bounds.Bottom + 1, Width, 2), Border3DStyle.SunkenOuter);
         }
+
+        #endregion
     }
 }
