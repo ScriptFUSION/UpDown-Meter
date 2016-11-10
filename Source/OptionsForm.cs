@@ -119,7 +119,7 @@ namespace ScriptFUSION.UpDown_Meter {
                 Border3DStyle.SunkenOuter
             );
         }
-        #endregion
 
+        #endregion
     }
 }

@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
-    public partial class NetGraph : Control {
-        private Stack<Sample> Samples { get; set; }
-
-        public long MaximumSpeed { get; set; }
+    public partial class NetGraph : Control, INotifyPropertyChanged {
+        private long maximumSpeed;
 
         private Pen applePen, pineapplePen, ppapPen;
+
+        private PropertyChangedEventHandler propertyChangedHandlers;
+
+        private Stack<Sample> Samples { get; set; }
+
+        public long MaximumSpeed
+        {
+            get { return maximumSpeed; }
+            set
+            {
+                maximumSpeed = value;
+                OnPropertyChanged();
+            }
+        }
 
         public NetGraph() {
             InitializeComponent();
@@ -21,6 +34,18 @@ namespace ScriptFUSION.UpDown_Meter {
             Samples = new Stack<Sample>();
 
             CreatePens();
+        }
+
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
+            add { propertyChangedHandlers += value; }
+            remove { propertyChangedHandlers -= value; }
+        }
+
+        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null) {
+            if (propertyChangedHandlers != null) {
+                propertyChangedHandlers(this, new PropertyChangedEventArgs(property));
+            }
         }
 
         private void CreatePens() {
@@ -68,18 +93,13 @@ namespace ScriptFUSION.UpDown_Meter {
                     var upstream = sample.Upstream / (float)MaximumSpeed;
                     var downDominant = downstream > upstream;
                     var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream)) + surface.Top;
+                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream)) + surface.Top;
 
                     // Draw hybrid bar.
                     e.Graphics.DrawLine(ppapPen, x, hybridHeight, x, surface.Bottom);
 
                     // Draw upload/download bar.
-                    e.Graphics.DrawLine(
-                        downDominant ? applePen : pineapplePen,
-                        x,
-                        surface.Height * (1 - (downDominant ? downstream : upstream)) + surface.Top,
-                        x,
-                        hybridHeight
-                    );
+                    e.Graphics.DrawLine(downDominant ? applePen : pineapplePen, x, dominantHeight, x, hybridHeight);
 
                     // Do not draw more samples than surface width permits.
                     if (--x < surface.Left) break;

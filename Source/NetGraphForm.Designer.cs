@@ -82,7 +82,7 @@
             this.verticalLabel1.Size = new System.Drawing.Size(14, 121);
             this.verticalLabel1.TabIndex = 5;
             this.verticalLabel1.Text = "NIC speed";
-            this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // netGraphBindingSource
             // 
