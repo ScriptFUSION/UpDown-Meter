@@ -29,13 +29,13 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.minimize = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dlRaw = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ulRaw = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dlAvg = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ulAvg = new System.Windows.Forms.ToolStripStatusLabel();
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.netGraphBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -101,6 +101,23 @@
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabel7.Spring = true;
+            this.toolStripStatusLabel7.Text = "DL Raw";
+            this.toolStripStatusLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlRaw
+            // 
+            this.dlRaw.Name = "dlRaw";
+            this.dlRaw.Size = new System.Drawing.Size(86, 17);
+            this.dlRaw.Spring = true;
+            this.dlRaw.Text = "0";
+            this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.GrayText;
@@ -108,6 +125,14 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(46, 17);
             this.toolStripStatusLabel2.Text = "UL Raw";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ulRaw
+            // 
+            this.ulRaw.Name = "ulRaw";
+            this.ulRaw.Size = new System.Drawing.Size(86, 17);
+            this.ulRaw.Spring = true;
+            this.ulRaw.Text = "0";
+            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusLabel3
             // 
@@ -117,6 +142,14 @@
             this.toolStripStatusLabel3.Text = "DL Avg";
             this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // dlAvg
+            // 
+            this.dlAvg.Name = "dlAvg";
+            this.dlAvg.Size = new System.Drawing.Size(86, 17);
+            this.dlAvg.Spring = true;
+            this.dlAvg.Text = "0";
+            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.GrayText;
@@ -125,50 +158,17 @@
             this.toolStripStatusLabel4.Text = "UL Avg";
             this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // toolStripStatusLabel7
-            // 
-            this.toolStripStatusLabel7.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(80, 17);
-            this.toolStripStatusLabel7.Spring = true;
-            this.toolStripStatusLabel7.Text = "DL Raw";
-            this.toolStripStatusLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dlRaw
-            // 
-            this.dlRaw.Name = "dlRaw";
-            this.dlRaw.Size = new System.Drawing.Size(80, 17);
-            this.dlRaw.Spring = true;
-            this.dlRaw.Text = "0";
-            this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ulRaw
-            // 
-            this.ulRaw.Name = "ulRaw";
-            this.ulRaw.Size = new System.Drawing.Size(80, 17);
-            this.ulRaw.Spring = true;
-            this.ulRaw.Text = "0";
-            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dlAvg
-            // 
-            this.dlAvg.Name = "dlAvg";
-            this.dlAvg.Size = new System.Drawing.Size(80, 17);
-            this.dlAvg.Spring = true;
-            this.dlAvg.Text = "0";
-            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // ulAvg
             // 
             this.ulAvg.Name = "ulAvg";
-            this.ulAvg.Size = new System.Drawing.Size(80, 17);
+            this.ulAvg.Size = new System.Drawing.Size(86, 17);
             this.ulAvg.Spring = true;
             this.ulAvg.Text = "0";
             this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // verticalLabel1
             // 
-            this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.netGraphBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 bps"));
+            this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.netGraphBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 B/s"));
             this.verticalLabel1.ForeColor = System.Drawing.SystemColors.GrayText;
             this.verticalLabel1.Location = new System.Drawing.Point(12, 12);
             this.verticalLabel1.Name = "verticalLabel1";

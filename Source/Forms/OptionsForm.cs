@@ -94,7 +94,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void nics_SelectedIndexChanged(object sender, EventArgs e) {
             Options.NetworkInterface = SelectedNic;
 
-            detectedSpeed.Text = SelectedNic?.Speed.ToString();
+            detectedSpeed.Text = (SelectedNic?.Speed / 8).ToString();
             customSpeed.Text = SelectedNic != null && Options.NicSpeeds.ContainsKey(SelectedNic.Id)
                 ? Options.NicSpeeds[SelectedNic.Id].ToString()
                 : detectedSpeed.Text;

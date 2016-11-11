@@ -31,6 +31,20 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        /// <summary>
+        /// Gets the rectangle that represents the graph area of the control.
+        /// </summary>
+        public Rectangle GraphRectangle
+        {
+            get
+            {
+                var rectangle = ClientRectangle;
+                rectangle.Inflate(-1, -1);
+
+                return rectangle;
+            }
+        }
+
         public NetGraph() {
             InitializeComponent();
 
@@ -75,20 +89,6 @@ namespace ScriptFUSION.UpDown_Meter {
 
         public IEnumerable<Sample> GetSamples() {
             return Samples.ToArray<Sample>();
-        }
-
-        /// <summary>
-        /// Gets the rectangle that represents the graph area of the control.
-        /// </summary>
-        public Rectangle GraphRectangle
-        {
-            get
-            {
-                var rectangle = ClientRectangle;
-                rectangle.Inflate(-1, -1);
-
-                return rectangle;
-            }
         }
 
         protected override void OnPaint(PaintEventArgs e) {

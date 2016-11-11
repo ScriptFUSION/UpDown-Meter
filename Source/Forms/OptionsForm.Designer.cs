@@ -76,15 +76,16 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Speed";
+            this.columnHeader3.Text = "Speed (bit/s)";
+            this.columnHeader3.Width = 77;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Down";
+            this.columnHeader4.Text = "Down (B)";
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Up";
+            this.columnHeader5.Text = "Up (B)";
             // 
             // label1
             // 
@@ -171,16 +172,16 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Detected speed (bps)";
+            this.label2.Text = "Reported speed (B/s)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(155, 280);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 13);
+            this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Set connection speed";
+            this.label3.Text = "Actual speed (B/s)";
             // 
             // customSpeed
             // 
