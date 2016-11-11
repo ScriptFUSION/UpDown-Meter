@@ -14,6 +14,9 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private PropertyChangedEventHandler propertyChangedHandlers;
 
+        /// <summary>
+        /// List of relative samples.
+        /// </summary>
         private Stack<Sample> Samples { get; set; }
 
         public long MaximumSpeed
@@ -65,6 +68,10 @@ namespace ScriptFUSION.UpDown_Meter {
             //}
 
             Invalidate();
+        }
+
+        public IEnumerable<Sample> GetSamples() {
+            return Samples.ToArray<Sample>();
         }
 
         /// <summary>

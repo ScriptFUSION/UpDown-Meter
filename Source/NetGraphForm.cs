@@ -19,16 +19,13 @@ namespace ScriptFUSION.UpDown_Meter {
         /// </summary>
         private Options Options
         {
-            get
-            {
-                return options;
-            }
-            set
-            {
-                SyncOptionsWithGraph(options = value);
-            }
+            get { return options; }
+            set { SyncOptionsWithGraph(options = value); }
         }
 
+        /// <summary>
+        /// Latest absolute sample taken from the current NIC.
+        /// </summary>
         private Sample LastSample { get; set; }
 
         public NetGraphForm() {
@@ -47,15 +44,16 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
-        private Sample TakeSample() {
+        private Sample CreateRelativeSample() {
             var nic = Options.NetworkInterface;
 
             if (nic != null) {
                 var stats = nic.GetIPStatistics();
                 var lastSample = LastSample;
-                var currentSample = LastSample = CreateSample(stats);
+                var currentSample = LastSample = CreateAbsoluteSample(stats);
 
-                // Do not diff a zero-sample because the reading will be inaccurate and off the scale. This only happens once, at start-up.
+                // Do not diff a zero-sample because the reading will be inaccurate and off the scale.
+                // This only happens after LastSample has been reset to zero.
                 if (lastSample.Max > 0) {
                     return currentSample - lastSample;
                 }
@@ -64,14 +62,26 @@ namespace ScriptFUSION.UpDown_Meter {
             return new Sample();
         }
 
-        private Sample CreateSample(IPInterfaceStatistics stats) {
+        private Sample CreateAbsoluteSample(IPInterfaceStatistics stats) {
             return new Sample { Downstream = stats.BytesReceived, Upstream = stats.BytesSent };
+        }
+
+        private void UpdateStats() {
+            var lastSample = netGraph.GetSamples().First();
+            dlRaw.Text = lastSample.Downstream.ToString();
+            ulRaw.Text = lastSample.Upstream.ToString();
+
+            var sampleSet = netGraph.GetSamples().Take(10);
+            dlAvg.Text = ((long)sampleSet.Average(sample => sample.Downstream)).ToString();
+            ulAvg.Text = ((long)sampleSet.Average(sample => sample.Upstream)).ToString();
         }
 
         #region Event handlers
 
         private void timer_Tick(object sender, EventArgs e) {
-            netGraph.AddSample(TakeSample());
+            netGraph.AddSample(CreateRelativeSample());
+
+            UpdateStats();
         }
 
         private void settings_Click(object sender, EventArgs e) {
