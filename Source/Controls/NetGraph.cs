@@ -8,9 +8,11 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraph : Control, INotifyPropertyChanged {
+        private const float headroom = .1f;
+
         private long maximumSpeed;
 
-        private Pen applePen, pineapplePen, ppapPen;
+        private Pen applePen, pineapplePen, ppapPen, lightBlackPen;
 
         private PropertyChangedEventHandler propertyChangedHandlers;
 
@@ -57,6 +59,7 @@ namespace ScriptFUSION.UpDown_Meter {
             applePen = new Pen(Color.FromArgb(opacity, 255, 76, 76));
             pineapplePen = new Pen(Color.FromArgb(opacity, 0, 255, 0).Desaturate(.4f));
             ppapPen = new Pen(Color.FromArgb(opacity, 255, 255, 0).Desaturate(.3f));
+            lightBlackPen = new Pen(Color.FromArgb(40, 0, 0, 0));
         }
 
         public void AddSample(Sample sample) {
@@ -89,18 +92,19 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         protected override void OnPaint(PaintEventArgs e) {
+            // Use entire graph area regardless of clipping region.
+            Rectangle surface = GraphRectangle;
+
             // Avoid division by zero.
             if (MaximumSpeed > 0) {
-                // Use entire graph area regardless of clipping region.
-                Rectangle surface = GraphRectangle;
                 var x = surface.Right - 1;
 
                 foreach (var sample in Samples) {
                     var downstream = sample.Downstream / (float)MaximumSpeed;
                     var upstream = sample.Upstream / (float)MaximumSpeed;
                     var downDominant = downstream > upstream;
-                    var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream)) + surface.Top;
-                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream)) + surface.Top;
+                    var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - headroom)) + surface.Top;
+                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - headroom)) + surface.Top;
 
                     // Draw hybrid bar.
                     e.Graphics.DrawLine(ppapPen, x, hybridHeight, x, surface.Bottom);
@@ -112,6 +116,10 @@ namespace ScriptFUSION.UpDown_Meter {
                     if (--x < surface.Left) break;
                 }
             }
+
+            // Draw headroom bar.
+            var headroomY = surface.Height * headroom;
+            e.Graphics.DrawLine(lightBlackPen, surface.Left, headroomY, surface.Right, headroomY);
 
             // Paint entire border regardless of clipping region.
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.SunkenOuter);
