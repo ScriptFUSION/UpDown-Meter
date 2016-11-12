@@ -34,6 +34,9 @@ namespace ScriptFUSION.UpDown_Meter {
             Options = Options.FromSettings(Settings.Default);
 
             netGraphBindingSource.Add(netGraph);
+
+            // Timer does not fire at start-up so trigger manually.
+            SampleAdapter();
         }
 
         private void SyncOptionsWithGraph(Options options) {
@@ -42,6 +45,12 @@ namespace ScriptFUSION.UpDown_Meter {
             if (nic != null) {
                 netGraph.MaximumSpeed = options.NicSpeeds[nic.Id];
             }
+        }
+
+        public void SampleAdapter() {
+            netGraph.AddSample(CreateRelativeSample());
+
+            UpdateStats();
         }
 
         private Sample CreateRelativeSample() {
@@ -54,16 +63,16 @@ namespace ScriptFUSION.UpDown_Meter {
 
                 // Do not diff a zero-sample because the reading will be inaccurate and off the scale.
                 // This only happens after LastSample has been reset to zero.
-                if (lastSample.Max > 0) {
+                if (lastSample?.Max > 0) {
                     return currentSample - lastSample;
                 }
             }
 
-            return new Sample();
+            return new Sample(0, 0);
         }
 
         private Sample CreateAbsoluteSample(IPInterfaceStatistics stats) {
-            return new Sample { Downstream = stats.BytesReceived, Upstream = stats.BytesSent };
+            return new Sample(stats.BytesReceived, stats.BytesSent);
         }
 
         private void UpdateStats() {
@@ -79,9 +88,7 @@ namespace ScriptFUSION.UpDown_Meter {
         #region Event handlers
 
         private void timer_Tick(object sender, EventArgs e) {
-            netGraph.AddSample(CreateRelativeSample());
-
-            UpdateStats();
+            SampleAdapter();
         }
 
         private void settings_Click(object sender, EventArgs e) {

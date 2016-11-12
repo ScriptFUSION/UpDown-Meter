@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraph : Control, INotifyPropertyChanged {
-        private const float headroom = .1f;
+        private const float HEADROOM = .1f;
 
-        private long maximumSpeed;
+        private long maximumSpeed, sampleCount;
 
-        private Pen applePen, pineapplePen, ppapPen, lightBlackPen;
+        private Pen applePen, pineapplePen, ppapPen, periodPen, headroomPen, lightPeriodPen;
 
         private PropertyChangedEventHandler propertyChangedHandlers;
 
@@ -20,6 +20,8 @@ namespace ScriptFUSION.UpDown_Meter {
         /// List of relative samples.
         /// </summary>
         private Stack<Sample> Samples { get; set; }
+
+        private Dictionary<Sample, long> sampleIndexes;
 
         public long MaximumSpeed
         {
@@ -50,8 +52,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
-            Samples = new Stack<Sample>();
-
+            Reset();
             CreatePens();
         }
 
@@ -62,9 +63,12 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null) {
-            if (propertyChangedHandlers != null) {
-                propertyChangedHandlers(this, new PropertyChangedEventArgs(property));
-            }
+            propertyChangedHandlers?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        public void Reset() {
+            Samples = new Stack<Sample>(Samples?.Count ?? Width);
+            sampleIndexes = new Dictionary<Sample, long>();
         }
 
         private void CreatePens() {
@@ -73,11 +77,17 @@ namespace ScriptFUSION.UpDown_Meter {
             applePen = new Pen(Color.FromArgb(opacity, 255, 76, 76));
             pineapplePen = new Pen(Color.FromArgb(opacity, 0, 255, 0).Desaturate(.4f));
             ppapPen = new Pen(Color.FromArgb(opacity, 255, 255, 0).Desaturate(.3f));
-            lightBlackPen = new Pen(Color.FromArgb(40, 0, 0, 0));
+
+            headroomPen = new Pen(Color.FromArgb(40, 0, 0, 0));
+            periodPen = new Pen(Color.FromArgb(60, 0, 0, 0));
+            lightPeriodPen = new Pen(Color.FromArgb(16, 0, 0, 0));
         }
 
         public void AddSample(Sample sample) {
             Samples.Push(sample);
+            sampleIndexes.Add(sample, sampleCount++);
+
+            // TODO: Crop old samples.
 
             // Automatic calibration.
             //if (sample.Max > MaximumSpeed) {
@@ -95,16 +105,17 @@ namespace ScriptFUSION.UpDown_Meter {
             // Use entire graph area regardless of clipping region.
             Rectangle surface = GraphRectangle;
 
+            // Drawing start point on x-axis.
+            var x = surface.Right - 1;
+
             // Avoid division by zero.
             if (MaximumSpeed > 0) {
-                var x = surface.Right - 1;
-
                 foreach (var sample in Samples) {
                     var downstream = sample.Downstream / (float)MaximumSpeed;
                     var upstream = sample.Upstream / (float)MaximumSpeed;
                     var downDominant = downstream > upstream;
-                    var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - headroom)) + surface.Top;
-                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - headroom)) + surface.Top;
+                    var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - HEADROOM)) + surface.Top;
+                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - HEADROOM)) + surface.Top;
 
                     // Draw hybrid bar.
                     e.Graphics.DrawLine(ppapPen, x, hybridHeight, x, surface.Bottom);
@@ -112,14 +123,21 @@ namespace ScriptFUSION.UpDown_Meter {
                     // Draw upload/download bar.
                     e.Graphics.DrawLine(downDominant ? applePen : pineapplePen, x, dominantHeight, x, hybridHeight);
 
+                    // Draw period separator.
+                    if (sampleIndexes[sample] % 60 == 0) {
+                        for (var i = surface.Top; i < surface.Bottom; i += 4) {
+                            e.Graphics.DrawLine((i - surface.Top) % 8 == 0 ? periodPen : lightPeriodPen, x, i, x, i + 3);
+                        }
+                    }
+
                     // Do not draw more samples than surface width permits.
                     if (--x < surface.Left) break;
                 }
             }
 
             // Draw headroom bar.
-            var headroomY = surface.Height * headroom;
-            e.Graphics.DrawLine(lightBlackPen, surface.Left, headroomY, surface.Right, headroomY);
+            var headroomY = surface.Height * HEADROOM;
+            e.Graphics.DrawLine(headroomPen, x + 1, headroomY, surface.Right, headroomY);
 
             // Paint entire border regardless of clipping region.
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.SunkenOuter);
