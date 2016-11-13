@@ -92,20 +92,28 @@ namespace ScriptFUSION.UpDown_Meter {
             SampleAdapter();
         }
 
-        private void settings_Click(object sender, EventArgs e) {
-            using (var optionsForm = new OptionsForm(Options.Clone())) {
-                if (optionsForm.ShowDialog(this) == DialogResult.OK) {
-                    Options = optionsForm.Options;
-                }
-            }
-        }
-
         private void close_Click(object sender, EventArgs e) {
             Close();
         }
 
         private void minimize_Click(object sender, EventArgs e) {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void topmost_Click(object sender, EventArgs e) {
+            TopMost = topmost.Selected;
+        }
+
+        private void transparent_Click(object sender, EventArgs e) {
+            Opacity = transparent.Selected ? .4 : 1;
+        }
+
+        private void settings_Click(object sender, EventArgs e) {
+            using (var optionsForm = new OptionsForm(Options.Clone())) {
+                if (optionsForm.ShowDialog(this) == DialogResult.OK) {
+                    Options = optionsForm.Options;
+                }
+            }
         }
 
         private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {

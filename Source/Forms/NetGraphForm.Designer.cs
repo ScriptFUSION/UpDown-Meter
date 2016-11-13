@@ -82,7 +82,7 @@
             // 
             this.toolStripStatusLabel7.ForeColor = System.Drawing.SystemColors.GrayText;
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(47, 15);
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(53, 15);
             this.toolStripStatusLabel7.Spring = true;
             this.toolStripStatusLabel7.Text = "DL Raw";
             this.toolStripStatusLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -90,7 +90,7 @@
             // dlRaw
             // 
             this.dlRaw.Name = "dlRaw";
-            this.dlRaw.Size = new System.Drawing.Size(47, 15);
+            this.dlRaw.Size = new System.Drawing.Size(53, 15);
             this.dlRaw.Spring = true;
             this.dlRaw.Text = "0";
             this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -106,7 +106,7 @@
             // ulRaw
             // 
             this.ulRaw.Name = "ulRaw";
-            this.ulRaw.Size = new System.Drawing.Size(47, 15);
+            this.ulRaw.Size = new System.Drawing.Size(53, 15);
             this.ulRaw.Spring = true;
             this.ulRaw.Text = "0";
             this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,7 +122,7 @@
             // dlAvg
             // 
             this.dlAvg.Name = "dlAvg";
-            this.dlAvg.Size = new System.Drawing.Size(47, 15);
+            this.dlAvg.Size = new System.Drawing.Size(53, 15);
             this.dlAvg.Spring = true;
             this.dlAvg.Text = "0";
             this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -138,7 +138,7 @@
             // ulAvg
             // 
             this.ulAvg.Name = "ulAvg";
-            this.ulAvg.Size = new System.Drawing.Size(47, 15);
+            this.ulAvg.Size = new System.Drawing.Size(53, 15);
             this.ulAvg.Spring = true;
             this.ulAvg.Text = "0";
             this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,47 +162,51 @@
             // 
             this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
             this.close.Location = new System.Drawing.Point(1, 2);
-            this.close.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.close.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
             this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(13, 12);
+            this.close.Size = new System.Drawing.Size(13, 13);
             this.close.TabIndex = 0;
             this.close.Click += new System.EventHandler(this.close_Click);
             // 
             // minimize
             // 
             this.minimize.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.minimize;
-            this.minimize.Location = new System.Drawing.Point(1, 18);
-            this.minimize.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.minimize.Location = new System.Drawing.Point(1, 16);
+            this.minimize.Margin = new System.Windows.Forms.Padding(1);
             this.minimize.Name = "minimize";
-            this.minimize.Size = new System.Drawing.Size(13, 12);
+            this.minimize.Size = new System.Drawing.Size(13, 13);
             this.minimize.TabIndex = 1;
             this.minimize.Click += new System.EventHandler(this.minimize_Click);
             // 
             // topmost
             // 
             this.topmost.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.topmost;
-            this.topmost.Location = new System.Drawing.Point(1, 34);
-            this.topmost.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.topmost.Location = new System.Drawing.Point(1, 31);
+            this.topmost.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
             this.topmost.Name = "topmost";
-            this.topmost.Size = new System.Drawing.Size(13, 12);
+            this.topmost.Size = new System.Drawing.Size(13, 13);
             this.topmost.TabIndex = 2;
+            this.topmost.ToggleButton = true;
+            this.topmost.Click += new System.EventHandler(this.topmost_Click);
             // 
             // transparent
             // 
             this.transparent.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.transparent;
-            this.transparent.Location = new System.Drawing.Point(1, 50);
-            this.transparent.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.transparent.Location = new System.Drawing.Point(1, 45);
+            this.transparent.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
             this.transparent.Name = "transparent";
-            this.transparent.Size = new System.Drawing.Size(13, 12);
+            this.transparent.Size = new System.Drawing.Size(13, 13);
             this.transparent.TabIndex = 3;
+            this.transparent.ToggleButton = true;
+            this.transparent.Click += new System.EventHandler(this.transparent_Click);
             // 
             // settings
             // 
             this.settings.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.settings;
-            this.settings.Location = new System.Drawing.Point(1, 66);
-            this.settings.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.settings.Location = new System.Drawing.Point(1, 59);
+            this.settings.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(13, 12);
+            this.settings.Size = new System.Drawing.Size(13, 13);
             this.settings.TabIndex = 4;
             this.settings.Click += new System.EventHandler(this.settings_Click);
             // 

@@ -125,7 +125,7 @@ namespace ScriptFUSION.UpDown_Meter {
                     e.Graphics.DrawLine(downDominant ? applePen : pineapplePen, x, dominantHeight, x, hybridHeight);
 
                     // Draw period separator.
-                    if (sampleIndexes[sample] % 60 == 0) {
+                    if (sampleIndexes[sample] % 30 == 0) {
                         for (var i = surface.Top; i < surface.Bottom; i += 4) {
                             e.Graphics.DrawLine((i - surface.Top) % 8 == 0 ? periodPen : lightPeriodPen, x, i, x, i + 3);
                         }
