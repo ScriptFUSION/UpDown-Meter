@@ -30,6 +30,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
         public NetGraphForm() {
             InitializeComponent();
+            toolbox.BackColor = BackColor.Desaturate(.15f).Darken(.14f);
 
             Options = Options.FromSettings(Settings.Default);
 
@@ -125,6 +126,11 @@ namespace ScriptFUSION.UpDown_Meter {
             // Force bottom and right to be drawn before top and left, causing the latter to overlap the former at the corners.
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.RaisedInner, Border3DSide.Bottom | Border3DSide.Right);
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.RaisedInner, Border3DSide.Top | Border3DSide.Left);
+
+            // Draw toolbox edge.
+            var toolboxEdge = toolbox.Bounds;
+            toolboxEdge.Offset(-toolbox.Width, 0);
+            ControlPaint.DrawBorder3D(e.Graphics, toolboxEdge, Border3DStyle.RaisedInner, Border3DSide.Right);
         }
 
         #endregion

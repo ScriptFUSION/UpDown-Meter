@@ -16,12 +16,12 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private PropertyChangedEventHandler propertyChangedHandlers;
 
+        private Dictionary<Sample, long> sampleIndexes;
+
         /// <summary>
         /// List of relative samples.
         /// </summary>
         private Stack<Sample> Samples { get; set; }
-
-        private Dictionary<Sample, long> sampleIndexes;
 
         public long MaximumSpeed
         {
@@ -36,7 +36,7 @@ namespace ScriptFUSION.UpDown_Meter {
         /// <summary>
         /// Gets the rectangle that represents the graph area of the control.
         /// </summary>
-        public Rectangle GraphRectangle
+        private Rectangle GraphRectangle
         {
             get
             {
@@ -72,13 +72,14 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void CreatePens() {
-            const int opacity = 192; // 75%.
+            const int OPACITY = 192; // 75%.
 
-            applePen = new Pen(Color.FromArgb(opacity, 255, 76, 76));
-            pineapplePen = new Pen(Color.FromArgb(opacity, 0, 255, 0).Desaturate(.4f));
-            ppapPen = new Pen(Color.FromArgb(opacity, 255, 255, 0).Desaturate(.3f));
+            applePen = new Pen(Color.FromArgb(OPACITY, 255, 76, 76));
+            pineapplePen = new Pen(Color.FromArgb(OPACITY, 0, 255, 0).Desaturate(.4f));
+            ppapPen = new Pen(Color.FromArgb(OPACITY, 255, 255, 0).Desaturate(.3f));
 
             headroomPen = new Pen(Color.FromArgb(40, 0, 0, 0));
+
             periodPen = new Pen(Color.FromArgb(60, 0, 0, 0));
             lightPeriodPen = new Pen(Color.FromArgb(16, 0, 0, 0));
         }
