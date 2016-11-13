@@ -8,11 +8,11 @@ namespace ScriptFUSION.UpDown_Meter {
     internal sealed class Options {
         public NetworkInterface NetworkInterface { get; set; }
 
-        public Dictionary<string, long> NicSpeeds { get; private set; }
+        public Dictionary<string, ulong> NicSpeeds { get; private set; }
 
         public Options Clone() {
             var clone = (Options)this.MemberwiseClone();
-            clone.NicSpeeds = new Dictionary<string, long>(NicSpeeds);
+            clone.NicSpeeds = new Dictionary<string, ulong>(NicSpeeds);
 
             return clone;
         }

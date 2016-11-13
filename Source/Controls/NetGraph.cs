@@ -10,20 +10,20 @@ namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraph : Control, INotifyPropertyChanged {
         private const float HEADROOM = .1f;
 
-        private long maximumSpeed, sampleCount;
+        private ulong maximumSpeed, sampleCount;
 
         private Pen applePen, pineapplePen, ppapPen, periodPen, headroomPen, lightPeriodPen;
 
         private PropertyChangedEventHandler propertyChangedHandlers;
 
-        private Dictionary<Sample, long> sampleIndexes;
+        private Dictionary<Sample, ulong> sampleIndexes;
 
         /// <summary>
         /// List of relative samples.
         /// </summary>
         private Stack<Sample> Samples { get; set; }
 
-        public long MaximumSpeed
+        public ulong MaximumSpeed
         {
             get { return maximumSpeed; }
             set
@@ -66,11 +66,6 @@ namespace ScriptFUSION.UpDown_Meter {
             propertyChangedHandlers?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public void Reset() {
-            Samples = new Stack<Sample>(Samples?.Count ?? Width);
-            sampleIndexes = new Dictionary<Sample, long>();
-        }
-
         private void CreatePens() {
             const int OPACITY = 192; // 75%.
 
@@ -94,6 +89,14 @@ namespace ScriptFUSION.UpDown_Meter {
             //if (sample.Max > MaximumSpeed) {
             //    MaximumSpeed = sample.Max;
             //}
+
+            Invalidate();
+        }
+
+        public void Reset() {
+            Samples = new Stack<Sample>(Samples?.Count ?? Width);
+            sampleIndexes = new Dictionary<Sample, ulong>();
+            sampleCount = 0;
 
             Invalidate();
         }

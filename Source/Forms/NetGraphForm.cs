@@ -44,7 +44,9 @@ namespace ScriptFUSION.UpDown_Meter {
             var nic = options.NetworkInterface;
 
             if (nic != null) {
-                netGraph.MaximumSpeed = options.NicSpeeds[nic.Id];
+                if (options.NicSpeeds.ContainsKey(nic.Id)) {
+                    netGraph.MaximumSpeed = options.NicSpeeds[nic.Id];
+                }
             }
         }
 
@@ -106,6 +108,10 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void transparent_Click(object sender, EventArgs e) {
             Opacity = transparent.Selected ? .4 : 1;
+        }
+
+        private void reset_Click(object sender, EventArgs e) {
+            netGraph.Reset();
         }
 
         private void settings_Click(object sender, EventArgs e) {

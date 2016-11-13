@@ -24,7 +24,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void SaveSettings() {
             if (SelectedNic != null) {
-                Options.NicSpeeds[SelectedNic.Id] = long.Parse(customSpeed.Text);
+                Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
             Options.Save(Settings.Default);

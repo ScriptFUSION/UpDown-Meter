@@ -39,6 +39,7 @@
             this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.transparent = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.netGraphBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -152,6 +153,7 @@
             this.toolbox.Controls.Add(this.minimize);
             this.toolbox.Controls.Add(this.topmost);
             this.toolbox.Controls.Add(this.transparent);
+            this.toolbox.Controls.Add(this.reset);
             this.toolbox.Controls.Add(this.settings);
             this.toolbox.Location = new System.Drawing.Point(315, 1);
             this.toolbox.Name = "toolbox";
@@ -200,10 +202,20 @@
             this.transparent.ToggleButton = true;
             this.transparent.Click += new System.EventHandler(this.transparent_Click);
             // 
+            // reset
+            // 
+            this.reset.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.refresh;
+            this.reset.Location = new System.Drawing.Point(1, 59);
+            this.reset.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(13, 12);
+            this.reset.TabIndex = 4;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // settings
             // 
             this.settings.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.settings;
-            this.settings.Location = new System.Drawing.Point(1, 59);
+            this.settings.Location = new System.Drawing.Point(1, 72);
             this.settings.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
             this.settings.Name = "settings";
             this.settings.Size = new System.Drawing.Size(13, 13);
@@ -234,7 +246,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.netGraph.Location = new System.Drawing.Point(18, 8);
             this.netGraph.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.netGraph.MaximumSpeed = ((long)(0));
+            this.netGraph.MaximumSpeed = ((ulong)(0ul));
             this.netGraph.Name = "netGraph";
             this.netGraph.Size = new System.Drawing.Size(289, 67);
             this.netGraph.TabIndex = 1;
@@ -287,5 +299,6 @@
         private Controls.BilgeButton topmost;
         private Controls.BilgeButton transparent;
         private Controls.BilgeButton settings;
+        private Controls.BilgeButton reset;
     }
 }
