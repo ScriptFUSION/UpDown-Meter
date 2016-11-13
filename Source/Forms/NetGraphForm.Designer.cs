@@ -70,10 +70,10 @@
             this.dlAvg,
             this.toolStripStatusLabel4,
             this.ulAvg});
-            this.statusStrip1.Location = new System.Drawing.Point(1, 102);
+            this.statusStrip1.Location = new System.Drawing.Point(1, 82);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(380, 20);
+            this.statusStrip1.Size = new System.Drawing.Size(312, 20);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
@@ -82,7 +82,7 @@
             // 
             this.toolStripStatusLabel7.ForeColor = System.Drawing.SystemColors.GrayText;
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(53, 15);
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(39, 15);
             this.toolStripStatusLabel7.Spring = true;
             this.toolStripStatusLabel7.Text = "DL Raw";
             this.toolStripStatusLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -90,7 +90,7 @@
             // dlRaw
             // 
             this.dlRaw.Name = "dlRaw";
-            this.dlRaw.Size = new System.Drawing.Size(53, 15);
+            this.dlRaw.Size = new System.Drawing.Size(39, 15);
             this.dlRaw.Spring = true;
             this.dlRaw.Text = "0";
             this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -106,7 +106,7 @@
             // ulRaw
             // 
             this.ulRaw.Name = "ulRaw";
-            this.ulRaw.Size = new System.Drawing.Size(53, 15);
+            this.ulRaw.Size = new System.Drawing.Size(39, 15);
             this.ulRaw.Spring = true;
             this.ulRaw.Text = "0";
             this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,7 +122,7 @@
             // dlAvg
             // 
             this.dlAvg.Name = "dlAvg";
-            this.dlAvg.Size = new System.Drawing.Size(53, 15);
+            this.dlAvg.Size = new System.Drawing.Size(39, 15);
             this.dlAvg.Spring = true;
             this.dlAvg.Text = "0";
             this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -138,7 +138,7 @@
             // ulAvg
             // 
             this.ulAvg.Name = "ulAvg";
-            this.ulAvg.Size = new System.Drawing.Size(53, 15);
+            this.ulAvg.Size = new System.Drawing.Size(39, 15);
             this.ulAvg.Spring = true;
             this.ulAvg.Text = "0";
             this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -153,9 +153,9 @@
             this.toolbox.Controls.Add(this.topmost);
             this.toolbox.Controls.Add(this.transparent);
             this.toolbox.Controls.Add(this.settings);
-            this.toolbox.Location = new System.Drawing.Point(383, 1);
+            this.toolbox.Location = new System.Drawing.Point(315, 1);
             this.toolbox.Name = "toolbox";
-            this.toolbox.Size = new System.Drawing.Size(15, 122);
+            this.toolbox.Size = new System.Drawing.Size(15, 102);
             this.toolbox.TabIndex = 7;
             // 
             // close
@@ -215,10 +215,10 @@
             this.verticalLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.netGraphBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 B/s"));
-            this.verticalLabel1.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.verticalLabel1.Location = new System.Drawing.Point(6, 9);
+            this.verticalLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.verticalLabel1.Location = new System.Drawing.Point(4, 9);
             this.verticalLabel1.Name = "verticalLabel1";
-            this.verticalLabel1.Size = new System.Drawing.Size(12, 80);
+            this.verticalLabel1.Size = new System.Drawing.Size(12, 60);
             this.verticalLabel1.TabIndex = 5;
             this.verticalLabel1.Text = "NIC speed";
             this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -232,11 +232,11 @@
             this.netGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.netGraph.Location = new System.Drawing.Point(23, 10);
+            this.netGraph.Location = new System.Drawing.Point(18, 8);
             this.netGraph.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.netGraph.MaximumSpeed = ((long)(0));
             this.netGraph.Name = "netGraph";
-            this.netGraph.Size = new System.Drawing.Size(349, 82);
+            this.netGraph.Size = new System.Drawing.Size(289, 67);
             this.netGraph.TabIndex = 1;
             this.netGraph.Text = "netGraph1";
             this.netGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
@@ -246,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 124);
+            this.ClientSize = new System.Drawing.Size(331, 104);
             this.Controls.Add(this.toolbox);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.verticalLabel1);
