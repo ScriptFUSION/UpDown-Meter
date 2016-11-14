@@ -224,6 +224,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UpDown Meter - Options";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OptionsForm_Paint);

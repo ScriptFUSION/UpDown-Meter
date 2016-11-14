@@ -116,6 +116,8 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void settings_Click(object sender, EventArgs e) {
             using (var optionsForm = new OptionsForm(Options.Clone())) {
+                optionsForm.Icon = Icon;
+
                 if (optionsForm.ShowDialog(this) == DialogResult.OK) {
                     Options = optionsForm.Options;
                 }

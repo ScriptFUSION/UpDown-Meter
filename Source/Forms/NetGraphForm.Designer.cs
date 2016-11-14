@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetGraphForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -44,6 +45,7 @@
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.netGraphBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.NetGraph();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusStrip1.SuspendLayout();
             this.toolbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.netGraphBindingSource)).BeginInit();
@@ -254,6 +256,11 @@
             this.netGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.netGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // NetGraphForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -265,6 +272,7 @@
             this.Controls.Add(this.netGraph);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NetGraphForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NetGraphForm";
@@ -300,5 +308,6 @@
         private Controls.BilgeButton transparent;
         private Controls.BilgeButton settings;
         private Controls.BilgeButton reset;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
