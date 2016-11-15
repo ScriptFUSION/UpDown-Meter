@@ -11,7 +11,7 @@ namespace ScriptFUSION.UpDown_Meter {
         public Dictionary<string, ulong> NicSpeeds { get; private set; }
 
         public Options Clone() {
-            var clone = (Options)this.MemberwiseClone();
+            var clone = (Options)MemberwiseClone();
             clone.NicSpeeds = new Dictionary<string, ulong>(NicSpeeds);
 
             return clone;

@@ -44,7 +44,7 @@ namespace ScriptFUSION.UpDown_Meter {
                             nic.NetworkInterfaceType.ToString(),
                             nic.Speed.ToString(),
                             stats.BytesReceived.ToString(),
-                            stats.BytesSent.ToString()
+                            stats.BytesSent.ToString(),
                         });
                         item.Tag = nic;
 

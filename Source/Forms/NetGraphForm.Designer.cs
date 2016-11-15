@@ -36,6 +36,7 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ulAvg = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolbox = new System.Windows.Forms.FlowLayoutPanel();
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
@@ -43,12 +44,11 @@
             this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
-            this.netGraphBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.NetGraph();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusStrip1.SuspendLayout();
             this.toolbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.netGraphBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // timer
@@ -162,6 +162,10 @@
             this.toolbox.Size = new System.Drawing.Size(15, 102);
             this.toolbox.TabIndex = 7;
             // 
+            // trayIcon
+            // 
+            this.trayIcon.Visible = true;
+            // 
             // close
             // 
             this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
@@ -228,7 +232,7 @@
             // 
             this.verticalLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.netGraphBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 B/s"));
+            this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.samplerBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 B/s"));
             this.verticalLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.verticalLabel1.Location = new System.Drawing.Point(4, 9);
             this.verticalLabel1.Name = "verticalLabel1";
@@ -237,9 +241,9 @@
             this.verticalLabel1.Text = "NIC speed";
             this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
-            // netGraphBindingSource
+            // samplerBindingSource
             // 
-            this.netGraphBindingSource.DataSource = typeof(ScriptFUSION.UpDown_Meter.NetGraph);
+            this.samplerBindingSource.DataSource = typeof(ScriptFUSION.UpDown_Meter.NetworkInterfaceSampler);
             // 
             // netGraph
             // 
@@ -248,18 +252,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.netGraph.Location = new System.Drawing.Point(18, 8);
             this.netGraph.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.netGraph.MaximumSpeed = ((ulong)(0ul));
             this.netGraph.Name = "netGraph";
             this.netGraph.Size = new System.Drawing.Size(289, 67);
             this.netGraph.TabIndex = 1;
             this.netGraph.Text = "netGraph1";
             this.netGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.netGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
             // 
             // NetGraphForm
             // 
@@ -282,7 +280,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolbox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.netGraphBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,7 +288,7 @@
         #endregion
         private NetGraph netGraph;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.BindingSource netGraphBindingSource;
+        private System.Windows.Forms.BindingSource samplerBindingSource;
         private Controls.VerticalLabel verticalLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
@@ -308,6 +306,6 @@
         private Controls.BilgeButton transparent;
         private Controls.BilgeButton settings;
         private Controls.BilgeButton reset;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon trayIcon;
     }
 }

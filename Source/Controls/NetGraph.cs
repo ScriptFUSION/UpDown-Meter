@@ -1,37 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
-    public partial class NetGraph : Control, INotifyPropertyChanged {
+    public partial class NetGraph : Control {
         private const float HEADROOM = .1f;
 
-        private ulong maximumSpeed, sampleCount;
-
-        private Pen applePen, pineapplePen, ppapPen, periodPen, headroomPen, lightPeriodPen;
-
-        private PropertyChangedEventHandler propertyChangedHandlers;
+        private NetworkInterfaceSampler sampler;
 
         private Dictionary<Sample, ulong> sampleIndexes;
+        private ulong sampleCount;
 
-        /// <summary>
-        /// List of relative samples.
-        /// </summary>
-        private Stack<Sample> Samples { get; set; }
-
-        public ulong MaximumSpeed
-        {
-            get { return maximumSpeed; }
-            set
-            {
-                maximumSpeed = value;
-                OnPropertyChanged();
-            }
-        }
+        private Pen applePen, pineapplePen, ppapPen, headroomPen, periodPen, lightPeriodPen;
 
         /// <summary>
         /// Gets the rectangle that represents the graph area of the control.
@@ -47,23 +30,24 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        public NetworkInterfaceSampler Sampler
+        {
+            set
+            {
+                sampler = value;
+
+                value.SampleAdded += Sampler_SampleAdded;
+                value.SamplesCleared += Sampler_SamplesCleared;
+
+                Reset();
+            }
+        }
+
         public NetGraph() {
             InitializeComponent();
-
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
-            Reset();
             CreatePens();
-        }
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { propertyChangedHandlers += value; }
-            remove { propertyChangedHandlers -= value; }
-        }
-
-        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null) {
-            propertyChangedHandlers?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private void CreatePens() {
@@ -79,44 +63,35 @@ namespace ScriptFUSION.UpDown_Meter {
             lightPeriodPen = new Pen(Color.FromArgb(16, 0, 0, 0));
         }
 
-        public void AddSample(Sample sample) {
-            Samples.Push(sample);
-            sampleIndexes.Add(sample, sampleCount++);
-
-            // TODO: Crop old samples.
-
-            // Automatic calibration.
-            //if (sample.Max > MaximumSpeed) {
-            //    MaximumSpeed = sample.Max;
-            //}
-
-            Invalidate();
-        }
-
         public void Reset() {
-            Samples = new Stack<Sample>(Samples?.Count ?? Width);
             sampleIndexes = new Dictionary<Sample, ulong>();
             sampleCount = 0;
 
             Invalidate();
         }
 
-        public IEnumerable<Sample> GetSamples() {
-            return Samples.ToArray<Sample>();
+        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
+            sampleIndexes.Add(sample, sampleCount++);
+
+            Invalidate();
+        }
+
+        private void Sampler_SamplesCleared(NetworkInterfaceSampler sampler) {
+            Reset();
         }
 
         protected override void OnPaint(PaintEventArgs e) {
-            // Use entire graph area regardless of clipping region.
-            Rectangle surface = GraphRectangle;
-
-            // Drawing start point on x-axis.
-            var x = surface.Right - 1;
-
             // Avoid division by zero.
-            if (MaximumSpeed > 0) {
-                foreach (var sample in Samples) {
-                    var downstream = sample.Downstream / (float)MaximumSpeed;
-                    var upstream = sample.Upstream / (float)MaximumSpeed;
+            if (sampler?.MaximumSpeed > 0) {
+                // Use entire graph area regardless of clipping region.
+                Rectangle surface = GraphRectangle;
+
+                // Drawing start point on x-axis.
+                var x = surface.Right - 1;
+
+                foreach (var sample in sampler.GetSamples()) {
+                    var downstream = sample.Downstream / (float)sampler.MaximumSpeed;
+                    var upstream = sample.Upstream / (float)sampler.MaximumSpeed;
                     var downDominant = downstream > upstream;
                     var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - HEADROOM)) + surface.Top;
                     var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - HEADROOM)) + surface.Top;
@@ -137,11 +112,11 @@ namespace ScriptFUSION.UpDown_Meter {
                     // Do not draw more samples than surface width permits.
                     if (--x < surface.Left) break;
                 }
-            }
 
-            // Draw headroom bar.
-            var headroomY = surface.Height * HEADROOM;
-            e.Graphics.DrawLine(headroomPen, x + 1, headroomY, surface.Right, headroomY);
+                // Draw headroom bar.
+                var headroomY = surface.Height * HEADROOM;
+                e.Graphics.DrawLine(headroomPen, x + 1, headroomY, surface.Right, headroomY);
+            }
 
             // Paint entire border regardless of clipping region.
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.SunkenOuter);

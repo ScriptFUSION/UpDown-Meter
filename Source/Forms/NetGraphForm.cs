@@ -8,6 +8,8 @@ using System.Windows.Forms;
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraphForm : Form {
         private Options options;
+        private NetworkInterfaceSampler sampler;
+        private TrayIconIllustrator trayIconIllustrator;
 
         /// <summary>
         /// Point at which the user starts dragging the form.
@@ -20,78 +22,69 @@ namespace ScriptFUSION.UpDown_Meter {
         private Options Options
         {
             get { return options; }
-            set { SyncOptionsWithGraph(options = value); }
+            set { SyncOptionsWithSampler(options = value); }
         }
-
-        /// <summary>
-        /// Latest absolute sample taken from the current NIC.
-        /// </summary>
-        private Sample LastSample { get; set; }
 
         public NetGraphForm() {
             InitializeComponent();
             toolbox.BackColor = BackColor.Desaturate(.15f).Darken(.14f);
 
+            samplerBindingSource.Add(sampler = netGraph.Sampler = new NetworkInterfaceSampler());
+            sampler.SampleAdded += Sampler_SampleAdded;
+
             Options = Options.FromSettings(Settings.Default);
 
-            netGraphBindingSource.Add(netGraph);
+            trayIconIllustrator = new TrayIconIllustrator();
+            trayIcon.Icon = Icon;
 
             // Timer does not fire at start-up so trigger manually.
-            SampleAdapter();
+            timer_Tick(null, null);
         }
 
-        private void SyncOptionsWithGraph(Options options) {
-            var nic = options.NetworkInterface;
+        private void SyncOptionsWithSampler(Options options) {
+            var nic = sampler.NetworkInterface = options.NetworkInterface;
 
             if (nic != null) {
                 if (options.NicSpeeds.ContainsKey(nic.Id)) {
-                    netGraph.MaximumSpeed = options.NicSpeeds[nic.Id];
+                    sampler.MaximumSpeed = options.NicSpeeds[nic.Id];
                 }
             }
-        }
-
-        public void SampleAdapter() {
-            netGraph.AddSample(CreateRelativeSample());
-
-            UpdateStats();
-        }
-
-        private Sample CreateRelativeSample() {
-            var nic = Options.NetworkInterface;
-
-            if (nic != null) {
-                var stats = nic.GetIPStatistics();
-                var lastSample = LastSample;
-                var currentSample = LastSample = CreateAbsoluteSample(stats);
-
-                // Do not diff a zero-sample because the reading will be inaccurate and off the scale.
-                // This only happens after LastSample has been reset to zero.
-                if (lastSample?.Max > 0) {
-                    return currentSample - lastSample;
-                }
-            }
-
-            return new Sample(0, 0);
-        }
-
-        private Sample CreateAbsoluteSample(IPInterfaceStatistics stats) {
-            return new Sample(stats.BytesReceived, stats.BytesSent);
         }
 
         private void UpdateStats() {
-            var lastSample = netGraph.GetSamples().First();
+            var lastSample = sampler.GetSamples().First();
             dlRaw.Text = lastSample.Downstream.ToString();
             ulRaw.Text = lastSample.Upstream.ToString();
 
-            var sampleSet = netGraph.GetSamples().Take(10);
+            var sampleSet = sampler.GetSamples().Take(10);
             dlAvg.Text = ((long)sampleSet.Average(sample => sample.Downstream)).ToString();
             ulAvg.Text = ((long)sampleSet.Average(sample => sample.Upstream)).ToString();
         }
 
+        private void UpdateTrayIcon() {
+            var oldIcon = trayIcon.Icon;
+
+            var lastSample = sampler.GetSamples().First();
+            trayIcon.Icon = trayIconIllustrator.DrawIcon(
+                lastSample.Upstream / (float)sampler.MaximumSpeed,
+                lastSample.Downstream / (float)sampler.MaximumSpeed
+            );
+
+            // Dispose of old icon.
+            if (oldIcon != null && oldIcon != Icon) {
+                oldIcon.Dispose();
+            }
+        }
+
         #region Event handlers
 
+        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
+            UpdateStats();
+        }
+
         private void timer_Tick(object sender, EventArgs e) {
-            SampleAdapter();
+            sampler.SampleAdapter();
+            UpdateTrayIcon();
         }
 
         private void close_Click(object sender, EventArgs e) {
@@ -111,7 +104,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void reset_Click(object sender, EventArgs e) {
-            netGraph.Reset();
+            sampler.Reset();
         }
 
         private void settings_Click(object sender, EventArgs e) {
