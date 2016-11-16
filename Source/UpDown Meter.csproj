@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ScriptFUSION.UpDown_Meter</RootNamespace>
     <AssemblyName>UpDown Meter</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScriptFUSION.UpDown_Meter.Program</StartupObject>
@@ -57,7 +60,7 @@
       <DependentUpon>NetGraph.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\BilgeButton.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\BilgeButton.Designer.cs">
       <DependentUpon>BilgeButton.cs</DependentUpon>
@@ -86,9 +89,6 @@
     <Compile Include="Sample.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="TrayIconIllustrator.cs" />
-    <EmbeddedResource Include="Controls\BilgeButton.resx">
-      <DependentUpon>BilgeButton.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NetGraphForm.resx">
       <DependentUpon>NetGraphForm.cs</DependentUpon>
     </EmbeddedResource>

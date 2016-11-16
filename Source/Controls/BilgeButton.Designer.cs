@@ -27,8 +27,6 @@
             // 
             // BilgeButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "BilgeButton";
             this.Click += new System.EventHandler(this.BilgeButton_Click);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BilgeButton_MouseDown);

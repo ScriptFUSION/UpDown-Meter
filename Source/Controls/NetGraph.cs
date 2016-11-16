@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ScriptFUSION.UpDown_Meter {
+namespace ScriptFUSION.UpDown_Meter.Controls {
     public partial class NetGraph : Control {
         private const float HEADROOM = .1f;
 

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter.Controls {
     [DefaultEvent("Click")]
-    public partial class BilgeButton : UserControl {
+    public partial class BilgeButton : Control {
         private bool mouseDown, mouseOver, selected;
 
         public Image Image { get; set; }

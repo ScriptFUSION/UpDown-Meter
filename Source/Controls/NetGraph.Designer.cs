@@ -1,4 +1,4 @@
-﻿namespace ScriptFUSION.UpDown_Meter {
+﻿namespace ScriptFUSION.UpDown_Meter.Controls {
     partial class NetGraph {
         /// <summary>
         /// Required designer variable.

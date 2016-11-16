@@ -45,7 +45,7 @@
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.netGraph = new ScriptFUSION.UpDown_Meter.NetGraph();
+            this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
             this.statusStrip1.SuspendLayout();
             this.toolbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).BeginInit();
@@ -289,7 +289,7 @@
         }
 
         #endregion
-        private NetGraph netGraph;
+        private Controls.NetGraph netGraph;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.BindingSource samplerBindingSource;
         private Controls.VerticalLabel verticalLabel1;
