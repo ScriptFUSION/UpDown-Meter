@@ -16,6 +16,13 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private Pen applePen, pineapplePen, ppapPen, headroomPen, periodPen, lightPeriodPen;
 
+        public NetGraph() {
+            InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
+            CreatePens();
+        }
+
         /// <summary>
         /// Gets the rectangle that represents the graph area of the control.
         /// </summary>
@@ -41,13 +48,6 @@ namespace ScriptFUSION.UpDown_Meter {
 
                 Reset();
             }
-        }
-
-        public NetGraph() {
-            InitializeComponent();
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
-            CreatePens();
         }
 
         private void CreatePens() {

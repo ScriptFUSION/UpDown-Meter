@@ -36,13 +36,13 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ulAvg = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolbox = new System.Windows.Forms.FlowLayoutPanel();
-            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.transparent = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.NetGraph();
@@ -162,10 +162,6 @@
             this.toolbox.Size = new System.Drawing.Size(15, 102);
             this.toolbox.TabIndex = 7;
             // 
-            // trayIcon
-            // 
-            this.trayIcon.Visible = true;
-            // 
             // close
             // 
             this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
@@ -228,6 +224,12 @@
             this.settings.TabIndex = 4;
             this.settings.Click += new System.EventHandler(this.settings_Click);
             // 
+            // trayIcon
+            // 
+            this.trayIcon.Visible = true;
+            this.trayIcon.Click += new System.EventHandler(this.trayIcon_Click);
+            this.trayIcon.DoubleClick += new System.EventHandler(this.trayIcon_Click);
+            // 
             // verticalLabel1
             // 
             this.verticalLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -277,6 +279,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NetGraphForm_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
+            this.Resize += new System.EventHandler(this.NetGraphForm_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolbox.ResumeLayout(false);

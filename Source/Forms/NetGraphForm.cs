@@ -1,8 +1,8 @@
 ﻿using ScriptFUSION.UpDown_Meter.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
@@ -15,15 +15,6 @@ namespace ScriptFUSION.UpDown_Meter {
         /// Point at which the user starts dragging the form.
         /// </summary>
         private Point dragPoint;
-
-        /// <summary>
-        /// Application options.
-        /// </summary>
-        private Options Options
-        {
-            get { return options; }
-            set { SyncOptionsWithSampler(options = value); }
-        }
 
         public NetGraphForm() {
             InitializeComponent();
@@ -41,6 +32,40 @@ namespace ScriptFUSION.UpDown_Meter {
             timer_Tick(null, null);
         }
 
+        /// <summary>
+        /// Application options.
+        /// </summary>
+        private Options Options
+        {
+            get { return options; }
+            set { SyncOptionsWithSampler(options = value); }
+        }
+
+        private Sample LastSample
+        {
+            get { return sampler.GetSamples().First(); }
+        }
+
+        private IEnumerable<Sample> LatestSamples
+        {
+            get { return sampler.GetSamples().Take(10); }
+        }
+
+        private ulong AverageDownloadSpeed
+        {
+            get { return (ulong)LatestSamples.Average(sample => sample.Downstream); }
+        }
+
+        private ulong AverageUploadSpeed
+        {
+            get { return (ulong)LatestSamples.Average(sample => sample.Upstream); }
+        }
+
+        private bool IsConnectionDormant
+        {
+            get { return LastSample.Max < 1000 && AverageDownloadSpeed < 1000 && AverageUploadSpeed < 1000; }
+        }
+
         private void SyncOptionsWithSampler(Options options) {
             var nic = sampler.NetworkInterface = options.NetworkInterface;
 
@@ -52,25 +77,39 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void UpdateStats() {
-            var lastSample = sampler.GetSamples().First();
-            dlRaw.Text = lastSample.Downstream.ToString();
-            ulRaw.Text = lastSample.Upstream.ToString();
+            dlRaw.Text = LastSample.Downstream.ToString();
+            ulRaw.Text = LastSample.Upstream.ToString();
 
-            var sampleSet = sampler.GetSamples().Take(10);
-            dlAvg.Text = ((long)sampleSet.Average(sample => sample.Downstream)).ToString();
-            ulAvg.Text = ((long)sampleSet.Average(sample => sample.Upstream)).ToString();
+            dlAvg.Text = AverageDownloadSpeed.ToString();
+            ulAvg.Text = AverageUploadSpeed.ToString();
+        }
+
+        private void UpdateTray() {
+            UpdateTrayIcon();
+
+            trayIcon.Text = string.Format(
+                "D: {0} KB/s U: {1} KB/s",
+                Math.Round(LastSample.Downstream / 1000f, 1),
+                Math.Round(LastSample.Upstream / 1000f, 1)
+            );
         }
 
         private void UpdateTrayIcon() {
             var oldIcon = trayIcon.Icon;
 
-            var lastSample = sampler.GetSamples().First();
-            trayIcon.Icon = trayIconIllustrator.DrawIcon(
-                lastSample.Upstream / (float)sampler.MaximumSpeed,
-                lastSample.Downstream / (float)sampler.MaximumSpeed
-            );
+            if (IsConnectionDormant) {
+                // Use application icon.
+                trayIcon.Icon = Icon;
+            }
+            else {
+                // Draw new icon.
+                trayIcon.Icon = trayIconIllustrator.DrawIcon(
+                    LastSample.Upstream / (float)sampler.MaximumSpeed,
+                    LastSample.Downstream / (float)sampler.MaximumSpeed
+                );
+            }
 
-            // Dispose of old icon.
+            // Dispose of old icon unless it's the application icon.
             if (oldIcon != null && oldIcon != Icon) {
                 oldIcon.Dispose();
             }
@@ -84,7 +123,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void timer_Tick(object sender, EventArgs e) {
             sampler.SampleAdapter();
-            UpdateTrayIcon();
+            UpdateTray();
         }
 
         private void close_Click(object sender, EventArgs e) {
@@ -115,6 +154,14 @@ namespace ScriptFUSION.UpDown_Meter {
                     Options = optionsForm.Options;
                 }
             }
+        }
+
+        private void trayIcon_Click(object sender, EventArgs e) {
+            WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Minimized : FormWindowState.Normal;
+        }
+
+        private void NetGraphForm_Resize(object sender, EventArgs e) {
+            ShowInTaskbar = WindowState != FormWindowState.Minimized;
         }
 
         private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {
