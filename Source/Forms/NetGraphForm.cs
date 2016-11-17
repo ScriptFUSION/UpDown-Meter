@@ -115,6 +115,12 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        private bool CanSnap(int clientEdge, int containerEdge, int tension) {
+            const int DOCK_DISTANCE = 10;
+
+            return Math.Abs(clientEdge - containerEdge) <= DOCK_DISTANCE && tension <= DOCK_DISTANCE && tension >= -DOCK_DISTANCE;
+        }
+
         #region Event handlers
 
         private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
@@ -174,7 +180,24 @@ namespace ScriptFUSION.UpDown_Meter {
         private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
             // Drag form.
             if ((e.Button & MouseButtons.Left) > 0) {
-                Location = new Point(Location.X + e.X - dragPoint.X, Location.Y + e.Y - dragPoint.Y);
+                var container = Screen.FromRectangle(Bounds).WorkingArea;
+                var x = Location.X + e.X - dragPoint.X;
+                var y = Location.Y + e.Y - dragPoint.Y;
+
+                if (CanSnap(Left, container.Left, x - container.Left)) {
+                    x = container.Left;
+                }
+                if (CanSnap(Top, container.Top, y - container.Top)) {
+                    y = container.Top;
+                }
+                if (CanSnap(Right, container.Right, container.Right - (x + Width))) {
+                    x = container.Right - Width;
+                }
+                if (CanSnap(Bottom, container.Bottom, container.Bottom - (y + Height))) {
+                    y = container.Bottom - Height;
+                }
+
+                Location = new Point(x, y);
             }
         }
 
