@@ -18,12 +18,13 @@ namespace ScriptFUSION.UpDown_Meter {
 
         public NetGraphForm() {
             InitializeComponent();
+
             toolbox.BackColor = BackColor.Desaturate(.15f).Darken(.14f);
 
             samplerBindingSource.Add(sampler = netGraph.Sampler = new NetworkInterfaceSampler());
             sampler.SampleAdded += Sampler_SampleAdded;
 
-            Options = Options.FromSettings(Settings.Default);
+            Options = new Options(Settings.Default);
 
             trayIconIllustrator = new TrayIconIllustrator();
             trayIcon.Icon = Icon;
@@ -38,7 +39,13 @@ namespace ScriptFUSION.UpDown_Meter {
         private Options Options
         {
             get { return options; }
-            set { SyncOptionsWithSampler(options = value); }
+            set
+            {
+                options = value;
+
+                SyncOptionsWithSampler(value);
+                SyncOptionsWithUI(value);
+            }
         }
 
         private Sample LastSample
@@ -69,11 +76,17 @@ namespace ScriptFUSION.UpDown_Meter {
         private void SyncOptionsWithSampler(Options options) {
             var nic = sampler.NetworkInterface = options.NetworkInterface;
 
-            if (nic != null) {
-                if (options.NicSpeeds.ContainsKey(nic.Id)) {
-                    sampler.MaximumSpeed = options.NicSpeeds[nic.Id];
-                }
+            sampler.MaximumSpeed = options.NicSpeeds.ContainsKey(nic?.Id ?? string.Empty) ? options.NicSpeeds[nic.Id] : 0;
+        }
+
+        private void SyncOptionsWithUI(Options options) {
+            if (!options.Bounds.Location.IsEmpty) {
+                StartPosition = FormStartPosition.Manual;
+                Location = options.Bounds.Location;
             }
+
+            if (options.Topmost) topmost.SimulateClick();
+            if (options.Transparent) transparent.SimulateClick();
         }
 
         private void UpdateStats() {
@@ -97,7 +110,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void UpdateTrayIcon() {
             var oldIcon = trayIcon.Icon;
 
-            if (IsConnectionDormant) {
+            if (IsConnectionDormant || sampler.MaximumSpeed == 0) {
                 // Use application icon.
                 trayIcon.Icon = Icon;
             }
@@ -145,14 +158,18 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void topmost_Click(object sender, EventArgs e) {
-            TopMost = topmost.Selected = topmostMenuItem.Checked =
+            TopMost = topmost.Selected = topmostMenuItem.Checked = options.Topmost =
                 sender == topmost ? topmost.Selected : topmostMenuItem.Checked;
+
+            options.Save();
         }
 
         private void transparent_Click(object sender, EventArgs e) {
-            Opacity = (transparent.Selected = transparencyMenuItem.Checked =
+            Opacity = (transparent.Selected = transparencyMenuItem.Checked = options.Transparent =
                 sender == transparent ? transparent.Selected : transparencyMenuItem.Checked
             ) ? .4 : 1;
+
+            options.Save();
         }
 
         private void reset_Click(object sender, EventArgs e) {
@@ -223,6 +240,12 @@ namespace ScriptFUSION.UpDown_Meter {
             var toolboxEdge = toolbox.Bounds;
             toolboxEdge.Offset(-toolbox.Width, 0);
             ControlPaint.DrawBorder3D(e.Graphics, toolboxEdge, Border3DStyle.RaisedInner, Border3DSide.Right);
+        }
+
+        private void NetGraphForm_FormClosed(object sender, FormClosedEventArgs e) {
+            options.Bounds = Bounds;
+
+            options.Save();
         }
 
         #endregion

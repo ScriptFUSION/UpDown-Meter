@@ -86,12 +86,12 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool HandsFree {
+        public bool Transparent {
             get {
-                return ((bool)(this["HandsFree"]));
+                return ((bool)(this["Transparent"]));
             }
             set {
-                this["HandsFree"] = value;
+                this["Transparent"] = value;
             }
         }
     }

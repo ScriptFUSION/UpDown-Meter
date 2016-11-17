@@ -52,6 +52,10 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             SetStyle(ControlStyles.StandardDoubleClick, false);
         }
 
+        public void SimulateClick() {
+            OnClick(EventArgs.Empty);
+        }
+
         protected override void OnPaint(PaintEventArgs e) {
             if (Image == null) return;
 

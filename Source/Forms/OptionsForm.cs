@@ -1,5 +1,4 @@
-﻿using ScriptFUSION.UpDown_Meter.Properties;
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace ScriptFUSION.UpDown_Meter {
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
-            Options.Save(Settings.Default);
+            Options.Save();
         }
 
         private void LoadNetworkInterfaces() {
