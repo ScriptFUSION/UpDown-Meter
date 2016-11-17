@@ -43,11 +43,21 @@
             this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.topmostMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transparencyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
             this.statusStrip1.SuspendLayout();
             this.toolbox.SuspendLayout();
+            this.trayMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,9 +236,81 @@
             // 
             // trayIcon
             // 
+            this.trayIcon.ContextMenuStrip = this.trayMenu;
             this.trayIcon.Visible = true;
-            this.trayIcon.Click += new System.EventHandler(this.trayIcon_Click);
-            this.trayIcon.DoubleClick += new System.EventHandler(this.trayIcon_Click);
+            this.trayIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseClick);
+            this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseClick);
+            // 
+            // trayMenu
+            // 
+            this.trayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showMenuItem,
+            this.settingsMenuItem,
+            this.toolStripSeparator1,
+            this.topmostMenuItem,
+            this.transparencyMenuItem,
+            this.resetMenuItem,
+            this.toolStripSeparator2,
+            this.exitMenuItem});
+            this.trayMenu.Name = "contextMenuStrip1";
+            this.trayMenu.ShowCheckMargin = true;
+            this.trayMenu.ShowImageMargin = false;
+            this.trayMenu.Size = new System.Drawing.Size(227, 148);
+            // 
+            // showMenuItem
+            // 
+            this.showMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.showMenuItem.Name = "showMenuItem";
+            this.showMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.showMenuItem.Text = "&Show/Hide UpDown Meter";
+            this.showMenuItem.Click += new System.EventHandler(this.showMenuItem_Click);
+            // 
+            // settingsMenuItem
+            // 
+            this.settingsMenuItem.Name = "settingsMenuItem";
+            this.settingsMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.settingsMenuItem.Text = "S&ettings...";
+            this.settingsMenuItem.Click += new System.EventHandler(this.settings_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(223, 6);
+            // 
+            // topmostMenuItem
+            // 
+            this.topmostMenuItem.CheckOnClick = true;
+            this.topmostMenuItem.Name = "topmostMenuItem";
+            this.topmostMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.topmostMenuItem.Text = "&Always on top";
+            this.topmostMenuItem.Click += new System.EventHandler(this.topmost_Click);
+            // 
+            // transparencyMenuItem
+            // 
+            this.transparencyMenuItem.CheckOnClick = true;
+            this.transparencyMenuItem.Name = "transparencyMenuItem";
+            this.transparencyMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.transparencyMenuItem.Text = "&Transparency";
+            this.transparencyMenuItem.Click += new System.EventHandler(this.transparent_Click);
+            // 
+            // resetMenuItem
+            // 
+            this.resetMenuItem.Name = "resetMenuItem";
+            this.resetMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.resetMenuItem.Text = "&Reset";
+            this.resetMenuItem.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(223, 6);
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exitMenuItem.Text = "E&xit";
+            this.exitMenuItem.Click += new System.EventHandler(this.close_Click);
             // 
             // verticalLabel1
             // 
@@ -283,6 +365,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolbox.ResumeLayout(false);
+            this.trayMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -310,5 +393,14 @@
         private Controls.BilgeButton settings;
         private Controls.BilgeButton reset;
         private System.Windows.Forms.NotifyIcon trayIcon;
+        private System.Windows.Forms.ContextMenuStrip trayMenu;
+        private System.Windows.Forms.ToolStripMenuItem showMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem topmostMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transparencyMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetMenuItem;
     }
 }

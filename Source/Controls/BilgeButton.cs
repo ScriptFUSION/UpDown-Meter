@@ -14,11 +14,11 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         [DefaultValue(false)]
         public bool ToggleButton { get; set; }
 
-        [Browsable(false)]
+        [DefaultValue(false)]
         public bool Selected
         {
             get { return selected; }
-            private set
+            set
             {
                 selected = value;
                 Invalidate();

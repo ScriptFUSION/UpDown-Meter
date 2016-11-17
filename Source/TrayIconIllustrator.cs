@@ -55,10 +55,16 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        /// <summary>
+        /// Composites a portion of the up and down bars onto the background framework.
+        /// </summary>
+        /// <param name="up">Upload bar apportionment, between 0 and 1.</param>
+        /// <param name="down">Download bar apportionment, between 0 and 1.</param>
+        /// <returns>Composited meters.</returns>
         private Bitmap CompositeMeters(float up, float down) {
-            var bitmap = (Bitmap)frame.Clone();
+            var meters = (Bitmap)frame.Clone();
 
-            using (var g = Graphics.FromImage(bitmap)) {
+            using (var g = Graphics.FromImage(meters)) {
                 g.DrawImageUnscaledAndClipped(
                     upBar, new Rectangle(1, 1, Math.Min(upBar.Width, (int)Math.Round(upBar.Width * up)), upBar.Height)
                 );
@@ -67,7 +73,7 @@ namespace ScriptFUSION.UpDown_Meter {
                 );
             }
 
-            return bitmap;
+            return meters;
         }
 
         private static byte[] BitmapToBytes(Bitmap bitmap) {
@@ -143,8 +149,8 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         public Icon DrawIcon(float up, float down) {
-            using (var meter = CompositeMeters(up, down)) {
-                return BitmapToIcon(meter);
+            using (var meters = CompositeMeters(up, down)) {
+                return BitmapToIcon(meters);
             }
         }
     }

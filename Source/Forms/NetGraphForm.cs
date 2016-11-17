@@ -88,7 +88,7 @@ namespace ScriptFUSION.UpDown_Meter {
             UpdateTrayIcon();
 
             trayIcon.Text = string.Format(
-                "D: {0} KB/s U: {1} KB/s",
+                "D: {0} kB/s U: {1} kB/s",
                 Math.Round(LastSample.Downstream / 1000f, 1),
                 Math.Round(LastSample.Upstream / 1000f, 1)
             );
@@ -115,6 +115,15 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
+        private void ToggleWindowVisibility() {
+            WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Minimized : FormWindowState.Normal;
+        }
+
+        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
+            UpdateStats();
+            UpdateTray();
+        }
+
         private bool CanSnap(int clientEdge, int containerEdge, int tension) {
             const int DOCK_DISTANCE = 10;
 
@@ -123,13 +132,8 @@ namespace ScriptFUSION.UpDown_Meter {
 
         #region Event handlers
 
-        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
-            UpdateStats();
-        }
-
         private void timer_Tick(object sender, EventArgs e) {
             sampler.SampleAdapter();
-            UpdateTray();
         }
 
         private void close_Click(object sender, EventArgs e) {
@@ -141,11 +145,14 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void topmost_Click(object sender, EventArgs e) {
-            TopMost = topmost.Selected;
+            TopMost = topmost.Selected = topmostMenuItem.Checked =
+                sender == topmost ? topmost.Selected : topmostMenuItem.Checked;
         }
 
         private void transparent_Click(object sender, EventArgs e) {
-            Opacity = transparent.Selected ? .4 : 1;
+            Opacity = (transparent.Selected = transparencyMenuItem.Checked =
+                sender == transparent ? transparent.Selected : transparencyMenuItem.Checked
+            ) ? .4 : 1;
         }
 
         private void reset_Click(object sender, EventArgs e) {
@@ -162,8 +169,14 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
-        private void trayIcon_Click(object sender, EventArgs e) {
-            WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Minimized : FormWindowState.Normal;
+        private void trayIcon_MouseClick(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) > 0) {
+                ToggleWindowVisibility();
+            }
+        }
+
+        private void showMenuItem_Click(object sender, EventArgs e) {
+            ToggleWindowVisibility();
         }
 
         private void NetGraphForm_Resize(object sender, EventArgs e) {
