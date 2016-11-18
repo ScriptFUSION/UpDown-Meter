@@ -26,15 +26,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetGraphForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dlRaw = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ulRaw = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dlAvg = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ulAvg = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolbox = new System.Windows.Forms.FlowLayoutPanel();
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -46,6 +37,15 @@
             this.resetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusBar = new System.Windows.Forms.TableLayoutPanel();
+            this.dlRaw = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ulRaw = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dlAvg = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ulAvg = new System.Windows.Forms.Label();
             this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
@@ -55,9 +55,9 @@
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
-            this.statusStrip1.SuspendLayout();
             this.toolbox.SuspendLayout();
             this.trayMenu.SuspendLayout();
+            this.statusBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,95 +66,6 @@
             this.timer.Enabled = true;
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.statusStrip1.AutoSize = false;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel7,
-            this.dlRaw,
-            this.toolStripStatusLabel2,
-            this.ulRaw,
-            this.toolStripStatusLabel3,
-            this.dlAvg,
-            this.toolStripStatusLabel4,
-            this.ulAvg});
-            this.statusStrip1.Location = new System.Drawing.Point(1, 82);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(312, 20);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 6;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel7
-            // 
-            this.toolStripStatusLabel7.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(39, 15);
-            this.toolStripStatusLabel7.Spring = true;
-            this.toolStripStatusLabel7.Text = "DL Raw";
-            this.toolStripStatusLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dlRaw
-            // 
-            this.dlRaw.Name = "dlRaw";
-            this.dlRaw.Size = new System.Drawing.Size(39, 15);
-            this.dlRaw.Spring = true;
-            this.dlRaw.Text = "0";
-            this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(34, 15);
-            this.toolStripStatusLabel2.Text = "UL Raw";
-            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ulRaw
-            // 
-            this.ulRaw.Name = "ulRaw";
-            this.ulRaw.Size = new System.Drawing.Size(39, 15);
-            this.ulRaw.Spring = true;
-            this.ulRaw.Text = "0";
-            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(32, 15);
-            this.toolStripStatusLabel3.Text = "DL Avg";
-            this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dlAvg
-            // 
-            this.dlAvg.Name = "dlAvg";
-            this.dlAvg.Size = new System.Drawing.Size(39, 15);
-            this.dlAvg.Spring = true;
-            this.dlAvg.Text = "0";
-            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(32, 15);
-            this.toolStripStatusLabel4.Text = "UL Avg";
-            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ulAvg
-            // 
-            this.ulAvg.Name = "ulAvg";
-            this.ulAvg.Size = new System.Drawing.Size(39, 15);
-            this.ulAvg.Spring = true;
-            this.ulAvg.Text = "0";
-            this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolbox
             // 
@@ -250,6 +161,138 @@
             this.exitMenuItem.Text = "E&xit";
             this.exitMenuItem.Click += new System.EventHandler(this.close_Click);
             // 
+            // statusBar
+            // 
+            this.statusBar.ColumnCount = 8;
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.41899F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58101F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.41899F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58101F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.41899F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58101F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.41899F));
+            this.statusBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58101F));
+            this.statusBar.Controls.Add(this.dlRaw, 1, 0);
+            this.statusBar.Controls.Add(this.label1, 0, 0);
+            this.statusBar.Controls.Add(this.label3, 2, 0);
+            this.statusBar.Controls.Add(this.ulRaw, 3, 0);
+            this.statusBar.Controls.Add(this.label5, 4, 0);
+            this.statusBar.Controls.Add(this.dlAvg, 5, 0);
+            this.statusBar.Controls.Add(this.label7, 6, 0);
+            this.statusBar.Controls.Add(this.ulAvg, 7, 0);
+            this.statusBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusBar.Location = new System.Drawing.Point(8, 82);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.statusBar.RowCount = 1;
+            this.statusBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.statusBar.Size = new System.Drawing.Size(298, 15);
+            this.statusBar.TabIndex = 5;
+            // 
+            // dlRaw
+            // 
+            this.dlRaw.AutoSize = true;
+            this.dlRaw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlRaw.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.dlRaw.Location = new System.Drawing.Point(42, 0);
+            this.dlRaw.Margin = new System.Windows.Forms.Padding(0);
+            this.dlRaw.Name = "dlRaw";
+            this.dlRaw.Size = new System.Drawing.Size(33, 15);
+            this.dlRaw.TabIndex = 1;
+            this.dlRaw.Text = "0";
+            this.dlRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "DL Raw";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.Location = new System.Drawing.Point(75, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "UL Raw";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ulRaw
+            // 
+            this.ulRaw.AutoSize = true;
+            this.ulRaw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ulRaw.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.ulRaw.Location = new System.Drawing.Point(114, 0);
+            this.ulRaw.Margin = new System.Windows.Forms.Padding(0);
+            this.ulRaw.Name = "ulRaw";
+            this.ulRaw.Size = new System.Drawing.Size(33, 15);
+            this.ulRaw.TabIndex = 3;
+            this.ulRaw.Text = "0";
+            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.Location = new System.Drawing.Point(147, 0);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "DL Avg";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlAvg
+            // 
+            this.dlAvg.AutoSize = true;
+            this.dlAvg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlAvg.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.dlAvg.Location = new System.Drawing.Point(186, 0);
+            this.dlAvg.Margin = new System.Windows.Forms.Padding(0);
+            this.dlAvg.Name = "dlAvg";
+            this.dlAvg.Size = new System.Drawing.Size(33, 15);
+            this.dlAvg.TabIndex = 5;
+            this.dlAvg.Text = "0";
+            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label7.Location = new System.Drawing.Point(219, 0);
+            this.label7.Margin = new System.Windows.Forms.Padding(0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "UL Avg";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ulAvg
+            // 
+            this.ulAvg.AutoSize = true;
+            this.ulAvg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ulAvg.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.ulAvg.Location = new System.Drawing.Point(258, 0);
+            this.ulAvg.Margin = new System.Windows.Forms.Padding(0);
+            this.ulAvg.Name = "ulAvg";
+            this.ulAvg.Size = new System.Drawing.Size(37, 15);
+            this.ulAvg.TabIndex = 7;
+            this.ulAvg.Text = "0";
+            this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // close
             // 
             this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
@@ -320,7 +363,7 @@
             this.verticalLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.verticalLabel1.Location = new System.Drawing.Point(4, 9);
             this.verticalLabel1.Name = "verticalLabel1";
-            this.verticalLabel1.Size = new System.Drawing.Size(12, 60);
+            this.verticalLabel1.Size = new System.Drawing.Size(12, 64);
             this.verticalLabel1.TabIndex = 5;
             this.verticalLabel1.Text = "NIC speed";
             this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -349,9 +392,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 104);
             this.Controls.Add(this.toolbox);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.verticalLabel1);
             this.Controls.Add(this.netGraph);
+            this.Controls.Add(this.statusBar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -363,10 +406,10 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
             this.Resize += new System.EventHandler(this.NetGraphForm_Resize);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.toolbox.ResumeLayout(false);
             this.trayMenu.ResumeLayout(false);
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -377,15 +420,6 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.BindingSource samplerBindingSource;
         private Controls.VerticalLabel verticalLabel1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
-        private System.Windows.Forms.ToolStripStatusLabel dlRaw;
-        private System.Windows.Forms.ToolStripStatusLabel ulRaw;
-        private System.Windows.Forms.ToolStripStatusLabel dlAvg;
-        private System.Windows.Forms.ToolStripStatusLabel ulAvg;
         private System.Windows.Forms.FlowLayoutPanel toolbox;
         private Controls.BilgeButton close;
         private Controls.BilgeButton minimize;
@@ -403,5 +437,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetMenuItem;
+        private System.Windows.Forms.TableLayoutPanel statusBar;
+        private System.Windows.Forms.Label dlRaw;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label ulRaw;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label dlAvg;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label ulAvg;
     }
 }

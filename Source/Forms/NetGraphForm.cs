@@ -90,11 +90,11 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void UpdateStats() {
-            dlRaw.Text = LastSample.Downstream.ToString();
-            ulRaw.Text = LastSample.Upstream.ToString();
+            dlRaw.Text = Math.Round(LastSample.Downstream / 1000f, 1).ToString("F1");
+            ulRaw.Text = Math.Round(LastSample.Upstream / 1000f, 1).ToString("F1");
 
-            dlAvg.Text = AverageDownloadSpeed.ToString();
-            ulAvg.Text = AverageUploadSpeed.ToString();
+            dlAvg.Text = Math.Round(AverageDownloadSpeed / 1000f, 1).ToString("F1");
+            ulAvg.Text = Math.Round(AverageUploadSpeed / 1000f, 1).ToString("F1");
         }
 
         private void UpdateTray() {
@@ -129,7 +129,9 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void ToggleWindowVisibility() {
-            WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Minimized : FormWindowState.Normal;
+            if (Visible = !Visible) {
+                Activate();
+            }
         }
 
         private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
@@ -154,7 +156,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void minimize_Click(object sender, EventArgs e) {
-            WindowState = FormWindowState.Minimized;
+            Visible = false;
         }
 
         private void topmost_Click(object sender, EventArgs e) {
@@ -240,6 +242,11 @@ namespace ScriptFUSION.UpDown_Meter {
             var toolboxEdge = toolbox.Bounds;
             toolboxEdge.Offset(-toolbox.Width, 0);
             ControlPaint.DrawBorder3D(e.Graphics, toolboxEdge, Border3DStyle.RaisedInner, Border3DSide.Right);
+
+            // Draw status bar border.
+            var statusBarBounds = statusBar.Bounds;
+            statusBarBounds.Inflate(1, 1);
+            ControlPaint.DrawBorder(e.Graphics, statusBarBounds, SystemColors.ButtonShadow, ButtonBorderStyle.Solid);
         }
 
         private void NetGraphForm_FormClosed(object sender, FormClosedEventArgs e) {
