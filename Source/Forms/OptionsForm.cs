@@ -21,6 +21,10 @@ namespace ScriptFUSION.UpDown_Meter {
             LoadNetworkInterfaces();
         }
 
+        internal delegate void ApplyOptionsDelegate(OptionsForm sender, Options options);
+
+        internal event ApplyOptionsDelegate ApplyOptions;
+
         private void SaveSettings() {
             if (SelectedNic != null) {
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
@@ -88,6 +92,8 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void apply_Click(object sender, EventArgs e) {
             SaveSettings();
+
+            ApplyOptions?.Invoke(this, Options);
         }
 
         private void nics_SelectedIndexChanged(object sender, EventArgs e) {

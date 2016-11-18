@@ -134,11 +134,6 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
-        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
-            UpdateStats();
-            UpdateTray();
-        }
-
         private bool CanSnap(int clientEdge, int containerEdge, int tension) {
             const int DOCK_DISTANCE = 10;
 
@@ -181,6 +176,9 @@ namespace ScriptFUSION.UpDown_Meter {
         private void settings_Click(object sender, EventArgs e) {
             using (var optionsForm = new OptionsForm(Options.Clone())) {
                 optionsForm.Icon = Icon;
+                optionsForm.ApplyOptions += (_, options) => {
+                    Options = options.Clone();
+                };
 
                 if (optionsForm.ShowDialog(this) == DialogResult.OK) {
                     Options = optionsForm.Options;
@@ -196,6 +194,11 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void showMenuItem_Click(object sender, EventArgs e) {
             ToggleWindowVisibility();
+        }
+
+        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
+            UpdateStats();
+            UpdateTray();
         }
 
         private void NetGraphForm_Resize(object sender, EventArgs e) {

@@ -14,9 +14,9 @@ namespace ScriptFUSION.UpDown_Meter {
 
             NetworkInterface = NetworkInterfaces.Fetch(settings.LastNic);
             NicSpeeds = settings.NicSpeeds;
+            Bounds = settings.Bounds;
             Topmost = settings.Topmost;
             Transparent = settings.Transparent;
-            Bounds = settings.Bounds;
         }
 
         public NetworkInterface NetworkInterface { get; set; }
@@ -39,9 +39,9 @@ namespace ScriptFUSION.UpDown_Meter {
         public void Save() {
             settings.LastNic = NetworkInterface?.Id;
             settings.NicSpeeds = NicSpeeds;
+            settings.Bounds = Bounds;
             settings.Topmost = Topmost;
             settings.Transparent = Transparent;
-            settings.Bounds = Bounds;
 
             settings.Save();
         }
