@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.customSpeed = new System.Windows.Forms.TextBox();
             this.copySpeed = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.header)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,7 +125,7 @@
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ok.Location = new System.Drawing.Point(392, 358);
+            this.ok.Location = new System.Drawing.Point(392, 349);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(75, 23);
             this.ok.TabIndex = 5;
@@ -137,7 +138,7 @@
             this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cancel.Location = new System.Drawing.Point(473, 358);
+            this.cancel.Location = new System.Drawing.Point(473, 349);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 6;
@@ -149,7 +150,7 @@
             // 
             this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.apply.Location = new System.Drawing.Point(554, 358);
+            this.apply.Location = new System.Drawing.Point(554, 349);
             this.apply.Name = "apply";
             this.apply.Size = new System.Drawing.Size(75, 23);
             this.apply.TabIndex = 7;
@@ -159,7 +160,7 @@
             // 
             // detectedSpeed
             // 
-            this.detectedSpeed.Location = new System.Drawing.Point(12, 296);
+            this.detectedSpeed.Location = new System.Drawing.Point(193, 296);
             this.detectedSpeed.Name = "detectedSpeed";
             this.detectedSpeed.ReadOnly = true;
             this.detectedSpeed.Size = new System.Drawing.Size(106, 20);
@@ -168,7 +169,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 280);
+            this.label2.Location = new System.Drawing.Point(190, 280);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 9;
@@ -177,7 +178,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(155, 280);
+            this.label3.Location = new System.Drawing.Point(336, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 10;
@@ -185,21 +186,32 @@
             // 
             // customSpeed
             // 
-            this.customSpeed.Location = new System.Drawing.Point(158, 296);
+            this.customSpeed.Location = new System.Drawing.Point(339, 296);
             this.customSpeed.Name = "customSpeed";
             this.customSpeed.Size = new System.Drawing.Size(108, 20);
             this.customSpeed.TabIndex = 11;
             // 
             // copySpeed
             // 
-            this.copySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.copySpeed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copySpeed.Location = new System.Drawing.Point(128, 296);
+            this.copySpeed.Location = new System.Drawing.Point(309, 296);
             this.copySpeed.Name = "copySpeed";
             this.copySpeed.Size = new System.Drawing.Size(20, 20);
             this.copySpeed.TabIndex = 12;
             this.copySpeed.Text = ">";
             this.copySpeed.Click += new System.EventHandler(this.copySpeed_Click);
+            // 
+            // title
+            // 
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.Color.White;
+            this.title.Font = new System.Drawing.Font("Arial", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Location = new System.Drawing.Point(412, 9);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(217, 42);
+            this.title.TabIndex = 14;
+            this.title.Text = "networking";
+            this.title.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // OptionsForm
             // 
@@ -207,7 +219,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancel;
-            this.ClientSize = new System.Drawing.Size(641, 393);
+            this.ClientSize = new System.Drawing.Size(641, 384);
+            this.Controls.Add(this.title);
             this.Controls.Add(this.copySpeed);
             this.Controls.Add(this.customSpeed);
             this.Controls.Add(this.label3);
@@ -253,6 +266,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox customSpeed;
         private System.Windows.Forms.Button copySpeed;
+        private System.Windows.Forms.Label title;
     }
 }
 
