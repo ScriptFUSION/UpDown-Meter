@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Nito.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.NetworkInformation;
 
 namespace ScriptFUSION.UpDown_Meter {
-    public class NetworkInterfaceSampler : INotifyPropertyChanged {
+    public class NetworkInterfaceSampler : INotifyPropertyChanged, IEnumerable<Sample> {
         private NetworkInterface nic;
+
         private ulong maximumSpeed;
 
         private PropertyChangedEventHandler propertyChangedHandlers;
-
-        public NetworkInterfaceSampler() {
-            Reset();
-        }
 
         public delegate void SampleAddedDelegate(NetworkInterfaceSampler sampler, Sample sample);
 
@@ -30,9 +29,9 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         /// <summary>
-        /// Stack of relative samples from the current NetworkInterface.
+        /// Collection of relative samples from the current NetworkInterface.
         /// </summary>
-        private Stack<Sample> Samples { get; set; }
+        private Deque<Sample> Samples { get; set; } = new Deque<Sample>(0x1000);
 
         /// <summary>
         /// Latest absolute sample from the current NetworkInterface.
@@ -66,17 +65,21 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         public void Reset() {
-            Samples = new Stack<Sample>(Samples?.Count ?? 0x100);
+            Samples.Clear();
             LastSample = null;
 
             RaiseSamplesCleared();
         }
 
         public void SampleAdapter() {
-            var sample = CreateRelativeSample();
-            Samples.Push(sample);
+            // Remove oldest sample when at capacity.
+            if (Samples.Count == Samples.Capacity) {
+                Samples.RemoveFromBack();
+            }
 
-            // TODO: Crop old samples.
+            // Add latest sample.
+            var sample = CreateRelativeSample();
+            Samples.AddToFront(sample);
 
             // TODO: Automatic calibration.
 
@@ -103,10 +106,6 @@ namespace ScriptFUSION.UpDown_Meter {
             return new Sample(stats.BytesReceived, stats.BytesSent);
         }
 
-        public IEnumerable<Sample> GetSamples() {
-            return Samples.ToArray<Sample>();
-        }
-
         private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null) {
             propertyChangedHandlers?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -117,6 +116,14 @@ namespace ScriptFUSION.UpDown_Meter {
 
         public void RaiseSamplesCleared() {
             SamplesCleared?.Invoke(this);
+        }
+
+        public IEnumerator<Sample> GetEnumerator() {
+            return Samples.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return Samples.GetEnumerator();
         }
     }
 }

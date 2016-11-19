@@ -206,7 +206,7 @@
             this.title.AutoSize = true;
             this.title.BackColor = System.Drawing.Color.White;
             this.title.Font = new System.Drawing.Font("Arial", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(412, 9);
+            this.title.Location = new System.Drawing.Point(420, 7);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(217, 42);
             this.title.TabIndex = 14;

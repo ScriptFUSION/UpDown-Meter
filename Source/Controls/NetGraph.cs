@@ -89,7 +89,7 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
                 // Drawing start point on x-axis.
                 var x = surface.Right - 1;
 
-                foreach (var sample in sampler.GetSamples()) {
+                foreach (var sample in sampler) {
                     var downstream = sample.Downstream / (float)sampler.MaximumSpeed;
                     var upstream = sample.Upstream / (float)sampler.MaximumSpeed;
                     var downDominant = downstream > upstream;

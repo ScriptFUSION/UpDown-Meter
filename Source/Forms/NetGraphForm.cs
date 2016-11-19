@@ -50,12 +50,12 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private Sample LastSample
         {
-            get { return sampler.GetSamples().First(); }
+            get { return sampler.First(); }
         }
 
         private IEnumerable<Sample> LatestSamples
         {
-            get { return sampler.GetSamples().Take(10); }
+            get { return sampler.Take(10); }
         }
 
         private ulong AverageDownloadSpeed
@@ -90,11 +90,13 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void UpdateStats() {
-            dlRaw.Text = Math.Round(LastSample.Downstream / 1000f, 1).ToString("F1");
-            ulRaw.Text = Math.Round(LastSample.Upstream / 1000f, 1).ToString("F1");
+            const string FORMAT = "F1";
 
-            dlAvg.Text = Math.Round(AverageDownloadSpeed / 1000f, 1).ToString("F1");
-            ulAvg.Text = Math.Round(AverageUploadSpeed / 1000f, 1).ToString("F1");
+            dlRaw.Text = Math.Round(LastSample.Downstream / 1000f, 1).ToString(FORMAT);
+            ulRaw.Text = Math.Round(LastSample.Upstream / 1000f, 1).ToString(FORMAT);
+
+            dlAvg.Text = Math.Round(AverageDownloadSpeed / 1000f, 1).ToString(FORMAT);
+            ulAvg.Text = Math.Round(AverageUploadSpeed / 1000f, 1).ToString(FORMAT);
         }
 
         private void UpdateTray() {
@@ -137,7 +139,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private bool CanSnap(int clientEdge, int containerEdge, int tension) {
             const int DOCK_DISTANCE = 10;
 
-            return Math.Abs(clientEdge - containerEdge) <= DOCK_DISTANCE && tension <= DOCK_DISTANCE && tension >= -DOCK_DISTANCE;
+            return Math.Abs(clientEdge - containerEdge) <= DOCK_DISTANCE && Math.Abs(tension) <= DOCK_DISTANCE;
         }
 
         #region Event handlers
