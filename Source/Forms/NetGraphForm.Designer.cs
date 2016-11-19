@@ -27,12 +27,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetGraphForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.toolbox = new System.Windows.Forms.FlowLayoutPanel();
-            this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.transparent = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +46,12 @@
             this.dlAvg = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.ulAvg = new System.Windows.Forms.Label();
+            this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.minimize = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.topmost = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.transparent = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
@@ -82,68 +82,6 @@
             this.toolbox.Name = "toolbox";
             this.toolbox.Size = new System.Drawing.Size(15, 102);
             this.toolbox.TabIndex = 7;
-            // 
-            // close
-            // 
-            this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
-            this.close.Location = new System.Drawing.Point(1, 2);
-            this.close.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
-            this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(13, 13);
-            this.close.TabIndex = 0;
-            this.close.Click += new System.EventHandler(this.close_Click);
-            // 
-            // minimize
-            // 
-            this.minimize.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.minimize;
-            this.minimize.Location = new System.Drawing.Point(1, 16);
-            this.minimize.Margin = new System.Windows.Forms.Padding(1);
-            this.minimize.Name = "minimize";
-            this.minimize.Size = new System.Drawing.Size(13, 13);
-            this.minimize.TabIndex = 1;
-            this.minimize.Click += new System.EventHandler(this.minimize_Click);
-            // 
-            // topmost
-            // 
-            this.topmost.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.topmost;
-            this.topmost.Location = new System.Drawing.Point(1, 31);
-            this.topmost.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
-            this.topmost.Name = "topmost";
-            this.topmost.Size = new System.Drawing.Size(13, 13);
-            this.topmost.TabIndex = 2;
-            this.topmost.ToggleButton = true;
-            this.topmost.Click += new System.EventHandler(this.topmost_Click);
-            // 
-            // transparent
-            // 
-            this.transparent.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.transparent;
-            this.transparent.Location = new System.Drawing.Point(1, 45);
-            this.transparent.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
-            this.transparent.Name = "transparent";
-            this.transparent.Size = new System.Drawing.Size(13, 13);
-            this.transparent.TabIndex = 3;
-            this.transparent.ToggleButton = true;
-            this.transparent.Click += new System.EventHandler(this.transparent_Click);
-            // 
-            // reset
-            // 
-            this.reset.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.refresh;
-            this.reset.Location = new System.Drawing.Point(1, 59);
-            this.reset.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(13, 12);
-            this.reset.TabIndex = 4;
-            this.reset.Click += new System.EventHandler(this.reset_Click);
-            // 
-            // settings
-            // 
-            this.settings.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.settings;
-            this.settings.Location = new System.Drawing.Point(1, 72);
-            this.settings.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
-            this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(13, 13);
-            this.settings.TabIndex = 4;
-            this.settings.Click += new System.EventHandler(this.settings_Click);
             // 
             // trayIcon
             // 
@@ -355,6 +293,68 @@
             this.ulAvg.Text = "0";
             this.ulAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // close
+            // 
+            this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
+            this.close.Location = new System.Drawing.Point(1, 2);
+            this.close.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
+            this.close.Name = "close";
+            this.close.Size = new System.Drawing.Size(13, 13);
+            this.close.TabIndex = 0;
+            this.close.Click += new System.EventHandler(this.close_Click);
+            // 
+            // minimize
+            // 
+            this.minimize.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.minimize;
+            this.minimize.Location = new System.Drawing.Point(1, 16);
+            this.minimize.Margin = new System.Windows.Forms.Padding(1);
+            this.minimize.Name = "minimize";
+            this.minimize.Size = new System.Drawing.Size(13, 13);
+            this.minimize.TabIndex = 1;
+            this.minimize.Click += new System.EventHandler(this.minimize_Click);
+            // 
+            // topmost
+            // 
+            this.topmost.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.topmost;
+            this.topmost.Location = new System.Drawing.Point(1, 31);
+            this.topmost.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
+            this.topmost.Name = "topmost";
+            this.topmost.Size = new System.Drawing.Size(13, 13);
+            this.topmost.TabIndex = 2;
+            this.topmost.ToggleButton = true;
+            this.topmost.Click += new System.EventHandler(this.topmost_Click);
+            // 
+            // transparent
+            // 
+            this.transparent.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.transparent;
+            this.transparent.Location = new System.Drawing.Point(1, 45);
+            this.transparent.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
+            this.transparent.Name = "transparent";
+            this.transparent.Size = new System.Drawing.Size(13, 13);
+            this.transparent.TabIndex = 3;
+            this.transparent.ToggleButton = true;
+            this.transparent.Click += new System.EventHandler(this.transparent_Click);
+            // 
+            // reset
+            // 
+            this.reset.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.refresh;
+            this.reset.Location = new System.Drawing.Point(1, 59);
+            this.reset.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(13, 12);
+            this.reset.TabIndex = 4;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // settings
+            // 
+            this.settings.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.settings;
+            this.settings.Location = new System.Drawing.Point(1, 72);
+            this.settings.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
+            this.settings.Name = "settings";
+            this.settings.Size = new System.Drawing.Size(13, 13);
+            this.settings.TabIndex = 4;
+            this.settings.Click += new System.EventHandler(this.settings_Click);
+            // 
             // verticalLabel1
             // 
             this.verticalLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -377,6 +377,7 @@
             this.netGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.netGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.netGraph.Location = new System.Drawing.Point(18, 8);
             this.netGraph.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.netGraph.Name = "netGraph";

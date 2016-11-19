@@ -84,42 +84,91 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             // Avoid division by zero.
             if (sampler?.MaximumSpeed > 0) {
                 // Use entire graph area regardless of clipping region.
-                Rectangle surface = GraphRectangle;
-
-                // Drawing start point on x-axis.
-                var x = surface.Right - 1;
-
-                foreach (var sample in sampler) {
-                    var downstream = sample.Downstream / (float)sampler.MaximumSpeed;
-                    var upstream = sample.Upstream / (float)sampler.MaximumSpeed;
-                    var downDominant = downstream > upstream;
-                    var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - HEADROOM)) + surface.Top;
-                    var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - HEADROOM)) + surface.Top;
-
-                    // Draw hybrid bar.
-                    e.Graphics.DrawLine(ppapPen, x, hybridHeight, x, surface.Bottom);
-
-                    // Draw upload/download bar.
-                    e.Graphics.DrawLine(downDominant ? applePen : pineapplePen, x, dominantHeight, x, hybridHeight);
-
-                    // Draw period separator.
-                    if (sampleIndexes[sample] % 30 == 0) {
-                        for (var i = surface.Top; i < surface.Bottom; i += 4) {
-                            e.Graphics.DrawLine((i - surface.Top) % 8 == 0 ? periodPen : lightPeriodPen, x, i, x, i + 3);
-                        }
-                    }
-
-                    // Do not draw more samples than surface width permits.
-                    if (--x < surface.Left) break;
-                }
-
-                // Draw headroom bar.
-                var headroomY = surface.Height * HEADROOM;
-                e.Graphics.DrawLine(headroomPen, x + 1, headroomY, surface.Right, headroomY);
+                PaintGraph(e.Graphics, GraphRectangle);
+            }
+            else {
+                PaintWarning(e.Graphics, ClientRectangle, "Please choose an adapter");
             }
 
             // Paint entire border regardless of clipping region.
             ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.SunkenOuter);
+        }
+
+        private void PaintGraph(Graphics g, Rectangle surface) {
+            // Drawing start point on x-axis.
+            var x = surface.Right - 1;
+
+            foreach (var sample in sampler) {
+                var downstream = sample.Downstream / (float)sampler.MaximumSpeed;
+                var upstream = sample.Upstream / (float)sampler.MaximumSpeed;
+                var downDominant = downstream > upstream;
+                var hybridHeight = surface.Height * (1 - (downDominant ? upstream : downstream) * (1 - HEADROOM)) + surface.Top;
+                var dominantHeight = surface.Height * (1 - (downDominant ? downstream : upstream) * (1 - HEADROOM)) + surface.Top;
+
+                // Draw hybrid bar.
+                g.DrawLine(ppapPen, x, hybridHeight, x, surface.Bottom);
+
+                // Draw upload/download bar.
+                g.DrawLine(downDominant ? applePen : pineapplePen, x, dominantHeight, x, hybridHeight);
+
+                // Draw period separator.
+                if (sampleIndexes[sample] % 30 == 0) {
+                    for (var i = surface.Top; i < surface.Bottom; i += 4) {
+                        g.DrawLine((i - surface.Top) % 8 == 0 ? periodPen : lightPeriodPen, x, i, x, i + 3);
+                    }
+                }
+
+                // Do not draw more samples than surface width permits.
+                if (--x < surface.Left) break;
+            }
+
+            // Draw headroom bar.
+            var headroomY = surface.Height * HEADROOM;
+            g.DrawLine(headroomPen, x + 1, headroomY, surface.Right, headroomY);
+        }
+
+        private void PaintWarning(Graphics g, Rectangle surface, string warning) {
+            const int MARGIN = 4;
+            var indicatorSize = new SizeF(40, 40);
+            var warningSize = g.MeasureString(warning, Font);
+            var totalSize = new SizeF(indicatorSize.Width + MARGIN + warningSize.Width, indicatorSize.Height);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            // Draw indicator.
+            using (var brush = new SolidBrush(Color.FromArgb(128, BackColor.Darken(.4f)))) {
+                g.FillEllipse(brush, new RectangleF(
+                    new PointF(
+                        (float)Math.Round(surface.Width / 2 - totalSize.Width / 2),
+                        (float)Math.Round(surface.Height / 2 - indicatorSize.Height / 2)
+                    ),
+                    indicatorSize
+                ));
+            }
+
+            // Draw indicator text.
+            using (var font = new Font("Segoe UI", 25, FontStyle.Bold)) {
+                var fontSize = g.MeasureString("?", font);
+
+                g.DrawString(
+                    "?",
+                    font,
+                    SystemBrushes.Control,
+                    (float)Math.Round(surface.Width / 2 - totalSize.Width / 2 + indicatorSize.Width / 2 - fontSize.Width / 2 + 1.5),
+                    (float)Math.Round(surface.Height / 2 - fontSize.Height / 2 + 1.5)
+                );
+            }
+
+            // Draw warning text.
+            using (var brush = new SolidBrush(Color.FromArgb(192, ForeColor))) {
+                g.DrawString(
+                    warning,
+                    Font,
+                    brush,
+                    (float)Math.Round(surface.Width / 2 + indicatorSize.Width - totalSize.Width / 2 + MARGIN),
+                    (float)Math.Round(surface.Height / 2 - warningSize.Height / 2 + 1.5)
+                );
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e) {
