@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         private ulong sampleCount;
 
         private Pen applePen, pineapplePen, ppapPen, headroomPen, periodPen, lightPeriodPen;
+
+        private DateTime pulseStart;
+        private byte warningOpacity;
 
         public NetGraph() {
             InitializeComponent();
@@ -70,23 +74,17 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             Invalidate();
         }
 
-        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
-            sampleIndexes.Add(sample, sampleCount++);
-
-            Invalidate();
-        }
-
-        private void Sampler_SamplesCleared(NetworkInterfaceSampler sampler) {
-            Reset();
-        }
-
         protected override void OnPaint(PaintEventArgs e) {
             // Avoid division by zero.
             if (sampler?.MaximumSpeed > 0) {
+                StopPulse();
+
                 // Use entire graph area regardless of clipping region.
                 PaintGraph(e.Graphics, GraphRectangle);
             }
             else {
+                StartPulse();
+
                 PaintWarning(e.Graphics, ClientRectangle, "Please choose an adapter");
             }
 
@@ -160,13 +158,13 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             }
 
             // Draw warning text.
-            using (var brush = new SolidBrush(Color.FromArgb(192, ForeColor))) {
+            using (var brush = new SolidBrush(Color.FromArgb(warningOpacity, ForeColor))) {
                 g.DrawString(
                     warning,
                     Font,
                     brush,
                     (float)Math.Round(surface.Width / 2 + indicatorSize.Width - totalSize.Width / 2 + MARGIN),
-                    (float)Math.Round(surface.Height / 2 - warningSize.Height / 2 + 1.5)
+                    (float)Math.Round(surface.Height / 2 - warningSize.Height / 2 + .5)
                 );
             }
         }
@@ -179,5 +177,51 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
                 e.Graphics.FillRectangle(backgroud, surface);
             }
         }
+
+        private void StartPulse() {
+            // Already started.
+            if (pulseStart != default(DateTime)) {
+                return;
+            }
+
+            pulseStart = DateTime.Now;
+            pulse.Enabled = true;
+        }
+
+        private void StopPulse() {
+            pulse.Enabled = false;
+            pulseStart = default(DateTime);
+        }
+
+        private double Ease(double t) {
+            t = t < .5 ? t * 2 : 2 - 2 * t;
+
+            return t * t * t;
+        }
+
+        #region Event handlers
+
+        private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
+            sampleIndexes.Add(sample, sampleCount++);
+
+            Invalidate();
+        }
+
+        private void Sampler_SamplesCleared(NetworkInterfaceSampler sampler) {
+            Reset();
+        }
+
+        private void pulse_Tick(object sender, EventArgs e) {
+            const float ANIMATION_DURATION = 1500;
+            const int MAX_OPACITY = 192;
+
+            warningOpacity = (byte)(MAX_OPACITY - (MAX_OPACITY *
+                Ease((DateTime.Now - pulseStart).TotalMilliseconds % ANIMATION_DURATION / ANIMATION_DURATION)
+            ));
+
+            Invalidate();
+        }
+
+        #endregion
     }
 }

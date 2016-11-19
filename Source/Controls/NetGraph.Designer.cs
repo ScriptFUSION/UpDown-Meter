@@ -23,9 +23,20 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
+            this.pulse = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // pulse
+            // 
+            this.pulse.Interval = 40;
+            this.pulse.Tick += new System.EventHandler(this.pulse_Tick);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer pulse;
     }
 }

@@ -116,6 +116,9 @@
     <Compile Include="Sample.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="TrayIconIllustrator.cs" />
+    <EmbeddedResource Include="Controls\NetGraph.resx">
+      <DependentUpon>NetGraph.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NetGraphForm.resx">
       <DependentUpon>NetGraphForm.cs</DependentUpon>
     </EmbeddedResource>
