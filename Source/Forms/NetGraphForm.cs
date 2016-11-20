@@ -21,7 +21,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
             toolbox.BackColor = BackColor.Desaturate(.15f).Darken(.14f);
 
-            samplerBindingSource.Add(sampler = netGraph.Sampler = new NetworkInterfaceSampler());
+            sampler = netGraph.Sampler = new NetworkInterfaceSampler();
             sampler.SampleAdded += Sampler_SampleAdded;
 
             Options = new Options(Settings.Default);
@@ -77,6 +77,8 @@ namespace ScriptFUSION.UpDown_Meter {
             var nic = sampler.NetworkInterface = options.NetworkInterface;
 
             sampler.MaximumSpeed = options.NicSpeeds.ContainsKey(nic?.Id ?? string.Empty) ? options.NicSpeeds[nic.Id] : 0;
+
+            nicSpeed.Text = Math.Round(sampler.MaximumSpeed / 1000f).ToString("0 kB/s");
         }
 
         private void SyncOptionsWithUI(Options options) {

@@ -52,13 +52,11 @@
             this.transparent = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.reset = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.settings = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
-            this.verticalLabel1 = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
-            this.samplerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nicSpeed = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
             this.toolbox.SuspendLayout();
             this.trayMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // timer
@@ -355,22 +353,17 @@
             this.settings.TabIndex = 4;
             this.settings.Click += new System.EventHandler(this.settings_Click);
             // 
-            // verticalLabel1
+            // nicSpeed
             // 
-            this.verticalLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.nicSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.verticalLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.samplerBindingSource, "MaximumSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "0 B/s"));
-            this.verticalLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.verticalLabel1.Location = new System.Drawing.Point(4, 9);
-            this.verticalLabel1.Name = "verticalLabel1";
-            this.verticalLabel1.Size = new System.Drawing.Size(12, 64);
-            this.verticalLabel1.TabIndex = 5;
-            this.verticalLabel1.Text = "NIC speed";
-            this.verticalLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            // 
-            // samplerBindingSource
-            // 
-            this.samplerBindingSource.DataSource = typeof(ScriptFUSION.UpDown_Meter.NetworkInterfaceSampler);
+            this.nicSpeed.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.nicSpeed.Location = new System.Drawing.Point(4, 9);
+            this.nicSpeed.Name = "nicSpeed";
+            this.nicSpeed.Size = new System.Drawing.Size(12, 64);
+            this.nicSpeed.TabIndex = 5;
+            this.nicSpeed.Text = "NIC speed";
+            this.nicSpeed.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // netGraph
             // 
@@ -393,7 +386,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 104);
             this.Controls.Add(this.toolbox);
-            this.Controls.Add(this.verticalLabel1);
+            this.Controls.Add(this.nicSpeed);
             this.Controls.Add(this.netGraph);
             this.Controls.Add(this.statusBar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -411,7 +404,6 @@
             this.trayMenu.ResumeLayout(false);
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.samplerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -419,8 +411,7 @@
         #endregion
         private Controls.NetGraph netGraph;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.BindingSource samplerBindingSource;
-        private Controls.VerticalLabel verticalLabel1;
+        private Controls.VerticalLabel nicSpeed;
         private System.Windows.Forms.FlowLayoutPanel toolbox;
         private Controls.BilgeButton close;
         private Controls.BilgeButton minimize;

@@ -7,12 +7,8 @@ using System.Linq;
 using System.Net.NetworkInformation;
 
 namespace ScriptFUSION.UpDown_Meter {
-    public class NetworkInterfaceSampler : INotifyPropertyChanged, IEnumerable<Sample> {
+    public class NetworkInterfaceSampler : IEnumerable<Sample> {
         private NetworkInterface nic;
-
-        private ulong maximumSpeed;
-
-        private PropertyChangedEventHandler propertyChangedHandlers;
 
         public delegate void SampleAddedDelegate(NetworkInterfaceSampler sampler, Sample sample);
 
@@ -21,12 +17,6 @@ namespace ScriptFUSION.UpDown_Meter {
         public event SampleAddedDelegate SampleAdded;
 
         public event SamplesClearedDelegate SamplesCleared;
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { propertyChangedHandlers += value; }
-            remove { propertyChangedHandlers -= value; }
-        }
 
         /// <summary>
         /// Collection of relative samples from the current NetworkInterface.
@@ -54,15 +44,7 @@ namespace ScriptFUSION.UpDown_Meter {
         /// <summary>
         /// List of relative samples.
         /// </summary>
-        public ulong MaximumSpeed
-        {
-            get { return maximumSpeed; }
-            set
-            {
-                maximumSpeed = value;
-                RaisePropertyChanged();
-            }
-        }
+        public ulong MaximumSpeed { get; set; }
 
         public void Reset() {
             Samples.Clear();
@@ -104,10 +86,6 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private Sample CreateAbsoluteSample(IPInterfaceStatistics stats) {
             return new Sample(stats.BytesReceived, stats.BytesSent);
-        }
-
-        private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null) {
-            propertyChangedHandlers?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private void RaiseSampleAdded(Sample sample) {

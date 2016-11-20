@@ -24,7 +24,7 @@ Reading from the left, the graph above shows we started downloading data at full
 
 ### Calibration
 
-The scale of the graph is shown in bytes per second on the left of the graph. This can be changed by modifying the *actual speed* value in network settings. By default the actual speed is the same as the reported speed, which is the theoretical maximum speed reported by the adapter's device driver, but is usually much higher than the actual speed of a typical internet connection so we must calibrate it to a more realistic value.
+The scale of the graph is shown in kilobytes per second on the left of the graph. This can be changed by modifying the *actual speed* value in network settings. By default the actual speed is the same as the reported speed, which is the theoretical maximum speed reported by the adapter's device driver, but is usually much higher than the actual speed of a typical internet connection so we must calibrate it to a more realistic value.
 
 <img src="https://github.com/ScriptFUSION/UpDown-Meter/wiki/images/speedtest.gif" align="right">
 To calibrate the speed of an internet connection we must apply full load to the connection to test its capacity. The easiest way to do this is visit a benchmarking site such as [Speedtest.net](http://www.speedtest.net). After performing the test, return to the *actual speed* setting and modify the value until the upload or download bar (whichever is taller) just touches the horizontal bar across the top of the graph, as shown on the right.
@@ -46,7 +46,7 @@ Contributing
 
 Everyone is welcome to contribute anything, from [ideas][Issues] to [issues][Issues] to graphics to documentation to [code][PRs]!
 
-Compiling the code is as easy as cloning the source in Visual Studio and clicking *start*, in newer versions of Visual Studio. In older versions, it may be necessary to manually restore NuGet packages after cloning.
+Compiling the code is as easy as cloning the source in Visual Studio and clicking *start*. In older versions of Visual Studio, it may be necessary to manually restore NuGet packages after cloning.
 
 
   [Releases]: https://github.com/ScriptFUSION/UpDown-Meter/releases
