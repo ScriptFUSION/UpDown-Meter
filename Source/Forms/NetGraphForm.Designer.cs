@@ -41,9 +41,9 @@
             this.dlRaw = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ulRaw = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.dlAvg = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ulRaw = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.ulAvg = new System.Windows.Forms.Label();
             this.close = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
@@ -175,9 +175,9 @@
             this.statusBar.Controls.Add(this.dlRaw, 1, 0);
             this.statusBar.Controls.Add(this.label1, 0, 0);
             this.statusBar.Controls.Add(this.label3, 2, 0);
-            this.statusBar.Controls.Add(this.ulRaw, 3, 0);
+            this.statusBar.Controls.Add(this.dlAvg, 3, 0);
             this.statusBar.Controls.Add(this.label5, 4, 0);
-            this.statusBar.Controls.Add(this.dlAvg, 5, 0);
+            this.statusBar.Controls.Add(this.ulRaw, 5, 0);
             this.statusBar.Controls.Add(this.label7, 6, 0);
             this.statusBar.Controls.Add(this.ulAvg, 7, 0);
             this.statusBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -225,21 +225,21 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 15);
             this.label3.TabIndex = 2;
-            this.label3.Text = "UL Raw";
+            this.label3.Text = "DL Avg";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // ulRaw
+            // dlAvg
             // 
-            this.ulRaw.AutoSize = true;
-            this.ulRaw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ulRaw.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.ulRaw.Location = new System.Drawing.Point(114, 0);
-            this.ulRaw.Margin = new System.Windows.Forms.Padding(0);
-            this.ulRaw.Name = "ulRaw";
-            this.ulRaw.Size = new System.Drawing.Size(33, 15);
-            this.ulRaw.TabIndex = 3;
-            this.ulRaw.Text = "0";
-            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dlAvg.AutoSize = true;
+            this.dlAvg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlAvg.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.dlAvg.Location = new System.Drawing.Point(114, 0);
+            this.dlAvg.Margin = new System.Windows.Forms.Padding(0);
+            this.dlAvg.Name = "dlAvg";
+            this.dlAvg.Size = new System.Drawing.Size(33, 15);
+            this.dlAvg.TabIndex = 3;
+            this.dlAvg.Text = "0";
+            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -251,21 +251,21 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 15);
             this.label5.TabIndex = 4;
-            this.label5.Text = "DL Avg";
+            this.label5.Text = "UL Raw";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dlAvg
+            // ulRaw
             // 
-            this.dlAvg.AutoSize = true;
-            this.dlAvg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dlAvg.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.dlAvg.Location = new System.Drawing.Point(186, 0);
-            this.dlAvg.Margin = new System.Windows.Forms.Padding(0);
-            this.dlAvg.Name = "dlAvg";
-            this.dlAvg.Size = new System.Drawing.Size(33, 15);
-            this.dlAvg.TabIndex = 5;
-            this.dlAvg.Text = "0";
-            this.dlAvg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ulRaw.AutoSize = true;
+            this.ulRaw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ulRaw.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.ulRaw.Location = new System.Drawing.Point(186, 0);
+            this.ulRaw.Margin = new System.Windows.Forms.Padding(0);
+            this.ulRaw.Name = "ulRaw";
+            this.ulRaw.Size = new System.Drawing.Size(33, 15);
+            this.ulRaw.TabIndex = 5;
+            this.ulRaw.Text = "0";
+            this.ulRaw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
@@ -442,9 +442,9 @@
         private System.Windows.Forms.Label dlRaw;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label ulRaw;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label dlAvg;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label ulRaw;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label ulAvg;
     }

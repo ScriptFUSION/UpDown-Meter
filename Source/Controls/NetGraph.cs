@@ -17,8 +17,10 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
 
         private Pen applePen, pineapplePen, ppapPen, headroomPen, periodPen, lightPeriodPen;
 
+        private const int WARNING_MAX_OPACITY = 192;
+        private byte warningOpacity = WARNING_MAX_OPACITY;
+
         private DateTime pulseStart;
-        private byte warningOpacity;
 
         public NetGraph() {
             InitializeComponent();
@@ -180,7 +182,7 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
 
         private void StartPulse() {
             // Already started.
-            if (pulseStart != default(DateTime)) {
+            if (pulseStart != default(DateTime) || DesignMode) {
                 return;
             }
 
@@ -213,9 +215,8 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
 
         private void pulse_Tick(object sender, EventArgs e) {
             const float ANIMATION_DURATION = 1500;
-            const int MAX_OPACITY = 192;
 
-            warningOpacity = (byte)(MAX_OPACITY - (MAX_OPACITY *
+            warningOpacity = (byte)(WARNING_MAX_OPACITY - (WARNING_MAX_OPACITY *
                 Ease((DateTime.Now - pulseStart).TotalMilliseconds % ANIMATION_DURATION / ANIMATION_DURATION)
             ));
 
