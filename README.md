@@ -1,7 +1,7 @@
 UpDown Meter
 ============
 
-UpDown Meter graphs network activity for a specific network adapter. It is deliberately designed to consume trace memory and processor time, so it can run as long as the system runs, providing a better overview of how the connection is being used.
+UpDown Meter graphs network activity for a specific network adapter. It is deliberately designed to consume trace memory and processor time, so it can run as long as the system runs, providing an overview of how the connection is being used.
 
 Usage
 -----
@@ -31,6 +31,27 @@ To calibrate the speed of an internet connection we must apply full load to the 
 
 Remember: clicking the [Apply] button allows us to apply our new settings without closing the settings window, allowing us to prototype different settings quickly. This is the easiest way to calibrate the graph until an automatic calibration feature is added.
 
+Features
+--------
+
+### Animated tray icon ![][Tray icon]
+
+The animated tray icon shows constantly updated meters of the current network usage whilst the connection is active. When the connection is dormant, the application logo is displayed instead. The meters use the same scale as the main graph.
+
+If using a version of windows that usually hides tray icons it is recommended to reconfigure this icon to be always shown for at-a-glance monitoring.
+
+### Multi-monitor screen edge docking
+
+When moving the graph towards the edge of any screen, it automatically snaps to the edges to make it easier to position at the sides of the screen.
+
+### Always on top
+
+When always-on-top mode is enabled, the graph is always displayed above all other windows whilst it is visible. The graph can still be minimized.
+
+### Translucent window
+
+The graph can be toggled between opaque and semi-transparent states.
+
 Download
 --------
 
@@ -39,7 +60,7 @@ To download the latest version see the [releases][Releases].
 Requirements
 ------------
 
-UpDown Meter requires [.NET Framework 4.5.1][.NET Framework] which ships with Windows 8.1 and later.
+UpDown Meter requires [.NET Framework 4.5.1][.NET Framework] which ships with Windows 8.1 and later but can be installed on earlier versions of Windows.
 
 Contributing
 ------------
@@ -58,3 +79,4 @@ Compiling the code is as easy as cloning the source in Visual Studio and clickin
   [First minute]: https://github.com/ScriptFUSION/UpDown-Meter/wiki/images/1%20minute.gif
   [Typical graph]: https://github.com/ScriptFUSION/UpDown-Meter/wiki/images/typical.gif
   [Settings button]: https://github.com/ScriptFUSION/UpDown-Meter/wiki/images/settings.gif
+  [Tray icon]: https://github.com/ScriptFUSION/UpDown-Meter/wiki/images/tray.gif
