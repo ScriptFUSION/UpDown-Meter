@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -128,8 +127,8 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         }
 
         private void PaintWarning(Graphics g, Rectangle surface, string warning) {
-            const int MARGIN = 4;
-            var indicatorSize = new SizeF(40, 40);
+            const int MARGIN = 2;
+            var indicatorSize = new SizeF(30, 30);
             var warningSize = g.MeasureString(warning, Font);
             var totalSize = new SizeF(indicatorSize.Width + MARGIN + warningSize.Width, indicatorSize.Height);
 
@@ -147,7 +146,7 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             }
 
             // Draw indicator text.
-            using (var font = new Font("Segoe UI", 25, FontStyle.Bold)) {
+            using (var font = new Font("Segoe UI", 18, FontStyle.Bold)) {
                 var fontSize = g.MeasureString("?", font);
 
                 g.DrawString(
@@ -155,7 +154,7 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
                     font,
                     SystemBrushes.Control,
                     (float)Math.Round(surface.Width / 2 - totalSize.Width / 2 + indicatorSize.Width / 2 - fontSize.Width / 2 + 1.5),
-                    (float)Math.Round(surface.Height / 2 - fontSize.Height / 2 + 1.5)
+                    (float)Math.Round(surface.Height / 2 - fontSize.Height / 2)
                 );
             }
 
