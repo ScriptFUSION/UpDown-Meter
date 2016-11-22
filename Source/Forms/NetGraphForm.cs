@@ -27,7 +27,7 @@ namespace ScriptFUSION.UpDown_Meter {
             Options = new Options(Settings.Default);
 
             trayIconIllustrator = new TrayIconIllustrator();
-            trayIcon.Icon = Properties.Resources.udm;
+            trayIcon.Icon = new Icon(Properties.Resources.udm, SystemInformation.SmallIconSize);  
 
             // Timer does not fire at start-up so trigger manually.
             timer_Tick(null, null);
