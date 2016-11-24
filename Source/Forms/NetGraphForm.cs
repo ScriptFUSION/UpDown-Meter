@@ -200,6 +200,10 @@ namespace ScriptFUSION.UpDown_Meter {
             ToggleWindowVisibility();
         }
 
+        private void homePageMenuItem_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/ScriptFUSION/UpDown-Meter");
+        }
+
         private void Sampler_SampleAdded(NetworkInterfaceSampler sampler, Sample sample) {
             UpdateStats();
             UpdateTray();
