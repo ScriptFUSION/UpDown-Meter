@@ -17,6 +17,7 @@ namespace ScriptFUSION.UpDown_Meter {
             Bounds = settings.Bounds;
             Topmost = settings.Topmost;
             Transparent = settings.Transparent;
+            Docking = settings.Docking;
         }
 
         public NetworkInterface NetworkInterface { get; set; }
@@ -28,6 +29,8 @@ namespace ScriptFUSION.UpDown_Meter {
         public bool Topmost { get; set; }
 
         public bool Transparent { get; set; }
+
+        public bool Docking { get; set; }
 
         public Options Clone() {
             var clone = (Options)MemberwiseClone();
@@ -42,6 +45,7 @@ namespace ScriptFUSION.UpDown_Meter {
             settings.Bounds = Bounds;
             settings.Topmost = Topmost;
             settings.Transparent = Transparent;
+            settings.Docking = Docking;
 
             settings.Save();
         }

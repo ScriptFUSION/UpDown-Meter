@@ -45,12 +45,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.customSpeed = new System.Windows.Forms.TextBox();
             this.optionsPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
+            this.dock = new System.Windows.Forms.CheckBox();
             this.options = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.networking = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.header)).BeginInit();
             this.pager.SuspendLayout();
             this.networkingPage.SuspendLayout();
+            this.optionsPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // ok
@@ -100,7 +102,7 @@
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(328, 42);
             this.title.TabIndex = 14;
-            this.title.Text = "networking";
+            this.title.Text = "title text";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // footer
@@ -190,6 +192,7 @@
             this.nics.TabIndex = 13;
             this.nics.UseCompatibleStateImageBehavior = false;
             this.nics.View = System.Windows.Forms.View.Details;
+            this.nics.SelectedIndexChanged += new System.EventHandler(this.nics_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -222,6 +225,7 @@
             this.showDisabledAdapters.TabIndex = 15;
             this.showDisabledAdapters.Text = "Show disabled adapters";
             this.showDisabledAdapters.UseVisualStyleBackColor = true;
+            this.showDisabledAdapters.CheckedChanged += new System.EventHandler(this.showDisabledAdapters_CheckedChanged);
             // 
             // label2
             // 
@@ -240,6 +244,7 @@
             this.copySpeed.Size = new System.Drawing.Size(20, 20);
             this.copySpeed.TabIndex = 20;
             this.copySpeed.Text = ">";
+            this.copySpeed.Click += new System.EventHandler(this.copySpeed_Click);
             // 
             // detectedSpeed
             // 
@@ -267,10 +272,21 @@
             // 
             // optionsPage
             // 
+            this.optionsPage.Controls.Add(this.dock);
             this.optionsPage.Location = new System.Drawing.Point(0, 0);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Size = new System.Drawing.Size(641, 267);
             this.optionsPage.TabIndex = 1;
+            // 
+            // dock
+            // 
+            this.dock.AutoSize = true;
+            this.dock.Location = new System.Drawing.Point(13, 12);
+            this.dock.Name = "dock";
+            this.dock.Size = new System.Drawing.Size(101, 17);
+            this.dock.TabIndex = 0;
+            this.dock.Text = "Screen docking";
+            this.dock.UseVisualStyleBackColor = true;
             // 
             // options
             // 
@@ -320,6 +336,8 @@
             this.pager.ResumeLayout(false);
             this.networkingPage.ResumeLayout(false);
             this.networkingPage.PerformLayout();
+            this.optionsPage.ResumeLayout(false);
+            this.optionsPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -349,6 +367,7 @@
         private Controls.DockedPanel optionsPage;
         private Controls.BilgeButton networking;
         private Controls.BilgeButton options;
+        private System.Windows.Forms.CheckBox dock;
     }
 }
 

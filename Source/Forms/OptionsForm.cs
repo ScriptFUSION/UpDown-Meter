@@ -21,6 +21,10 @@ namespace ScriptFUSION.UpDown_Meter {
 
             InitializeComponent();
             LoadNetworkInterfaces();
+            LoadSettings();
+
+            // Load default page.
+            networking.SimulateClick();
         }
 
         internal delegate void ApplyOptionsDelegate(OptionsForm sender, Options options);
@@ -28,11 +32,17 @@ namespace ScriptFUSION.UpDown_Meter {
         internal event ApplyOptionsDelegate ApplyOptions;
 
         private void SaveSettings() {
-            if (SelectedNic != null) {
+            if ((Options.NetworkInterface = SelectedNic) != null) {
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
+            Options.Docking = dock.Checked;
+
             Options.Save();
+        }
+
+        private void LoadSettings() {
+            dock.Checked = Options.Docking;
         }
 
         private void LoadNetworkInterfaces() {
@@ -99,8 +109,6 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void nics_SelectedIndexChanged(object sender, EventArgs e) {
-            Options.NetworkInterface = SelectedNic;
-
             detectedSpeed.Text = (SelectedNic?.Speed / 8).ToString();
             customSpeed.Text = SelectedNic != null && Options.NicSpeeds.ContainsKey(SelectedNic.Id)
                 ? Options.NicSpeeds[SelectedNic.Id].ToString()

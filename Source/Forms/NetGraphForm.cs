@@ -82,7 +82,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SyncOptionsWithUI(Options options) {
-            if (!options.Bounds.Location.IsEmpty) {
+            if (!options.Bounds.Location.IsEmpty && StartPosition != FormStartPosition.Manual) {
                 StartPosition = FormStartPosition.Manual;
                 Location = options.Bounds.Location;
             }
@@ -139,6 +139,10 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private bool CanSnap(int clientEdge, int containerEdge, int tension) {
+            if (!options.Docking) {
+                return false;
+            }
+
             const int DOCK_DISTANCE = 10;
 
             return Math.Abs(clientEdge - containerEdge) <= DOCK_DISTANCE && Math.Abs(tension) <= DOCK_DISTANCE;
