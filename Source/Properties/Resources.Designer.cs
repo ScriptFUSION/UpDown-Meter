@@ -83,6 +83,26 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap network_adapter {
+            get {
+                object obj = ResourceManager.GetObject("network_adapter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap options {
+            get {
+                object obj = ResourceManager.GetObject("options", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh {
             get {
                 object obj = ResourceManager.GetObject("refresh", resourceCulture);
@@ -125,7 +145,7 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap UDM_banner {
             get {
-                object obj = ResourceManager.GetObject("UDM-banner", resourceCulture);
+                object obj = ResourceManager.GetObject("UDM_banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

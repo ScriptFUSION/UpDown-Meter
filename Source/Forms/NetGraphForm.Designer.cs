@@ -79,6 +79,7 @@
             this.toolbox.Controls.Add(this.settings);
             this.toolbox.Location = new System.Drawing.Point(315, 1);
             this.toolbox.Name = "toolbox";
+            this.toolbox.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.toolbox.Size = new System.Drawing.Size(15, 102);
             this.toolbox.TabIndex = 7;
             // 
@@ -86,7 +87,7 @@
             // 
             this.close.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.exit;
             this.close.Location = new System.Drawing.Point(1, 2);
-            this.close.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
+            this.close.Margin = new System.Windows.Forms.Padding(1, 1, 1, 0);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(13, 13);
             this.close.TabIndex = 0;

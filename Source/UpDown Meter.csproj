@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DockedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PanelStack.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PanelStack.Designer.cs">
+      <DependentUpon>PanelStack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Controls\NetGraph.cs">
       <SubType>Component</SubType>
@@ -150,9 +160,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UDM-banner.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\exit.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +178,9 @@
     <None Include="Resources\reset.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\options.png" />
+    <None Include="Resources\UDM-banner.png" />
+    <None Include="Resources\network adapter.png" />
     <Content Include="Resources\udm.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScriptFUSION.UpDown_Meter.Controls;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -113,16 +115,33 @@ namespace ScriptFUSION.UpDown_Meter {
             customSpeed.Text = detectedSpeed.Text;
         }
 
+        private void pagingButton_Click(object sender, EventArgs e) {
+            var clickedButton = sender as BilgeButton;
+            var map = new Dictionary<BilgeButton, DockedPanel>() {
+                { networking, networkingPage },
+                { options, optionsPage },
+            };
+
+            foreach (var button in footer.Controls.Cast<Control>().OfType<BilgeButton>()) {
+                button.Selected = false;
+            }
+            clickedButton.Selected = true;
+
+            pager.SelectedPanel = map[clickedButton];
+            title.Text = clickedButton.Text;
+        }
+
+        private void footer_Paint(object sender, PaintEventArgs e) {
+            ControlPaint.DrawBorder3D(
+                e.Graphics,
+                new Rectangle(0, 0, Width, 2),
+                Border3DStyle.SunkenOuter
+            );
+        }
+
         private void OptionsForm_Paint(object sender, PaintEventArgs e) {
             // Draw header border.
             ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bottom + 1, Width, 2), Border3DStyle.SunkenOuter);
-
-            // Draw footer border.
-            ControlPaint.DrawBorder3D(
-                e.Graphics,
-                new Rectangle(0, ok.Top - (ClientRectangle.Height - ok.Bottom) - 2, Width, 2),
-                Border3DStyle.SunkenOuter
-            );
         }
 
         #endregion
