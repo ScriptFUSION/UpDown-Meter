@@ -123,6 +123,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryOptions.cs" />
+    <Compile Include="RegistryPersister.cs" />
     <Compile Include="Sample.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="TrayIconIllustrator.cs" />

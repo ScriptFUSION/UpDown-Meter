@@ -23,13 +23,15 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.title = new System.Windows.Forms.Label();
+            this.banner = new System.Windows.Forms.PictureBox();
+            this.header = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.footer = new System.Windows.Forms.Panel();
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
             this.apply = new System.Windows.Forms.Button();
-            this.title = new System.Windows.Forms.Label();
-            this.footer = new System.Windows.Forms.Panel();
-            this.header = new System.Windows.Forms.PictureBox();
-            this.pager = new ScriptFUSION.UpDown_Meter.Controls.PanelStack();
+            this.pages = new ScriptFUSION.UpDown_Meter.Controls.PanelStack();
             this.networkingPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.nics = new System.Windows.Forms.ListView();
@@ -45,22 +47,95 @@
             this.label3 = new System.Windows.Forms.Label();
             this.customSpeed = new System.Windows.Forms.TextBox();
             this.optionsPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
+            this.sysLoad = new System.Windows.Forms.CheckBox();
             this.dock = new System.Windows.Forms.CheckBox();
             this.options = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.networking = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
+            this.header.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.footer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.header)).BeginInit();
-            this.pager.SuspendLayout();
+            this.pages.SuspendLayout();
             this.networkingPage.SuspendLayout();
             this.optionsPage.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // title
+            // 
+            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.title.BackColor = System.Drawing.Color.Transparent;
+            this.title.Font = new System.Drawing.Font("Arial", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Location = new System.Drawing.Point(325, 7);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(280, 42);
+            this.title.TabIndex = 14;
+            this.title.Text = "title";
+            this.title.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // banner
+            // 
+            this.banner.BackColor = System.Drawing.Color.White;
+            this.banner.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.UDM_banner;
+            this.banner.Location = new System.Drawing.Point(0, 0);
+            this.banner.Margin = new System.Windows.Forms.Padding(0);
+            this.banner.Name = "banner";
+            this.banner.Size = new System.Drawing.Size(280, 55);
+            this.banner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.banner.TabIndex = 2;
+            this.banner.TabStop = false;
+            // 
+            // header
+            // 
+            this.header.BackColor = System.Drawing.Color.White;
+            this.header.Controls.Add(this.banner);
+            this.header.Controls.Add(this.title);
+            this.header.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.header.Location = new System.Drawing.Point(0, 0);
+            this.header.Margin = new System.Windows.Forms.Padding(0);
+            this.header.Name = "header";
+            this.header.Size = new System.Drawing.Size(609, 58);
+            this.header.TabIndex = 17;
+            this.header.Paint += new System.Windows.Forms.PaintEventHandler(this.header_Paint);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.header, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pages, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.footer, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(609, 384);
+            this.tableLayoutPanel1.TabIndex = 18;
+            // 
+            // footer
+            // 
+            this.footer.Controls.Add(this.options);
+            this.footer.Controls.Add(this.networking);
+            this.footer.Controls.Add(this.ok);
+            this.footer.Controls.Add(this.cancel);
+            this.footer.Controls.Add(this.apply);
+            this.footer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footer.Location = new System.Drawing.Point(0, 334);
+            this.footer.Margin = new System.Windows.Forms.Padding(0);
+            this.footer.Name = "footer";
+            this.footer.Size = new System.Drawing.Size(609, 50);
+            this.footer.TabIndex = 18;
+            this.footer.Paint += new System.Windows.Forms.PaintEventHandler(this.footer_Paint);
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ok.Location = new System.Drawing.Point(393, 14);
+            this.ok.Location = new System.Drawing.Point(361, 14);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(75, 23);
             this.ok.TabIndex = 5;
@@ -73,7 +148,7 @@
             this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cancel.Location = new System.Drawing.Point(474, 14);
+            this.cancel.Location = new System.Drawing.Point(442, 14);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 6;
@@ -85,7 +160,7 @@
             // 
             this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.apply.Location = new System.Drawing.Point(555, 14);
+            this.apply.Location = new System.Drawing.Point(523, 14);
             this.apply.Name = "apply";
             this.apply.Size = new System.Drawing.Size(75, 23);
             this.apply.TabIndex = 7;
@@ -93,59 +168,21 @@
             this.apply.UseVisualStyleBackColor = true;
             this.apply.Click += new System.EventHandler(this.apply_Click);
             // 
-            // title
+            // pages
             // 
-            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.title.BackColor = System.Drawing.Color.White;
-            this.title.Font = new System.Drawing.Font("Arial", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(309, 7);
-            this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(328, 42);
-            this.title.TabIndex = 14;
-            this.title.Text = "title text";
-            this.title.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // footer
-            // 
-            this.footer.Controls.Add(this.options);
-            this.footer.Controls.Add(this.networking);
-            this.footer.Controls.Add(this.ok);
-            this.footer.Controls.Add(this.cancel);
-            this.footer.Controls.Add(this.apply);
-            this.footer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footer.Location = new System.Drawing.Point(0, 334);
-            this.footer.Name = "footer";
-            this.footer.Size = new System.Drawing.Size(641, 50);
-            this.footer.TabIndex = 15;
-            this.footer.Paint += new System.Windows.Forms.PaintEventHandler(this.footer_Paint);
-            // 
-            // header
-            // 
-            this.header.BackColor = System.Drawing.Color.White;
-            this.header.Dock = System.Windows.Forms.DockStyle.Top;
-            this.header.Image = global::ScriptFUSION.UpDown_Meter.Properties.Resources.UDM_banner;
-            this.header.Location = new System.Drawing.Point(0, 0);
-            this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(641, 55);
-            this.header.TabIndex = 2;
-            this.header.TabStop = false;
-            // 
-            // pager
-            // 
-            this.pager.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager.Controls.Add(this.networkingPage);
-            this.pager.Controls.Add(this.optionsPage);
-            this.pager.Location = new System.Drawing.Point(0, 61);
-            this.pager.Name = "pager";
-            this.pager.Panels = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel[] {
+            this.pages.Controls.Add(this.networkingPage);
+            this.pages.Controls.Add(this.optionsPage);
+            this.pages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pages.Location = new System.Drawing.Point(0, 58);
+            this.pages.Margin = new System.Windows.Forms.Padding(0);
+            this.pages.Name = "pages";
+            this.pages.Panels = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel[] {
         this.networkingPage,
         this.optionsPage};
-            this.pager.SelectedPanel = this.networkingPage;
-            this.pager.Size = new System.Drawing.Size(641, 267);
-            this.pager.TabIndex = 16;
-            this.pager.Text = "panelStack1";
+            this.pages.SelectedPanel = this.optionsPage;
+            this.pages.Size = new System.Drawing.Size(609, 276);
+            this.pages.TabIndex = 16;
+            this.pages.Text = "panelStack1";
             // 
             // networkingPage
             // 
@@ -159,7 +196,7 @@
             this.networkingPage.Controls.Add(this.customSpeed);
             this.networkingPage.Location = new System.Drawing.Point(0, 0);
             this.networkingPage.Name = "networkingPage";
-            this.networkingPage.Size = new System.Drawing.Size(641, 267);
+            this.networkingPage.Size = new System.Drawing.Size(609, 276);
             this.networkingPage.TabIndex = 0;
             // 
             // label1
@@ -188,7 +225,7 @@
             this.nics.Location = new System.Drawing.Point(12, 24);
             this.nics.MultiSelect = false;
             this.nics.Name = "nics";
-            this.nics.Size = new System.Drawing.Size(617, 163);
+            this.nics.Size = new System.Drawing.Size(585, 163);
             this.nics.TabIndex = 13;
             this.nics.UseCompatibleStateImageBehavior = false;
             this.nics.View = System.Windows.Forms.View.Details;
@@ -230,7 +267,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 222);
+            this.label2.Location = new System.Drawing.Point(175, 221);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 17;
@@ -239,7 +276,7 @@
             // copySpeed
             // 
             this.copySpeed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copySpeed.Location = new System.Drawing.Point(309, 238);
+            this.copySpeed.Location = new System.Drawing.Point(294, 237);
             this.copySpeed.Name = "copySpeed";
             this.copySpeed.Size = new System.Drawing.Size(20, 20);
             this.copySpeed.TabIndex = 20;
@@ -248,7 +285,7 @@
             // 
             // detectedSpeed
             // 
-            this.detectedSpeed.Location = new System.Drawing.Point(193, 238);
+            this.detectedSpeed.Location = new System.Drawing.Point(178, 237);
             this.detectedSpeed.Name = "detectedSpeed";
             this.detectedSpeed.ReadOnly = true;
             this.detectedSpeed.Size = new System.Drawing.Size(106, 20);
@@ -257,7 +294,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(336, 222);
+            this.label3.Location = new System.Drawing.Point(321, 221);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 18;
@@ -265,18 +302,29 @@
             // 
             // customSpeed
             // 
-            this.customSpeed.Location = new System.Drawing.Point(339, 238);
+            this.customSpeed.Location = new System.Drawing.Point(324, 237);
             this.customSpeed.Name = "customSpeed";
             this.customSpeed.Size = new System.Drawing.Size(108, 20);
             this.customSpeed.TabIndex = 19;
             // 
             // optionsPage
             // 
+            this.optionsPage.Controls.Add(this.sysLoad);
             this.optionsPage.Controls.Add(this.dock);
             this.optionsPage.Location = new System.Drawing.Point(0, 0);
             this.optionsPage.Name = "optionsPage";
-            this.optionsPage.Size = new System.Drawing.Size(641, 267);
+            this.optionsPage.Size = new System.Drawing.Size(609, 276);
             this.optionsPage.TabIndex = 1;
+            // 
+            // sysLoad
+            // 
+            this.sysLoad.AutoSize = true;
+            this.sysLoad.Location = new System.Drawing.Point(13, 35);
+            this.sysLoad.Name = "sysLoad";
+            this.sysLoad.Size = new System.Drawing.Size(135, 17);
+            this.sysLoad.TabIndex = 17;
+            this.sysLoad.Text = "Load at system start-up";
+            this.sysLoad.UseVisualStyleBackColor = true;
             // 
             // dock
             // 
@@ -314,42 +362,36 @@
             // 
             // OptionsForm
             // 
-            this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancel;
-            this.ClientSize = new System.Drawing.Size(641, 384);
-            this.Controls.Add(this.pager);
-            this.Controls.Add(this.title);
-            this.Controls.Add(this.header);
-            this.Controls.Add(this.footer);
+            this.ClientSize = new System.Drawing.Size(609, 384);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UpDown Meter - Options";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.OptionsForm_Paint);
+            this.Text = "UpDown Meter – Options";
+            ((System.ComponentModel.ISupportInitialize)(this.banner)).EndInit();
+            this.header.ResumeLayout(false);
+            this.header.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.footer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.header)).EndInit();
-            this.pager.ResumeLayout(false);
+            this.pages.ResumeLayout(false);
             this.networkingPage.ResumeLayout(false);
             this.networkingPage.PerformLayout();
             this.optionsPage.ResumeLayout(false);
             this.optionsPage.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox header;
-        private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.Button cancel;
-        private System.Windows.Forms.Button apply;
+        private System.Windows.Forms.PictureBox banner;
         private System.Windows.Forms.Label title;
-        private System.Windows.Forms.Panel footer;
-        private Controls.PanelStack pager;
+        private Controls.PanelStack pages;
         private Controls.DockedPanel networkingPage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView nics;
@@ -365,9 +407,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox customSpeed;
         private Controls.DockedPanel optionsPage;
-        private Controls.BilgeButton networking;
-        private Controls.BilgeButton options;
         private System.Windows.Forms.CheckBox dock;
+        private System.Windows.Forms.CheckBox sysLoad;
+        private System.Windows.Forms.Panel header;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel footer;
+        private Controls.BilgeButton options;
+        private Controls.BilgeButton networking;
+        private System.Windows.Forms.Button ok;
+        private System.Windows.Forms.Button cancel;
+        private System.Windows.Forms.Button apply;
     }
 }
 

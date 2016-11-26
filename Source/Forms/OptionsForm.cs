@@ -9,15 +9,11 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class OptionsForm : Form {
-        internal Options Options { get; private set; }
-
-        private NetworkInterface SelectedNic
-        {
-            get { return (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag; }
-        }
+        private RegistryPersister registryPersister;
 
         internal OptionsForm(Options options) {
             Options = options;
+            registryPersister = new RegistryPersister(new RegistryOptions());
 
             InitializeComponent();
             LoadNetworkInterfaces();
@@ -27,22 +23,48 @@ namespace ScriptFUSION.UpDown_Meter {
             networking.SimulateClick();
         }
 
+        internal Options Options { get; private set; }
+
+        private RegistryOptions RegistryOptions { get { return registryPersister.Options; } }
+
+        private NetworkInterface SelectedNic
+        {
+            get { return (NetworkInterface)nics.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag; }
+        }
+
         internal delegate void ApplyOptionsDelegate(OptionsForm sender, Options options);
 
         internal event ApplyOptionsDelegate ApplyOptions;
 
         private void SaveSettings() {
             if ((Options.NetworkInterface = SelectedNic) != null) {
+                // TODO: Validate text before parsing.
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
             Options.Docking = dock.Checked;
 
             Options.Save();
+
+            SaveRegistrySettings();
+        }
+
+        private void SaveRegistrySettings() {
+            RegistryOptions.LoadAtSystemStartup = sysLoad.Checked;
+
+            registryPersister.Save();
         }
 
         private void LoadSettings() {
             dock.Checked = Options.Docking;
+
+            LoadRegistrySettings();
+        }
+
+        private void LoadRegistrySettings() {
+            registryPersister.Load();
+
+            sysLoad.Checked = RegistryOptions.LoadAtSystemStartup;
         }
 
         private void LoadNetworkInterfaces() {
@@ -135,21 +157,16 @@ namespace ScriptFUSION.UpDown_Meter {
             }
             clickedButton.Selected = true;
 
-            pager.SelectedPanel = map[clickedButton];
+            pages.SelectedPanel = map[clickedButton];
             title.Text = clickedButton.Text;
         }
 
-        private void footer_Paint(object sender, PaintEventArgs e) {
-            ControlPaint.DrawBorder3D(
-                e.Graphics,
-                new Rectangle(0, 0, Width, 2),
-                Border3DStyle.SunkenOuter
-            );
+        private void header_Paint(object sender, PaintEventArgs e) {
+            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bottom - 2, Width, 2), Border3DStyle.SunkenOuter);
         }
 
-        private void OptionsForm_Paint(object sender, PaintEventArgs e) {
-            // Draw header border.
-            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, header.Bottom + 1, Width, 2), Border3DStyle.SunkenOuter);
+        private void footer_Paint(object sender, PaintEventArgs e) {
+            ControlPaint.DrawBorder3D(e.Graphics, new Rectangle(0, 0, Width, 2), Border3DStyle.SunkenOuter);
         }
 
         #endregion

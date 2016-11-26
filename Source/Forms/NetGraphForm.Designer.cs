@@ -36,12 +36,13 @@
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.topmostMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparencyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.homePageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.TableLayoutPanel();
             this.dlRaw = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.ulAvg = new System.Windows.Forms.Label();
             this.nicSpeed = new ScriptFUSION.UpDown_Meter.Controls.VerticalLabel();
             this.netGraph = new ScriptFUSION.UpDown_Meter.Controls.NetGraph();
-            this.homePageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbox.SuspendLayout();
             this.trayMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -156,7 +156,7 @@
             // 
             this.trayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showMenuItem,
-            this.settingsMenuItem,
+            this.optionsMenuItem,
             this.toolStripSeparator1,
             this.topmostMenuItem,
             this.transparencyMenuItem,
@@ -167,7 +167,7 @@
             this.trayMenu.Name = "contextMenuStrip1";
             this.trayMenu.ShowCheckMargin = true;
             this.trayMenu.ShowImageMargin = false;
-            this.trayMenu.Size = new System.Drawing.Size(227, 192);
+            this.trayMenu.Size = new System.Drawing.Size(227, 170);
             // 
             // showMenuItem
             // 
@@ -177,12 +177,12 @@
             this.showMenuItem.Text = "&Show/Hide UpDown Meter";
             this.showMenuItem.Click += new System.EventHandler(this.showMenuItem_Click);
             // 
-            // settingsMenuItem
+            // optionsMenuItem
             // 
-            this.settingsMenuItem.Name = "settingsMenuItem";
-            this.settingsMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.settingsMenuItem.Text = "S&ettings...";
-            this.settingsMenuItem.Click += new System.EventHandler(this.settings_Click);
+            this.optionsMenuItem.Name = "optionsMenuItem";
+            this.optionsMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.optionsMenuItem.Text = "&Options...";
+            this.optionsMenuItem.Click += new System.EventHandler(this.settings_Click);
             // 
             // toolStripSeparator1
             // 
@@ -216,6 +216,13 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(223, 6);
+            // 
+            // homePageMenuItem
+            // 
+            this.homePageMenuItem.Name = "homePageMenuItem";
+            this.homePageMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.homePageMenuItem.Text = "Home page";
+            this.homePageMenuItem.Click += new System.EventHandler(this.homePageMenuItem_Click);
             // 
             // exitMenuItem
             // 
@@ -383,13 +390,6 @@
             this.netGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseDown);
             this.netGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NetGraphForm_MouseMove);
             // 
-            // homePageMenuItem
-            // 
-            this.homePageMenuItem.Name = "homePageMenuItem";
-            this.homePageMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.homePageMenuItem.Text = "Home page";
-            this.homePageMenuItem.Click += new System.EventHandler(this.homePageMenuItem_Click);
-            // 
             // NetGraphForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -432,7 +432,7 @@
         private System.Windows.Forms.NotifyIcon trayIcon;
         private System.Windows.Forms.ContextMenuStrip trayMenu;
         private System.Windows.Forms.ToolStripMenuItem showMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem topmostMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transparencyMenuItem;
