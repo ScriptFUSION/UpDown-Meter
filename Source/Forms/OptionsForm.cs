@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
     public partial class OptionsForm : Form {
-        private RegistryPersister registryPersister;
+        private RegistryPersister registry;
 
         internal OptionsForm(Options options) {
             Options = options;
-            registryPersister = new RegistryPersister(new RegistryOptions());
+            registry = new RegistryPersister(new RegistryOptions());
 
             InitializeComponent();
             LoadNetworkInterfaces();
@@ -25,7 +25,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
         internal Options Options { get; private set; }
 
-        private RegistryOptions RegistryOptions { get { return registryPersister.Options; } }
+        private RegistryOptions RegistryOptions { get { return registry.Options; } }
 
         private NetworkInterface SelectedNic
         {
@@ -53,7 +53,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void SaveRegistrySettings() {
             RegistryOptions.LoadAtSystemStartup = loadSystem.Checked;
 
-            registryPersister.Save();
+            registry.Save();
         }
 
         private void LoadSettings() {
@@ -64,7 +64,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void LoadRegistrySettings() {
-            registryPersister.Load();
+            registry.Load();
 
             loadSystem.Checked = RegistryOptions.LoadAtSystemStartup;
         }

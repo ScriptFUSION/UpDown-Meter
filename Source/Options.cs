@@ -12,13 +12,13 @@ namespace ScriptFUSION.UpDown_Meter {
         public Options(Settings settings) {
             this.settings = settings;
 
-            NetworkInterface = NetworkInterfaces.Fetch(settings.LastNic);
-            NicSpeeds = settings.NicSpeeds;
-            Bounds = settings.Bounds;
-            Topmost = settings.Topmost;
-            Transparent = settings.Transparent;
-            Docking = settings.Docking;
-            LoadHidden = settings.LoadHidden;
+            // Import settings from previous version.
+            if (!settings.Upgraded) {
+                settings.Upgrade();
+                settings.Upgraded = true;
+            }
+
+            Load();
         }
 
         public NetworkInterface NetworkInterface { get; set; }
@@ -40,6 +40,16 @@ namespace ScriptFUSION.UpDown_Meter {
             clone.NicSpeeds = new Dictionary<string, ulong>(NicSpeeds);
 
             return clone;
+        }
+
+        private void Load() {
+            NetworkInterface = NetworkInterfaces.Fetch(settings.LastNic);
+            NicSpeeds = settings.NicSpeeds;
+            Bounds = settings.Bounds;
+            Topmost = settings.Topmost;
+            Transparent = settings.Transparent;
+            Docking = settings.Docking;
+            LoadHidden = settings.LoadHidden;
         }
 
         public void Save() {
