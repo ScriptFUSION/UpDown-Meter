@@ -52,7 +52,6 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private struct RegistryEntry {
-
             public delegate bool? EntryExistsDelegate(RegistryEntry entry, RegistryKey key);
 
             public RegistryKey Hive { get; set; }

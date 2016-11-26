@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter {
@@ -11,7 +10,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NetGraphForm());
+            Application.Run(new UdmApplicationContext(new NetGraphForm()));
         }
     }
 }

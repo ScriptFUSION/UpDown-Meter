@@ -42,7 +42,8 @@ namespace ScriptFUSION.UpDown_Meter {
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
-            Options.Docking = dock.Checked;
+            Options.Docking = docking.Checked;
+            Options.LoadHidden = loadHidden.Checked;
 
             Options.Save();
 
@@ -50,13 +51,14 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SaveRegistrySettings() {
-            RegistryOptions.LoadAtSystemStartup = sysLoad.Checked;
+            RegistryOptions.LoadAtSystemStartup = loadSystem.Checked;
 
             registryPersister.Save();
         }
 
         private void LoadSettings() {
-            dock.Checked = Options.Docking;
+            docking.Checked = Options.Docking;
+            loadHidden.Checked = Options.LoadHidden;
 
             LoadRegistrySettings();
         }
@@ -64,7 +66,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void LoadRegistrySettings() {
             registryPersister.Load();
 
-            sysLoad.Checked = RegistryOptions.LoadAtSystemStartup;
+            loadSystem.Checked = RegistryOptions.LoadAtSystemStartup;
         }
 
         private void LoadNetworkInterfaces() {
@@ -83,6 +85,8 @@ namespace ScriptFUSION.UpDown_Meter {
                             stats.BytesReceived.ToString(),
                             stats.BytesSent.ToString(),
                         });
+
+                        // Store NetworkInterface because querying NICs is an expensive operation.
                         item.Tag = nic;
 
                         if (nic.OperationalStatus != OperationalStatus.Up) {
@@ -102,14 +106,9 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SelectCurrentNetworkInterface() {
-            if (Options.NetworkInterface != null) {
-                foreach (ListViewItem nic in nics.Items) {
-                    if (((NetworkInterface)nic.Tag).Id == Options.NetworkInterface.Id) {
-                        nic.Selected = true;
-                        break;
-                    }
-                }
-            }
+            nics.Items.Cast<ListViewItem>()
+                .Where(item => ((NetworkInterface)item.Tag).Id == Options.NetworkInterface?.Id)
+                .ToList().ForEach(item => item.Selected = true);
         }
 
         #region Event handlers

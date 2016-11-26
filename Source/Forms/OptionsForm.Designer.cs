@@ -27,10 +27,6 @@
             this.banner = new System.Windows.Forms.PictureBox();
             this.header = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.footer = new System.Windows.Forms.Panel();
-            this.ok = new System.Windows.Forms.Button();
-            this.cancel = new System.Windows.Forms.Button();
-            this.apply = new System.Windows.Forms.Button();
             this.pages = new ScriptFUSION.UpDown_Meter.Controls.PanelStack();
             this.networkingPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,17 +43,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.customSpeed = new System.Windows.Forms.TextBox();
             this.optionsPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
-            this.sysLoad = new System.Windows.Forms.CheckBox();
-            this.dock = new System.Windows.Forms.CheckBox();
+            this.loadHidden = new System.Windows.Forms.CheckBox();
+            this.loadSystem = new System.Windows.Forms.CheckBox();
+            this.docking = new System.Windows.Forms.CheckBox();
+            this.footer = new System.Windows.Forms.Panel();
             this.options = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.networking = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
+            this.ok = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
+            this.apply = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.banner)).BeginInit();
             this.header.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.footer.SuspendLayout();
             this.pages.SuspendLayout();
             this.networkingPage.SuspendLayout();
             this.optionsPage.SuspendLayout();
+            this.footer.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -114,59 +115,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(609, 384);
             this.tableLayoutPanel1.TabIndex = 18;
-            // 
-            // footer
-            // 
-            this.footer.Controls.Add(this.options);
-            this.footer.Controls.Add(this.networking);
-            this.footer.Controls.Add(this.ok);
-            this.footer.Controls.Add(this.cancel);
-            this.footer.Controls.Add(this.apply);
-            this.footer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.footer.Location = new System.Drawing.Point(0, 334);
-            this.footer.Margin = new System.Windows.Forms.Padding(0);
-            this.footer.Name = "footer";
-            this.footer.Size = new System.Drawing.Size(609, 50);
-            this.footer.TabIndex = 18;
-            this.footer.Paint += new System.Windows.Forms.PaintEventHandler(this.footer_Paint);
-            // 
-            // ok
-            // 
-            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ok.Location = new System.Drawing.Point(361, 14);
-            this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(75, 23);
-            this.ok.TabIndex = 5;
-            this.ok.Text = "OK";
-            this.ok.UseVisualStyleBackColor = true;
-            this.ok.Click += new System.EventHandler(this.ok_Click);
-            // 
-            // cancel
-            // 
-            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cancel.Location = new System.Drawing.Point(442, 14);
-            this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(75, 23);
-            this.cancel.TabIndex = 6;
-            this.cancel.Text = "Cancel";
-            this.cancel.UseVisualStyleBackColor = true;
-            this.cancel.Click += new System.EventHandler(this.cancel_Click);
-            // 
-            // apply
-            // 
-            this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.apply.Location = new System.Drawing.Point(523, 14);
-            this.apply.Name = "apply";
-            this.apply.Size = new System.Drawing.Size(75, 23);
-            this.apply.TabIndex = 7;
-            this.apply.Text = "Apply";
-            this.apply.UseVisualStyleBackColor = true;
-            this.apply.Click += new System.EventHandler(this.apply_Click);
             // 
             // pages
             // 
@@ -309,32 +257,58 @@
             // 
             // optionsPage
             // 
-            this.optionsPage.Controls.Add(this.sysLoad);
-            this.optionsPage.Controls.Add(this.dock);
+            this.optionsPage.Controls.Add(this.loadHidden);
+            this.optionsPage.Controls.Add(this.loadSystem);
+            this.optionsPage.Controls.Add(this.docking);
             this.optionsPage.Location = new System.Drawing.Point(0, 0);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Size = new System.Drawing.Size(609, 276);
             this.optionsPage.TabIndex = 1;
             // 
-            // sysLoad
+            // loadHidden
             // 
-            this.sysLoad.AutoSize = true;
-            this.sysLoad.Location = new System.Drawing.Point(13, 35);
-            this.sysLoad.Name = "sysLoad";
-            this.sysLoad.Size = new System.Drawing.Size(135, 17);
-            this.sysLoad.TabIndex = 17;
-            this.sysLoad.Text = "Load at system start-up";
-            this.sysLoad.UseVisualStyleBackColor = true;
+            this.loadHidden.AutoSize = true;
+            this.loadHidden.Location = new System.Drawing.Point(13, 58);
+            this.loadHidden.Name = "loadHidden";
+            this.loadHidden.Size = new System.Drawing.Size(165, 17);
+            this.loadHidden.TabIndex = 18;
+            this.loadHidden.Text = "Load minimized to system tray";
+            this.loadHidden.UseVisualStyleBackColor = true;
             // 
-            // dock
+            // loadSystem
             // 
-            this.dock.AutoSize = true;
-            this.dock.Location = new System.Drawing.Point(13, 12);
-            this.dock.Name = "dock";
-            this.dock.Size = new System.Drawing.Size(101, 17);
-            this.dock.TabIndex = 0;
-            this.dock.Text = "Screen docking";
-            this.dock.UseVisualStyleBackColor = true;
+            this.loadSystem.AutoSize = true;
+            this.loadSystem.Location = new System.Drawing.Point(13, 35);
+            this.loadSystem.Name = "loadSystem";
+            this.loadSystem.Size = new System.Drawing.Size(135, 17);
+            this.loadSystem.TabIndex = 17;
+            this.loadSystem.Text = "Load at system start-up";
+            this.loadSystem.UseVisualStyleBackColor = true;
+            // 
+            // docking
+            // 
+            this.docking.AutoSize = true;
+            this.docking.Location = new System.Drawing.Point(13, 12);
+            this.docking.Name = "docking";
+            this.docking.Size = new System.Drawing.Size(101, 17);
+            this.docking.TabIndex = 0;
+            this.docking.Text = "Screen docking";
+            this.docking.UseVisualStyleBackColor = true;
+            // 
+            // footer
+            // 
+            this.footer.Controls.Add(this.options);
+            this.footer.Controls.Add(this.networking);
+            this.footer.Controls.Add(this.ok);
+            this.footer.Controls.Add(this.cancel);
+            this.footer.Controls.Add(this.apply);
+            this.footer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footer.Location = new System.Drawing.Point(0, 334);
+            this.footer.Margin = new System.Windows.Forms.Padding(0);
+            this.footer.Name = "footer";
+            this.footer.Size = new System.Drawing.Size(609, 50);
+            this.footer.TabIndex = 18;
+            this.footer.Paint += new System.Windows.Forms.PaintEventHandler(this.footer_Paint);
             // 
             // options
             // 
@@ -360,6 +334,44 @@
             this.networking.Text = "networking";
             this.networking.Click += new System.EventHandler(this.pagingButton_Click);
             // 
+            // ok
+            // 
+            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.ok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ok.Location = new System.Drawing.Point(361, 14);
+            this.ok.Name = "ok";
+            this.ok.Size = new System.Drawing.Size(75, 23);
+            this.ok.TabIndex = 5;
+            this.ok.Text = "OK";
+            this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
+            // 
+            // cancel
+            // 
+            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cancel.Location = new System.Drawing.Point(442, 14);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.TabIndex = 6;
+            this.cancel.Text = "Cancel";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
+            // 
+            // apply
+            // 
+            this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.apply.Location = new System.Drawing.Point(523, 14);
+            this.apply.Name = "apply";
+            this.apply.Size = new System.Drawing.Size(75, 23);
+            this.apply.TabIndex = 7;
+            this.apply.Text = "Apply";
+            this.apply.UseVisualStyleBackColor = true;
+            this.apply.Click += new System.EventHandler(this.apply_Click);
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,12 +389,12 @@
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.footer.ResumeLayout(false);
             this.pages.ResumeLayout(false);
             this.networkingPage.ResumeLayout(false);
             this.networkingPage.PerformLayout();
             this.optionsPage.ResumeLayout(false);
             this.optionsPage.PerformLayout();
+            this.footer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,8 +419,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox customSpeed;
         private Controls.DockedPanel optionsPage;
-        private System.Windows.Forms.CheckBox dock;
-        private System.Windows.Forms.CheckBox sysLoad;
+        private System.Windows.Forms.CheckBox docking;
+        private System.Windows.Forms.CheckBox loadSystem;
         private System.Windows.Forms.Panel header;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel footer;
@@ -417,6 +429,7 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button apply;
+        private System.Windows.Forms.CheckBox loadHidden;
     }
 }
 

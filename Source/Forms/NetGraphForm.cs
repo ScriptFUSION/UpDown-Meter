@@ -25,6 +25,7 @@ namespace ScriptFUSION.UpDown_Meter {
             sampler.SampleAdded += Sampler_SampleAdded;
 
             Options = new Options(Settings.Default);
+            ApplyLoadTimeOptions();
 
             trayIconIllustrator = new TrayIconIllustrator();
             trayIcon.Icon = Icon;
@@ -73,6 +74,17 @@ namespace ScriptFUSION.UpDown_Meter {
             get { return LastSample.Max < 1000 && AverageDownloadSpeed < 1000 && AverageUploadSpeed < 1000; }
         }
 
+        private void ApplyLoadTimeOptions() {
+            if (!Options.Bounds.Location.IsEmpty) {
+                StartPosition = FormStartPosition.Manual;
+                Location = Options.Bounds.Location;
+            }
+
+            if (!Options.LoadHidden) {
+                Show();
+            }
+        }
+
         private void SyncOptionsWithSampler(Options options) {
             var nic = sampler.NetworkInterface = options.NetworkInterface;
 
@@ -82,13 +94,8 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void SyncOptionsWithUI(Options options) {
-            if (!options.Bounds.Location.IsEmpty && StartPosition != FormStartPosition.Manual) {
-                StartPosition = FormStartPosition.Manual;
-                Location = options.Bounds.Location;
-            }
-
-            if (options.Topmost) topmost.SimulateClick();
-            if (options.Transparent) transparent.SimulateClick();
+            if (options.Topmost && !topmost.Selected) topmost.SimulateClick();
+            if (options.Transparent && !transparent.Selected) transparent.SimulateClick();
         }
 
         private void UpdateStats() {
@@ -139,7 +146,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private bool CanSnap(int clientEdge, int containerEdge, int tension) {
-            if (!options.Docking) {
+            if (!Options.Docking) {
                 return false;
             }
 
@@ -159,22 +166,22 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void minimize_Click(object sender, EventArgs e) {
-            Visible = false;
+            Hide();
         }
 
         private void topmost_Click(object sender, EventArgs e) {
-            TopMost = topmost.Selected = topmostMenuItem.Checked = options.Topmost =
+            TopMost = topmost.Selected = topmostMenuItem.Checked = Options.Topmost =
                 sender == topmost ? topmost.Selected : topmostMenuItem.Checked;
 
-            options.Save();
+            Options.Save();
         }
 
         private void transparent_Click(object sender, EventArgs e) {
-            Opacity = (transparent.Selected = transparencyMenuItem.Checked = options.Transparent =
+            Opacity = (transparent.Selected = transparencyMenuItem.Checked = Options.Transparent =
                 sender == transparent ? transparent.Selected : transparencyMenuItem.Checked
             ) ? .4 : 1;
 
-            options.Save();
+            Options.Save();
         }
 
         private void reset_Click(object sender, EventArgs e) {
@@ -265,9 +272,9 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void NetGraphForm_FormClosed(object sender, FormClosedEventArgs e) {
-            options.Bounds = Bounds;
+            Options.Bounds = Bounds;
 
-            options.Save();
+            Options.Save();
         }
 
         #endregion

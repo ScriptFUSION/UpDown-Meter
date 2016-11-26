@@ -38,12 +38,12 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool BootHide {
+        public bool BootHidden {
             get {
-                return ((bool)(this["BootHide"]));
+                return ((bool)(this["BootHidden"]));
             }
             set {
-                this["BootHide"] = value;
+                this["BootHidden"] = value;
             }
         }
         
@@ -92,6 +92,18 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
             }
             set {
                 this["Transparent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LoadHidden {
+            get {
+                return ((bool)(this["LoadHidden"]));
+            }
+            set {
+                this["LoadHidden"] = value;
             }
         }
     }
