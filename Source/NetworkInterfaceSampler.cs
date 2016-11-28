@@ -91,7 +91,7 @@ namespace ScriptFUSION.UpDown_Meter {
             SampleAdded?.Invoke(this, sample);
         }
 
-        public void RaiseSamplesCleared() {
+        private void RaiseSamplesCleared() {
             SamplesCleared?.Invoke(this);
         }
 
