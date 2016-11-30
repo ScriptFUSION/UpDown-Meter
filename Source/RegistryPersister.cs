@@ -12,7 +12,11 @@ namespace ScriptFUSION.UpDown_Meter {
                 new RegistryEntry {
                     Hive = Registry.CurrentUser,
                     Key = @"Software\Microsoft\Windows\CurrentVersion\Run",
-                    Name = Application.ProductName,
+                    Name = Application.ProductName
+                        #if DEBUG
+                            + " DEBUG"
+                        #endif
+                    ,
                     Value = $"\"{Application.ExecutablePath}\"",
                     ExistsCallback = (entry, key) => key.GetValue(entry.Name)?.ToString().StartsWith(entry.Value),
                 }

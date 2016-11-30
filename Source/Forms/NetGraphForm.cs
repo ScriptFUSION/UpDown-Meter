@@ -8,8 +8,15 @@ using System.Windows.Forms;
 namespace ScriptFUSION.UpDown_Meter {
     public partial class NetGraphForm : Form {
         private Options options;
+
         private NetworkInterfaceSampler sampler;
+
         private TrayIconIllustrator trayIconIllustrator;
+
+        /// <summary>
+        /// Icon displayed in the system tray when the connection is dormant.
+        /// </summary>
+        private static Icon dormantIcon;
 
         /// <summary>
         /// Point at which the user starts dragging the form.
@@ -28,7 +35,7 @@ namespace ScriptFUSION.UpDown_Meter {
             ApplyLoadTimeOptions();
 
             trayIconIllustrator = new TrayIconIllustrator();
-            trayIcon.Icon = Icon;
+            UpdateTrayIcon();
 
             // Timer does not fire at start-up so trigger manually.
             timer_Tick(null, null);
@@ -44,14 +51,14 @@ namespace ScriptFUSION.UpDown_Meter {
             {
                 options = value;
 
-                SyncOptionsWithSampler(value);
-                SyncOptionsWithUI(value);
+                SyncSamplerOptions(value);
+                SyncUiOptions(value);
             }
         }
 
         private Sample LastSample
         {
-            get { return sampler.First(); }
+            get { return sampler.FirstOrDefault(); }
         }
 
         private IEnumerable<Sample> LatestSamples
@@ -71,7 +78,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private bool IsConnectionDormant
         {
-            get { return LastSample.Max < 1000 && AverageDownloadSpeed < 1000 && AverageUploadSpeed < 1000; }
+            get { return LastSample == null || LastSample.Max < 1000 && AverageDownloadSpeed < 1000 && AverageUploadSpeed < 1000; }
         }
 
         private void ApplyLoadTimeOptions() {
@@ -85,7 +92,7 @@ namespace ScriptFUSION.UpDown_Meter {
             }
         }
 
-        private void SyncOptionsWithSampler(Options options) {
+        private void SyncSamplerOptions(Options options) {
             var nic = sampler.NetworkInterface = options.NetworkInterface;
 
             sampler.MaximumSpeed = options.NicSpeeds.ContainsKey(nic?.Id ?? string.Empty) ? options.NicSpeeds[nic.Id] : 0;
@@ -93,7 +100,7 @@ namespace ScriptFUSION.UpDown_Meter {
             nicSpeed.Text = Math.Round(sampler.MaximumSpeed / 1000f).ToString("0 kB/s");
         }
 
-        private void SyncOptionsWithUI(Options options) {
+        private void SyncUiOptions(Options options) {
             if (options.Topmost && !topmost.Selected) topmost.SimulateClick();
             if (options.Transparent && !transparent.Selected) transparent.SimulateClick();
         }
@@ -123,7 +130,7 @@ namespace ScriptFUSION.UpDown_Meter {
 
             if (IsConnectionDormant || sampler.MaximumSpeed == 0) {
                 // Use application icon.
-                trayIcon.Icon = Icon;
+                trayIcon.Icon = CreateDormantIcon();
             }
             else {
                 // Draw new icon.
@@ -133,10 +140,20 @@ namespace ScriptFUSION.UpDown_Meter {
                 );
             }
 
-            // Dispose of old icon unless it's the application icon.
-            if (oldIcon != null && oldIcon != Icon) {
-                oldIcon.Dispose();
+            if (oldIcon != dormantIcon) {
+                oldIcon?.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Creates an icon to be displayed when the connection is dormant.
+        /// </summary>
+        /// <remarks>
+        /// The system tray is unable to select the most appropriate icon size for itself so this method gives it the
+        /// little extra help it needs to not completely suck.
+        /// </remarks>
+        private Icon CreateDormantIcon() {
+            return dormantIcon = dormantIcon ?? new Icon(Icon, 16, 16);
         }
 
         private void ToggleWindowVisibility() {
