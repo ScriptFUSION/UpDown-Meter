@@ -118,5 +118,17 @@ namespace ScriptFUSION.UpDown_Meter.Properties {
                 this["Upgraded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Tooltips {
+            get {
+                return ((bool)(this["Tooltips"]));
+            }
+            set {
+                this["Tooltips"] = value;
+            }
+        }
     }
 }

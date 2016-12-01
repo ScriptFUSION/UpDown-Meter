@@ -35,6 +35,8 @@ namespace ScriptFUSION.UpDown_Meter {
 
         public bool LoadHidden { get; set; }
 
+        public bool Tooltips { get; set; }
+
         public Options Clone() {
             var clone = (Options)MemberwiseClone();
             clone.NicSpeeds = new Dictionary<string, ulong>(NicSpeeds);
@@ -50,6 +52,7 @@ namespace ScriptFUSION.UpDown_Meter {
             Transparent = settings.Transparent;
             Docking = settings.Docking;
             LoadHidden = settings.LoadHidden;
+            Tooltips = settings.Tooltips;
         }
 
         public void Save() {
@@ -60,6 +63,7 @@ namespace ScriptFUSION.UpDown_Meter {
             settings.Transparent = Transparent;
             settings.Docking = Docking;
             settings.LoadHidden = LoadHidden;
+            settings.Tooltips = Tooltips;
 
             settings.Save();
         }

@@ -103,6 +103,8 @@ namespace ScriptFUSION.UpDown_Meter {
         private void SyncUiOptions(Options options) {
             if (options.Topmost && !topmost.Selected) topmost.SimulateClick();
             if (options.Transparent && !transparent.Selected) transparent.SimulateClick();
+
+            toolTip.Active = options.Tooltips;
         }
 
         private void UpdateStats() {

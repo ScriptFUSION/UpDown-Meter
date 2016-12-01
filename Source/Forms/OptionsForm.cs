@@ -42,8 +42,9 @@ namespace ScriptFUSION.UpDown_Meter {
                 Options.NicSpeeds[SelectedNic.Id] = ulong.Parse(customSpeed.Text);
             }
 
-            Options.Docking = docking.Checked;
             Options.LoadHidden = loadHidden.Checked;
+            Options.Docking = docking.Checked;
+            Options.Tooltips = tooltips.Checked;
 
             Options.Save();
 
@@ -57,8 +58,9 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void LoadSettings() {
-            docking.Checked = Options.Docking;
             loadHidden.Checked = Options.LoadHidden;
+            docking.Checked = Options.Docking;
+            tooltips.Checked = Options.Tooltips;
 
             LoadRegistrySettings();
         }

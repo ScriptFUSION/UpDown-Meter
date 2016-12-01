@@ -43,9 +43,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.customSpeed = new System.Windows.Forms.TextBox();
             this.optionsPage = new ScriptFUSION.UpDown_Meter.Controls.DockedPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tooltips = new System.Windows.Forms.CheckBox();
+            this.docking = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.loadHidden = new System.Windows.Forms.CheckBox();
             this.loadSystem = new System.Windows.Forms.CheckBox();
-            this.docking = new System.Windows.Forms.CheckBox();
             this.footer = new System.Windows.Forms.Panel();
             this.options = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.networking = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
@@ -58,6 +61,8 @@
             this.pages.SuspendLayout();
             this.networkingPage.SuspendLayout();
             this.optionsPage.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.footer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -170,7 +175,7 @@
             this.nics.GridLines = true;
             this.nics.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.nics.HideSelection = false;
-            this.nics.Location = new System.Drawing.Point(12, 24);
+            this.nics.Location = new System.Drawing.Point(12, 28);
             this.nics.MultiSelect = false;
             this.nics.Name = "nics";
             this.nics.Size = new System.Drawing.Size(585, 163);
@@ -204,7 +209,7 @@
             // 
             this.showDisabledAdapters.AutoSize = true;
             this.showDisabledAdapters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showDisabledAdapters.Location = new System.Drawing.Point(12, 193);
+            this.showDisabledAdapters.Location = new System.Drawing.Point(12, 197);
             this.showDisabledAdapters.Name = "showDisabledAdapters";
             this.showDisabledAdapters.Size = new System.Drawing.Size(136, 17);
             this.showDisabledAdapters.TabIndex = 15;
@@ -215,7 +220,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(175, 221);
+            this.label2.Location = new System.Drawing.Point(175, 223);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 17;
@@ -224,7 +229,7 @@
             // copySpeed
             // 
             this.copySpeed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copySpeed.Location = new System.Drawing.Point(294, 237);
+            this.copySpeed.Location = new System.Drawing.Point(294, 239);
             this.copySpeed.Name = "copySpeed";
             this.copySpeed.Size = new System.Drawing.Size(20, 20);
             this.copySpeed.TabIndex = 20;
@@ -233,7 +238,7 @@
             // 
             // detectedSpeed
             // 
-            this.detectedSpeed.Location = new System.Drawing.Point(178, 237);
+            this.detectedSpeed.Location = new System.Drawing.Point(178, 239);
             this.detectedSpeed.Name = "detectedSpeed";
             this.detectedSpeed.ReadOnly = true;
             this.detectedSpeed.Size = new System.Drawing.Size(106, 20);
@@ -242,7 +247,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(321, 221);
+            this.label3.Location = new System.Drawing.Point(321, 223);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 18;
@@ -250,25 +255,70 @@
             // 
             // customSpeed
             // 
-            this.customSpeed.Location = new System.Drawing.Point(324, 237);
+            this.customSpeed.Location = new System.Drawing.Point(324, 239);
             this.customSpeed.Name = "customSpeed";
             this.customSpeed.Size = new System.Drawing.Size(108, 20);
             this.customSpeed.TabIndex = 19;
             // 
             // optionsPage
             // 
-            this.optionsPage.Controls.Add(this.loadHidden);
-            this.optionsPage.Controls.Add(this.loadSystem);
-            this.optionsPage.Controls.Add(this.docking);
+            this.optionsPage.Controls.Add(this.groupBox2);
+            this.optionsPage.Controls.Add(this.groupBox1);
             this.optionsPage.Location = new System.Drawing.Point(0, 0);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Size = new System.Drawing.Size(609, 276);
             this.optionsPage.TabIndex = 1;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tooltips);
+            this.groupBox2.Controls.Add(this.docking);
+            this.groupBox2.Location = new System.Drawing.Point(221, 8);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox2.Size = new System.Drawing.Size(200, 74);
+            this.groupBox2.TabIndex = 21;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Interface";
+            // 
+            // tooltips
+            // 
+            this.tooltips.AutoSize = true;
+            this.tooltips.Location = new System.Drawing.Point(9, 45);
+            this.tooltips.Name = "tooltips";
+            this.tooltips.Size = new System.Drawing.Size(102, 17);
+            this.tooltips.TabIndex = 19;
+            this.tooltips.Text = "Show hover tips";
+            this.tooltips.UseVisualStyleBackColor = true;
+            // 
+            // docking
+            // 
+            this.docking.AutoSize = true;
+            this.docking.Location = new System.Drawing.Point(9, 22);
+            this.docking.Name = "docking";
+            this.docking.Size = new System.Drawing.Size(101, 17);
+            this.docking.TabIndex = 0;
+            this.docking.Text = "Screen docking";
+            this.docking.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.loadHidden);
+            this.groupBox1.Controls.Add(this.loadSystem);
+            this.groupBox1.Location = new System.Drawing.Point(13, 8);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox1.Size = new System.Drawing.Size(200, 74);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Start-up";
+            // 
             // loadHidden
             // 
             this.loadHidden.AutoSize = true;
-            this.loadHidden.Location = new System.Drawing.Point(13, 58);
+            this.loadHidden.Location = new System.Drawing.Point(9, 45);
             this.loadHidden.Name = "loadHidden";
             this.loadHidden.Size = new System.Drawing.Size(165, 17);
             this.loadHidden.TabIndex = 18;
@@ -278,22 +328,12 @@
             // loadSystem
             // 
             this.loadSystem.AutoSize = true;
-            this.loadSystem.Location = new System.Drawing.Point(13, 35);
+            this.loadSystem.Location = new System.Drawing.Point(9, 22);
             this.loadSystem.Name = "loadSystem";
             this.loadSystem.Size = new System.Drawing.Size(135, 17);
             this.loadSystem.TabIndex = 17;
             this.loadSystem.Text = "Load at system start-up";
             this.loadSystem.UseVisualStyleBackColor = true;
-            // 
-            // docking
-            // 
-            this.docking.AutoSize = true;
-            this.docking.Location = new System.Drawing.Point(13, 12);
-            this.docking.Name = "docking";
-            this.docking.Size = new System.Drawing.Size(101, 17);
-            this.docking.TabIndex = 0;
-            this.docking.Text = "Screen docking";
-            this.docking.UseVisualStyleBackColor = true;
             // 
             // footer
             // 
@@ -393,7 +433,10 @@
             this.networkingPage.ResumeLayout(false);
             this.networkingPage.PerformLayout();
             this.optionsPage.ResumeLayout(false);
-            this.optionsPage.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.footer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -430,6 +473,9 @@
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button apply;
         private System.Windows.Forms.CheckBox loadHidden;
+        private System.Windows.Forms.CheckBox tooltips;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
