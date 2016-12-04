@@ -10,7 +10,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UdmApplicationContext(new NetGraphForm()));
+            Application.Run(new UdmApplication(new NetGraphForm()));
         }
     }
 }

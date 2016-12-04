@@ -128,7 +128,7 @@
     <Compile Include="Sample.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="TrayIconIllustrator.cs" />
-    <Compile Include="UdmApplicationContext.cs" />
+    <Compile Include="UdmApplication.cs" />
     <EmbeddedResource Include="Controls\NetGraph.resx">
       <DependentUpon>NetGraph.cs</DependentUpon>
     </EmbeddedResource>

@@ -210,6 +210,7 @@ namespace ScriptFUSION.UpDown_Meter {
         private void settings_Click(object sender, EventArgs e) {
             using (var optionsForm = new OptionsForm(Options.Clone())) {
                 optionsForm.Icon = Icon;
+                optionsForm.TopMost = TopMost;
                 optionsForm.ApplyOptions += (_, options) => {
                     Options = options.Clone();
                 };

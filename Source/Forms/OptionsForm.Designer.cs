@@ -50,6 +50,7 @@
             this.loadHidden = new System.Windows.Forms.CheckBox();
             this.loadSystem = new System.Windows.Forms.CheckBox();
             this.footer = new System.Windows.Forms.Panel();
+            this.version = new System.Windows.Forms.Label();
             this.options = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.networking = new ScriptFUSION.UpDown_Meter.Controls.BilgeButton();
             this.ok = new System.Windows.Forms.Button();
@@ -287,9 +288,9 @@
             this.tooltips.AutoSize = true;
             this.tooltips.Location = new System.Drawing.Point(9, 45);
             this.tooltips.Name = "tooltips";
-            this.tooltips.Size = new System.Drawing.Size(102, 17);
+            this.tooltips.Size = new System.Drawing.Size(95, 17);
             this.tooltips.TabIndex = 19;
-            this.tooltips.Text = "Show hover tips";
+            this.tooltips.Text = "Show help tips";
             this.tooltips.UseVisualStyleBackColor = true;
             // 
             // docking
@@ -337,6 +338,7 @@
             // 
             // footer
             // 
+            this.footer.Controls.Add(this.version);
             this.footer.Controls.Add(this.options);
             this.footer.Controls.Add(this.networking);
             this.footer.Controls.Add(this.ok);
@@ -349,6 +351,19 @@
             this.footer.Size = new System.Drawing.Size(609, 50);
             this.footer.TabIndex = 18;
             this.footer.Paint += new System.Windows.Forms.PaintEventHandler(this.footer_Paint);
+            // 
+            // version
+            // 
+            this.version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.version.Enabled = false;
+            this.version.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.version.Location = new System.Drawing.Point(73, 19);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(282, 15);
+            this.version.TabIndex = 10;
+            this.version.Text = "version {0}";
+            this.version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // options
             // 
@@ -381,7 +396,7 @@
             this.ok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ok.Location = new System.Drawing.Point(361, 14);
             this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(75, 23);
+            this.ok.Size = new System.Drawing.Size(75, 24);
             this.ok.TabIndex = 5;
             this.ok.Text = "OK";
             this.ok.UseVisualStyleBackColor = true;
@@ -394,7 +409,7 @@
             this.cancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cancel.Location = new System.Drawing.Point(442, 14);
             this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.Size = new System.Drawing.Size(75, 24);
             this.cancel.TabIndex = 6;
             this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
@@ -406,7 +421,7 @@
             this.apply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.apply.Location = new System.Drawing.Point(523, 14);
             this.apply.Name = "apply";
-            this.apply.Size = new System.Drawing.Size(75, 23);
+            this.apply.Size = new System.Drawing.Size(75, 24);
             this.apply.TabIndex = 7;
             this.apply.Text = "Apply";
             this.apply.UseVisualStyleBackColor = true;
@@ -476,6 +491,7 @@
         private System.Windows.Forms.CheckBox tooltips;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label version;
     }
 }
 

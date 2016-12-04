@@ -16,6 +16,8 @@ namespace ScriptFUSION.UpDown_Meter {
             registry = new RegistryPersister(new RegistryOptions());
 
             InitializeComponent();
+            version.Text = string.Format(version.Text, UdmApplication.CanonicalProductVersion);
+
             LoadNetworkInterfaces();
             LoadSettings();
 
