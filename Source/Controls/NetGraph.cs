@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScriptFUSION.UpDown_Meter.Controls {
@@ -18,8 +20,7 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
 
         private const int WARNING_MAX_OPACITY = 192;
         private byte warningOpacity = WARNING_MAX_OPACITY;
-
-        private DateTime pulseStart;
+        private CancellationTokenSource cancelWarningAnimation;
 
         public NetGraph() {
             InitializeComponent();
@@ -78,13 +79,13 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         protected override void OnPaint(PaintEventArgs e) {
             // Avoid division by zero.
             if (sampler?.MaximumSpeed > 0) {
-                StopPulse();
+                StopWarningAnimation();
 
                 // Use entire graph area regardless of clipping region.
                 PaintGraph(e.Graphics, GraphRectangle);
             }
             else {
-                StartPulse();
+                StartWarningAnimation();
 
                 PaintWarning(e.Graphics, ClientRectangle, "Please choose an adapter");
             }
@@ -179,19 +180,42 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             }
         }
 
-        private void StartPulse() {
-            // Already started.
-            if (pulseStart != default(DateTime) || DesignMode) {
+        private async void StartWarningAnimation() {
+            // Avoid reentry.
+            if (cancelWarningAnimation != null || DesignMode) {
                 return;
             }
 
-            pulseStart = DateTime.Now;
-            pulse.Enabled = true;
+            using (cancelWarningAnimation = new CancellationTokenSource()) {
+                var startTime = DateTime.Now;
+
+                while (true) {
+                    AnimateWarning(startTime);
+
+                    try {
+                        await Task.Delay(40, cancelWarningAnimation.Token);
+                    }
+                    catch (TaskCanceledException) {
+                        break;
+                    }
+                }
+            }
+
+            cancelWarningAnimation = null;
         }
 
-        private void StopPulse() {
-            pulse.Enabled = false;
-            pulseStart = default(DateTime);
+        private void StopWarningAnimation() {
+            cancelWarningAnimation?.Cancel();
+        }
+
+        private void AnimateWarning(DateTime startTime) {
+            const float ANIMATION_DURATION = 1500;
+
+            warningOpacity = (byte)(WARNING_MAX_OPACITY - (WARNING_MAX_OPACITY *
+                Ease((DateTime.Now - startTime).TotalMilliseconds % ANIMATION_DURATION / ANIMATION_DURATION)
+            ));
+
+            Invalidate();
         }
 
         private double Ease(double t) {
@@ -210,16 +234,6 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
 
         private void Sampler_SamplesCleared(NetworkInterfaceSampler sampler) {
             Reset();
-        }
-
-        private void pulse_Tick(object sender, EventArgs e) {
-            const float ANIMATION_DURATION = 1500;
-
-            warningOpacity = (byte)(WARNING_MAX_OPACITY - (WARNING_MAX_OPACITY *
-                Ease((DateTime.Now - pulseStart).TotalMilliseconds % ANIMATION_DURATION / ANIMATION_DURATION)
-            ));
-
-            Invalidate();
         }
 
         #endregion
