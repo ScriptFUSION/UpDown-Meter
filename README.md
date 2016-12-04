@@ -3,6 +3,15 @@ UpDown Meter
 
 UpDown Meter graphs network activity for a specific network adapter. It is deliberately designed to consume trace memory and processor time, so it can run as long as the system runs, providing an overview of how the connection is being used.
 
+Contents
+--------
+
+  1. [Usage](#usage)
+  2. [Features](#features)
+  3. [Download](#download)
+  4. [Requirements](#requirements)
+  5. [Contributing](#contributing)
+
 Usage
 -----
 
