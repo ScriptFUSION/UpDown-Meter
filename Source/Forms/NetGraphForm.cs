@@ -36,9 +36,6 @@ namespace ScriptFUSION.UpDown_Meter {
 
             trayIconIllustrator = new TrayIconIllustrator();
             UpdateTrayIcon();
-
-            // Timer does not fire at start-up so trigger manually.
-            timer_Tick(null, null);
         }
 
         /// <summary>
@@ -175,10 +172,6 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         #region Event handlers
-
-        private void timer_Tick(object sender, EventArgs e) {
-            sampler.SampleAdapter();
-        }
 
         private void close_Click(object sender, EventArgs e) {
             Close();

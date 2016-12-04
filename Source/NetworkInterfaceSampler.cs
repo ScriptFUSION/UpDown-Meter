@@ -4,10 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 
 namespace ScriptFUSION.UpDown_Meter {
     public class NetworkInterfaceSampler : IEnumerable<Sample> {
         private NetworkInterface nic;
+
+        public NetworkInterfaceSampler() {
+            Loop();
+        }
 
         public delegate void SampleAddedDelegate(NetworkInterfaceSampler sampler, Sample sample);
 
@@ -44,6 +49,14 @@ namespace ScriptFUSION.UpDown_Meter {
         /// List of relative samples.
         /// </summary>
         public ulong MaximumSpeed { get; set; }
+
+        private async void Loop() {
+            while (true) {
+                SampleAdapter();
+
+                await Task.Delay(1000);
+            }
+        }
 
         public void Reset() {
             Samples.Clear();
