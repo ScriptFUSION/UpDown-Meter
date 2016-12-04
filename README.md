@@ -55,12 +55,12 @@ The graph can be toggled between opaque and semi-transparent states.
 Download
 --------
 
-To download the latest version see the [releases][Releases].
+See the [latest release][Latest release] to download the Windows installer (`.exe`), compiled binaries (`.zip`) or source code. It is recommended to use the installer. The installer ensures all requirements are met, downloading and installing any missing dependencies, and automatically overwrites any previously installed version.
 
 Requirements
 ------------
 
-UpDown Meter requires [.NET Framework 4.5.1][.NET Framework] which ships with Windows 8.1 and later but can be installed on earlier versions of Windows.
+UpDown Meter requires [.NET Framework 4.5.1][.NET Framework], which ships with Windows 8.1 and later, but can be installed on earlier versions of Windows. The installer will automatically install .NET Framework if needed.
 
 Contributing
 ------------
@@ -70,7 +70,7 @@ Everyone is welcome to contribute anything, from [ideas][Issues] to [issues][Iss
 Compiling the code is as easy as cloning the source in Visual Studio and clicking *start*. In older versions of Visual Studio, it may be necessary to manually restore NuGet packages after cloning.
 
 
-  [Releases]: https://github.com/ScriptFUSION/UpDown-Meter/releases
+  [Latest release]: https://github.com/ScriptFUSION/UpDown-Meter/releases/latest
   [Issues]: https://github.com/ScriptFUSION/UpDown-Meter/issues
   [PRs]: https://github.com/ScriptFUSION/UpDown-Meter/pulls
   [.NET Framework]: http://go.microsoft.com/fwlink/p/?LinkId=310159
