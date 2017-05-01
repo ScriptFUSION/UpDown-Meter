@@ -13,6 +13,11 @@ namespace ScriptFUSION.UpDown_Meter {
             mainForm.FormClosed += delegate { ExitThread(); };
         }
 
+        public static string ProductName
+        {
+            get { return Application.ProductName; }
+        }
+
         public static string CanonicalProductVersion
         {
             get

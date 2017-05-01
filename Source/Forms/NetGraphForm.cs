@@ -26,6 +26,8 @@ namespace ScriptFUSION.UpDown_Meter {
         public NetGraphForm() {
             InitializeComponent();
 
+            Text = UdmApplication.ProductName;
+
             toolbox.BackColor = BackColor.Desaturate(.15f).Darken(.14f);
 
             sampler = netGraph.Sampler = new NetworkInterfaceSampler();
