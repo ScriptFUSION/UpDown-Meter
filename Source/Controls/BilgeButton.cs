@@ -116,6 +116,13 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
             e.Graphics.DrawImageTranslucent(Image, Selected ? 1 : .75f, imageX - offset, imageY - offset);
         }
 
+        protected override void OnClick(EventArgs e) {
+            // Only allow left click to raise click event.
+            if ((e as MouseEventArgs)?.Button.HasFlag(MouseButtons.Left) ?? false) {
+                base.OnClick(e);
+            }
+        }
+
         private void BilgeButton_Click(object sender, EventArgs e) {
             if (ToggleButton) {
                 Selected = !Selected;
@@ -133,13 +140,13 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         }
 
         private void BilgeButton_MouseDown(object sender, MouseEventArgs e) {
-            if ((e.Button & MouseButtons.Left) > 0) {
+            if (e.Button.HasFlag(MouseButtons.Left)) {
                 IsMouseDown = true;
             }
         }
 
         private void BilgeButton_MouseUp(object sender, MouseEventArgs e) {
-            if ((e.Button & MouseButtons.Left) > 0) {
+            if (e.Button.HasFlag(MouseButtons.Left)) {
                 IsMouseDown = false;
             }
         }

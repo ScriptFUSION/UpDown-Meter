@@ -217,7 +217,7 @@ namespace ScriptFUSION.UpDown_Meter {
         }
 
         private void trayIcon_MouseClick(object sender, MouseEventArgs e) {
-            if ((e.Button & MouseButtons.Left) > 0) {
+            if (e.Button.HasFlag(MouseButtons.Left)) {
                 ToggleWindowVisibility();
             }
         }
@@ -241,14 +241,14 @@ namespace ScriptFUSION.UpDown_Meter {
 
         private void NetGraphForm_MouseDown(object sender, MouseEventArgs e) {
             // Record drag start location.
-            if ((e.Button & MouseButtons.Left) > 0) {
+            if (e.Button.HasFlag(MouseButtons.Left)) {
                 dragPoint = e.Location;
             }
         }
 
         private void NetGraphForm_MouseMove(object sender, MouseEventArgs e) {
             // Drag form.
-            if ((e.Button & MouseButtons.Left) > 0) {
+            if (e.Button.HasFlag(MouseButtons.Left)) {
                 var container = Screen.FromRectangle(Bounds).WorkingArea;
                 var x = Location.X + e.X - dragPoint.X;
                 var y = Location.Y + e.Y - dragPoint.Y;
