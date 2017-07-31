@@ -117,8 +117,8 @@ namespace ScriptFUSION.UpDown_Meter.Controls {
         }
 
         protected override void OnClick(EventArgs e) {
-            // Only allow left click to raise click event.
-            if ((e as MouseEventArgs)?.Button.HasFlag(MouseButtons.Left) ?? false) {
+            // Only allow left clicks and simulated clicks to raise click event.
+            if ((e as MouseEventArgs)?.Button.HasFlag(MouseButtons.Left) ?? true) {
                 base.OnClick(e);
             }
         }
